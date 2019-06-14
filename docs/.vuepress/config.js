@@ -38,8 +38,11 @@ module.exports = {
           '/vue/note-compress.md',
           '/vue/note-draggable.md',
           '/vue/note-md5.md',
+          '/vue/note-qrcode.md',
           // 练习
-          '/vue/demo-where-to-go.md'
+          '/vue/demo-where-to-go.md',
+          // 组件
+          '/vue/component/'
         ]
       },
       {
