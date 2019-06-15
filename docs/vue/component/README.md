@@ -5,7 +5,7 @@
 ---
 
 1. [Pagination 分页](#Pagination)
-2. [Table 表格](#Table)
+2. [Table 表格](#Table) - 待解决： 操作栏各按钮的方法匹配
 3. [Export 导出](#Export)
 4. [Upload 上传](#Upload)
 5. [QRcode 二维码](#QRcode)
@@ -212,10 +212,10 @@ export default {
     return {
       /* 导出配置 */
       exportInfo: {
-        btnName: '自定义名 - 后台导出', // 按钮文字（不设置则默认显示“导出”）
-        type: 'export', // 确定导出类型（后台导出export、前端模板下载download，默认export）
-        fileOrBlob: '/static/README.md', // 二进制流或文件路径【必设置项】
-        fileName: '自定义名', // 自定义文件名（export时无用）
+      	fileOrBlob: '/static/README.md', // 二进制流或文件路径【必设置项】
+        btnName: 'Upload - 自定义名', // 按钮文字（不设置则默认显示“导出”）
+        type: 'download', // 确定导出类型（后台导出export、前端模板下载download，默认export）
+        fileName: '自定义名', // download时可以进行自定义文件名（export时无用）
         res: {} // 响应信息（获取后台文件名时需要，download时无用）
       }
     }
@@ -288,12 +288,17 @@ export default {
 ```
 - 需手动触发才进行上传至服务器操作；
 
+**（ps：出现不符合配置操作后清空所有待上传文件）**
+
 ## <a name="QRcode">QRcode 二维码</a>
 
 ![二维码](./imgs/qrcode.png)
 
 - 基于插件 vue-qr，封装一个自定义基础二维码组件；
 - 配置大小、logo、背景等；
+- 可添加二维码名称，且其会根据二维码大小作相应字体大小调整；
+- 若文字长度超过图片宽度，显示“...”，且鼠标划过会显示完整信息，而若未超过则不会显示；
+
 
 ![二维码配置](./imgs/qrcode.gif)
 
@@ -323,12 +328,15 @@ export default {
     return {
       /* 二维码配置 */ 
       qrcodeInfo: {
-        text: 'Hello Orange！', // 二维码携带信息【必设置项】
-        size: 200, // 大小
+        value: 'Hello Orange！', // 二维码携带信息【必设置项】
+        size: 300, // 大小（默认200px）
+        name: '一二三四五六七八九十', // 二维码名字
+        nameColor: '#FFF', // 文字颜色
         bgSrc: '/static/orange.png', // 背景图
-        backgroundColor: 'orange', // 背景色
+        backgroundColor: 'orange', // 背景色（默认白色）
         logoSrc: '/static/orange.png', // 二维码中部logo
-        logoScale: 0.35 // logo大小（取值0～1，包含0不包含1，默认0.35）
+        logoScale: 0.35 // logo大小（取值0～1，包含0不包含1，默认0.2）
+        // 注：logo大小不能设置遮挡右下方块
       }
     }
    },
@@ -338,3 +346,4 @@ export default {
 }
 </script>
 ```
+**（ps：logo大小不能设置遮挡右下方块）**

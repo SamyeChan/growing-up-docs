@@ -30,6 +30,8 @@ module.exports = {
           // 基础部分
           '/vue/learn-basic.md',
           '/vue/learn-lifecycle.md',
+          // 脚手架
+          '/vue/cli-3.md',
           // 项目
           '/vue/proj-business-report.md',
           '/vue/proj-realtime-video.md',
@@ -62,7 +64,9 @@ module.exports = {
         title: 'HTML',
         collapsable: true,
         children: [
-          '/html/'
+          '/html/',
+          // h5
+          '/html/h5-canvas.md'
         ]
       },
       {
