@@ -1,22 +1,14 @@
 # Component | 自写组件
 
-[GitLab仓 - 组件](https://gitlab.com/SamyeChan/common-components)
+这些组件是部门重新分科室后为了日后的快速开发，让每一个18届新人写的。
 
----
-
-1. [Pagination 分页](#Pagination)
-2. [Table 表格](#Table) - 待解决： 操作栏各按钮的方法匹配
-3. [Export 导出](#Export)
-4. [Upload 上传](#Upload)
-5. [QRcode 二维码](#QRcode)
-
-##  <a name="Pagination">Pagination 分页组件</a>
+## Pagination 分页组件
 
 - 分页组件的功能和 element-ui 无异；
 - 仅在每次当前页切换、每页条数修改操作时响应一次新条件下的数据请求；
 - 且可自定义分页组件所需功能（是否显示总计、是否可修改每页条数、是否可跳转）；
 
-![Pagination分页](./imgs/Pagination.gif)
+![Pagination分页](./imgs/pagination.gif)
 
 ### 使用
 
@@ -64,8 +56,9 @@ export default {
 }
 </script>
 ```
+<a name="Table"></a>
 
-## <a name="Table">Table 表格组件</a>
+## Table 表格组件
 
 ![表格](./imgs/basic-table-00.gif)
 
@@ -186,8 +179,9 @@ export default {
 }
 </script>
 ```
+<a name="Export"></a>
 
-## <a name="Export">Export 导出</a>
+## Export 导出
 
 导出组件简单分为两类：
 1. export - 获取后台传入的二进制流转换后进行文件导出，文件名取自后台（默认项）；
@@ -234,8 +228,9 @@ export default {
 }
 </script>
 ```
+<a name="Upload"></a>
 
-## <a name="Upload">Upload 上传（文件、图片等）</a>
+## Upload 上传(文件、图片等)
 
 ![上传组件](./imgs/upload.gif)
 
@@ -290,7 +285,9 @@ export default {
 
 **（ps：出现不符合配置操作后清空所有待上传文件）**
 
-## <a name="QRcode">QRcode 二维码</a>
+<a name="QRcode"></a>
+
+## QRcode 二维码
 
 ![二维码](./imgs/qrcode.png)
 
@@ -347,3 +344,112 @@ export default {
 </script>
 ```
 **（ps：logo大小不能设置遮挡右下方块）**
+
+<a name="Organization"></a>
+
+## Organization 组织架构
+
+![组织架构](./imgs/basic-organization.gif)
+
+- 组织架构的树型结构显示；
+- 分为仅数据显示 `showView` 和可进行更多项操作 `operation` 两类（默认showView）；
+- 可进行组织关键字搜索；
+- 操作项弹出对话框（对话框自行编辑功能代码）；
+
+### 使用
+
+```vue
+<template>
+  <div>
+    <h3>组织架构：</h3>
+    <!-- 组件引入 -->
+    <basic-organization :data="orgInfo" @refresh="getOption" />
+    <!-- 操作框（此处仅展示） -->
+    <el-dialog :title="title" :visible.sync="dialogVisible">
+      <el-input v-model="input" autocomplete="off"></el-input>
+      <!-- 页脚 -->
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+      </div>
+  ` </el-dialog>
+  </div>
+</template>
+
+<script>
+import BasicOrganization from '@/components/moudelVue/organization/BasicOrganization'
+
+export default {
+  components: {
+    BasicOrganization
+  },
+  data () {
+    return {
+      title: '', // 弹框标题
+      input: '',
+      dialogVisible: false, // 操作框是否可见
+      /* 组织架构配置 */
+      orgInfo: {
+        // 组织架构数据【必配置项】
+        dataList: [],
+        type: 'operation', // 结构类型：showView仅查看、operation含操作项（默认showView）
+        hasSearch: true, // 是否可以搜索（默认关闭）
+        // 操作项配置（默认关闭）
+        optionsList: [
+          { // 操作项类型
+            value: 'add', // 值
+            label: '新增', // 按钮标签值
+            isUse: true // 按钮是否可使用
+          }, {
+            value: 'edit',
+            label: '编辑',
+            isUse: true
+          }, {
+            value: 'delet',
+            label: '删除',
+            isUse: true
+          }, {
+            value: 'batchExport',
+            label: '批量导入',
+            isUse: true
+          }
+        ]
+      }
+    }
+  },
+  methods: {
+    // 获取当前点击操作项val
+    getOption (val) {
+      this.dialogVisible = true
+      this.title = val.label
+      ... // 不同操作项具体执行逻辑
+    }
+  },
+  created () {
+    Axios().then(res => {
+      this.orgInfo.dataList = xxx // 组织数据赋值
+
+      /**
+       * 数据结构：树状（必需项：label、children）
+        {
+          id: 'C2D2',
+          label: '部门0202',
+          children: [
+            {
+              id: 'C2D2S1',
+              label: '科室020201'
+            }
+          ]
+        }
+       *
+       */
+      ...
+    }).catch(err => {
+      ...
+    })
+  }
+}
+</script>
+```
+
+<div style="text-align: center; margin-top: 35px;">2019-06-14 · samyec</div>

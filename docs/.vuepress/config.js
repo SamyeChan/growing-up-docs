@@ -20,6 +20,7 @@ module.exports = {
         collapsable: true,
         children: [
           '/start/',
+          '/start/basic-frame.md',
           '/start/list.md'
         ]
       },
@@ -28,21 +29,20 @@ module.exports = {
         collapsable: true,
         children: [
           // 基础部分
-          '/vue/learn-basic.md',
-          '/vue/learn-lifecycle.md',
-          // 脚手架
-          '/vue/cli-3.md',
-          // 项目
-          '/vue/proj-business-report.md',
-          '/vue/proj-realtime-video.md',
+          '/vue/basic/learn-basic.md',
+          '/vue/basic/learn-lifecycle.md',
+          '/vue/basic/vue-cli-3.md',
+          '/vue/basic/vue-router.md',
+          // 项目 & 练习
+          '/vue/proj/proj-business-report.md',
+          '/vue/proj/proj-realtime-video.md',
+          '/vue/proj/demo-where-to-go.md',
           // 李西康分享
-          '/vue/note-set_delete.md',
-          '/vue/note-compress.md',
-          '/vue/note-draggable.md',
-          '/vue/note-md5.md',
-          '/vue/note-qrcode.md',
-          // 练习
-          '/vue/demo-where-to-go.md',
+          '/vue/note/note-set_delete.md',
+          '/vue/note/note-compress.md',
+          '/vue/note/note-draggable.md',
+          '/vue/note/note-md5.md',
+          '/vue/note/note-qrcode.md',
           // 组件
           '/vue/component/'
         ]
@@ -52,12 +52,12 @@ module.exports = {
         collapsable: true,
         children: [
           // 基础部分
-          '/weapp/learn-weapp-basic.md',
-          '/weapp/learn-weapp-component.md',
-          '/weapp/learn-weapp-api.md',
-          '/weapp/learn-weapp-cloud.md',
+          '/weapp/basic/learn-weapp-basic.md',
+          '/weapp/basic/learn-weapp-component.md',
+          '/weapp/basic/learn-weapp-api.md',
+          '/weapp/basic/learn-weapp-cloud.md',
           // 例子部分
-          '/weapp/demo-imooc-movie.md'
+          '/weapp/proj/demo-imooc-movie.md'
         ]
       },
       {
@@ -82,8 +82,13 @@ module.exports = {
         title: 'JavaScript',
         collapsable: true,
         children: [
-          '/js/',
-          '/js/note-about-this.md'
+          // javascript
+          '/js/js/',
+          '/js/note-about-this.md',
+          '/js/note-js-es6.md',
+          // ECMAScript
+          '/js/es6/',
+          '/js/ts/'
         ]
       },
       {
@@ -91,13 +96,17 @@ module.exports = {
         collapsable: true,
         children: [
           // 面试题目
-          '/topic/html5-semanticization.md'
+          '/topic/html5-semanticization.md',
+          '/topic/note-pay.md'
         ]
       }, {
         title: '其他辅助',
         collapsable: true,
         children: [
-          '/tools/git.md'
+          '/tools/git.md',
+          '/tools/nginx.md',
+          '/tools/eslint.md',
+          '/tools/python.md'
         ]
       }
     ]
