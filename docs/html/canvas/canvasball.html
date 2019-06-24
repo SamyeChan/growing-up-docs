@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body {
+            margin: 0;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            /* cursor: none; */
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+  let myCanvas = document.getElementById("canvas");
+let ctx = myCanvas.getContext("2d"); //获取 canvas 上下文
+    myCanvas.width = document.documentElement.clientWidth;
+    myCanvas.height = document.documentElement.clientHeight;
+    function Ball(x,y) {
+        this.x = x;
+        this.y = y;
+        this.r = 30;
+        this.color = 'rgba('+ Math.random()*256 +','+ Math.random()*256 +','+ Math.random()*256+ ','+ 0.5+')';
+        this.dx = parseInt(Math.random()*8 - 4);
+        this.dy = parseInt(Math.random()*8 - 4);
+        ballArr.push(this);
+    }
+    Ball.prototype.update =function(){
+        this.x += this.dx;
+        this.y += this.dy;
+        this.r--;
+        if (this.r < 0){
+            this.godie();
+        }
+    };
+    Ball.prototype.render = function(){
+        ctx.beginPath();
+        ctx.arc(this.x,this.y, this.r,0,Math.PI*2,true);
+        ctx.closePath();
+        ctx.fillStyle = this.color;
+        ctx.fill();
+    };
+    Ball.prototype.godie = function(){
+        for (let i = 0; i <ballArr.length ; i++) {
+            if (ballArr[i] === this){
+                ballArr.splice(i , 1);
+            }
+        }
+    };
+    let ballArr = [];
+    myCanvas.onmousemove = function (event) {
+        new Ball(event.clientX,event.clientY);
+    }
+    setInterval(function () {
+        ctx.clearRect(0,0,myCanvas.width,myCanvas.height);
+        for (let i = 0; i <ballArr.length ; i++) {
+            ballArr[i].update();
+            ballArr[i]&&ballArr[i].render();
+        }
+    },20);
+</script>
+</body>
+</html>

@@ -1,1 +1,1 @@
-# 基础 | TypeScript
+# Learn | TypeScript

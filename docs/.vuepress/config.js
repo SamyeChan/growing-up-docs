@@ -65,8 +65,8 @@ module.exports = {
         collapsable: true,
         children: [
           '/html/',
-          // h5
-          '/html/h5-canvas.md'
+          '/html/canvas/',
+          '/html/canvas/canvas-colorful-ball.md'
         ]
       },
       {
@@ -84,6 +84,8 @@ module.exports = {
         children: [
           // javascript
           '/js/js/',
+          '/js/js/js-function.md',
+          '/js/js/js-face-to-object.md',
           '/js/note-about-this.md',
           '/js/note-js-es6.md',
           // ECMAScript

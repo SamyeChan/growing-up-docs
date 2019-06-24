@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Canvas</title>
+  <style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    /* background: #123456; */
+  }
+  #canvas {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    /* width: 100%;
+    height: 100%; */
+  }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+</body>
+<script>
+  let canvas = document.getElementById('canvas');
+  // 用下列方法设置 canvas 画布大小和在 css 中设置有天差地别的不同哇！！！
+  canvas.width = document.documentElement.clientWidth;
+  canvas.height = document.documentElement.clientHeight;
+  let ct = canvas.getContext('2d');
+  ct.beginPath();
+  ct.arc(200, 200, 100, 0, 2 * Math.PI);
+  ct.stroke();
+
+  // 定义单个球原型
+  function SingleBall(x, y, arr) {
+    // 获取当前球坐标(x, y)
+    this.w = w;
+    this.h = h;
+    // 定义球坐标(dx, dy)
+    this.dx = 1;
+    this.dy = 1;
+    this.r = 30;
+    arr.push(this);
+  }
+
+  // 球状态刷新函数
+  SingleBall.prototype.refresh = function () {
+
+  }
+
+  // 球渲染函数
+  SingleBall.prototype.render = function () {
+    ct.beginPath();
+    ct.arc(500, 500, 100, 0, 2 * Math.PI);
+    ct.stroke();
+  }
+
+  // 球销毁函数
+  SingleBall.prototype.destroy = function () {
+    
+  }
+</script>
+</html>
