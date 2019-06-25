@@ -90,7 +90,8 @@ module.exports = {
           '/js/note-js-es6.md',
           // ECMAScript
           '/js/es6/',
-          '/js/ts/'
+          '/js/ts/',
+          '/js/note-useful-function.md'
         ]
       },
       {

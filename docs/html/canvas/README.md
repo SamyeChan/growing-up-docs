@@ -43,3 +43,10 @@
 ```js
 clearRect(x, y, width, height)
 ```
+
+### 创建弧线、曲线、圆
+
+1. context.arc(横坐标, 纵坐标, 半径, 开始角度, 结束角度, 是否逆时针) 
+
+beginPath() - 开始一条路径 / 重置当前路径
+[创建路径：moveTo()、lineTo()、quadricCurveTo()、bezierCurveTo()、arcTo() 以及 arc()]

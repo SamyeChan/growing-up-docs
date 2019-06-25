@@ -104,4 +104,9 @@ var {name, age, passport: id} = person
 - 使用解构赋值对对象属性进行赋值时，如果对应的属性不存在，变量将被赋值为 `undefined`；
 - 解构赋值可大大简化带代码量；
 
-<div style="text-align: center; margin-top: 35px;">2019-06-24 · samyec</div>
+## 方法
+
+- 在一个对象中绑定函数，称为这个对象的方法；
+- 在一个方法内部，`this` 是一个特殊变量，它始终指向当前对象；
+
+<div style="text-align: center; margin-top: 35px;">2019-06-26 · samyec</div>

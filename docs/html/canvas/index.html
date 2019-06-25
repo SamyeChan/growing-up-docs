@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Canvas</title>
+</head>
+<body>
+  <!-- <canvas id="canvas"></canvas> -->
+</body>
+<script>
+  class SingleBall {
+    constructor(x, y, arr) {
+      this.x = x;
+      this.y = y;
+      this.dx = parseInt(Math.random()*10 - 5);
+      this.dy = parseInt(Math.random()*10 - 5);
+      this.r = 30;
+      this.color = `rgba(${Math.random() * 256}, ${Math.random() * 256}, ${Math.random() * 256}, ${Math.random()})`;
+      arr.push(this);
+    }
+    // 球渲染函数 - 渲染之时判断
+    render (ct, arr) {
+      if (this.r < 0) {
+        this.destroy(arr);
+      } else {
+        ct.beginPath();
+        ct.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+        ct.strokeStyle = this.color
+        ct.stroke();
+      }
+    }
+
+    // 球状态刷新函数 - 小球生成时为最大状态，而后逐渐减小，直至消失
+    refresh () {
+      this.x += this.dx;
+      this.y += this.dy;
+      this.r--
+    }
+
+    // 球销毁函数
+    destroy (arr) {
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === this) {
+          arr.splice(i, 1);
+        }
+      }
+    }
+  }
+  // // 定义单个球原型
+  // function SingleBall(x, y, arr) {
+  //   // 获取当前球坐标(x, y)
+  //   this.x = x;
+  //   this.y = y;
+  //   // 球坐标需要的位移量
+  //   this.dx = parseInt(Math.random()*10 - 5);
+  //   this.dy = parseInt(Math.random()*10 - 5);
+  //   // 球半径
+  //   this.r = 30;
+  //   // 随机球颜色
+  //   this.color = `rgba(${Math.random() * 256}, ${Math.random() * 256}, ${Math.random() * 256}, ${Math.random()})`;
+  //   // this.color = 'orange'
+  //   // 向显示的小球数组中添加新球数据 - new 时
+  //   arr.push(this);
+  // }
+
+  // // 球渲染函数 - 渲染之时判断
+  // SingleBall.prototype.render = function (ct, arr) {
+  //   // 判断小球大小，如果半径小于0就应该销毁
+  //   if (this.r < 0) {
+  //     this.destroy(arr);
+  //   } else {
+  //     ct.beginPath();
+  //     ct.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+  //     // 空心圆
+  //     ct.strokeStyle = this.color
+  //     ct.stroke();
+  //     // 实心圆
+  //     // ct.fillStyle = this.color;
+  //     // ct.fill();
+  //   }
+  // }
+
+  // // 球状态刷新函数 - 小球生成时为最大状态，而后逐渐减小，直至消失
+  // SingleBall.prototype.refresh = function () {
+  //   // 位移小球，并不断减小其半径
+  //   this.x += this.dx;
+  //   this.y += this.dy;
+  //   this.r--
+  // }
+
+  // // 球销毁函数
+  // SingleBall.prototype.destroy = function (arr) {
+  //   for (let i = 0; i < arr.length; i++) {
+  //     if (arr[i] === this) {
+  //       arr.splice(i, 1);
+  //     }
+  //   }
+  // }
+
+  /* - - - - - - - - - - 执行 - - - - - - - - - - */
+
+  // let canvas = document.getElementById('canvas');
+  let body = document.getElementsByTagName('body')[0];
+  let canvas = document.createElement('canvas');
+  body.appendChild(canvas);
+  // 用下列方法设置 canvas 画布大小和在 css 中设置有天差地别的不同哇！！！
+  canvas.width = document.documentElement.clientWidth;
+  canvas.height = document.documentElement.clientHeight;
+  // 确定上下文环境
+  let ct = canvas.getContext('2d');
+
+  // 显示中的小球数组
+  let ballArr = [];
+  // 当鼠标移动时，就自动生成一个小球 - 捕获一个 e 就生成一个
+  canvas.onmousemove = (e) => {
+    new SingleBall(e.clientX, e.clientY, ballArr);
+  }
+  // 
+  setInterval(() => {
+    // 清除画布
+    ct.clearRect(0, 0, canvas.width, canvas.height)
+    // 逐个刷新状态
+    ballArr.forEach(item => {
+      item.refresh();
+      // item && item.render(ct);
+      item.render(ct, ballArr);
+    })
+  }, 25)
+
+</script>
+</html>

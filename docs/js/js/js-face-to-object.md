@@ -45,4 +45,55 @@ FE.prototype.hello = function () {
 }
 ```
 
-## 原型继承
+## 原型继承 <badge text="X" type="error" />
+
+- 继承实际上是类型的扩展；
+- JavaScript 由于采用原型继承，故无法直接扩展一个 Class；
+- JavaScript 的对象模型是基于原型实现的；
+
+#### JavaScript的原型继承实现方式
+
+1. 定义新的构造函数，并在内部用 `call()`调用希望“继承”的构造函数，并绑定this；
+2. 借助中间函数 `F` 实现原型链继承，最好通过封装的 `inherits` 函数完成；
+3. 继续在新的构造函数的原型上定义新方法；
+
+## class 继承
+
+- ES6 引入新关键字： `class`；
+- 使得定义类更加简单；
+
+```js
+class 类名 {
+  constructor(x, y) {
+    this.x = x;
+    ...
+  }
+
+  方法名() {
+    ...
+  }
+}
+```
+- 用 `class` 定义类使得继承更方便；
+
+```js
+class 子类名 extends 父类名 {
+  constructor(x, y, w) {
+    // 调用父类构造函数
+    super(x, y);
+    this.w = w;
+    ...
+  }
+
+  子类方法名() {
+    ...
+  }
+}
+```
+- `extends` 表示子类原型链对象来自于父类；
+- 子类的构造函数需要通过 `super([父类参数])` 来调用父类的构造函数，否则父类的属性无法正常初始化；
+- [Babel](https://babeljs.io/) - 一个工具把 `class` 代码转换为传统的 `prototype` 代码；
+
+##### ES6 引入的 `class` 和原有的 JavaScript 原型继承没啥本质区别，就是更好写更好懂了嘛
+
+<!-- + + + + + + + + + + + + + + + + + + + + + -->
