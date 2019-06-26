@@ -66,7 +66,8 @@ module.exports = {
         children: [
           '/html/',
           '/html/canvas/',
-          '/html/canvas/canvas-colorful-ball.md'
+          '/html/canvas/canvas-colorful-ball.md',
+          '/html/canvas/canvas-asteroids.md'
         ]
       },
       {
@@ -108,6 +109,7 @@ module.exports = {
         children: [
           '/tools/git.md',
           '/tools/nginx.md',
+          '/tools/http.md',
           '/tools/eslint.md',
           '/tools/python.md'
         ]
