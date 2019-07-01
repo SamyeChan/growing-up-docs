@@ -48,9 +48,10 @@ module.exports = {
         ]
       },
       {
-        title: '小程序',
+        title: '公众号/小程序',
         collapsable: true,
         children: [
+          '/weapp/wechat.md',
           // 基础部分
           '/weapp/basic/learn-weapp-basic.md',
           '/weapp/basic/learn-weapp-component.md',
@@ -92,7 +93,11 @@ module.exports = {
           // ECMAScript
           '/js/es6/',
           '/js/ts/',
-          '/js/note-useful-function.md'
+          '/js/note-useful-function.md',
+          // 阅读 | 你不知道的JavaScript
+          '/js/js/uDontKnowJS/book-1.md',
+          // 课程 | JavaScript高级工程师
+          '/js/class/'
         ]
       },
       {
