@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ch-zn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>作业 | 幻灯片</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    a{
+      text-decoration: none;
+    }
+    .wrap{
+      width: 1000px;
+      height: 800px;
+      background: url(img/02-bg.jpg) no-repeat;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-left: -500px;
+      margin-top: -400px;
+    }
+    #prev,#next{
+      position: absolute;
+      width: 25px;
+      height: 45px;
+      background: url(img/02-ar.png) no-repeat;
+      top: 155px;
+    }
+    #prev{
+      left: 13px;
+    }
+    #next{
+      transform: rotate(180deg);
+      right: 13px;
+    }
+    .pic{
+      width: 536px;
+      height: 356px;
+      position: absolute;
+      top: 170px;
+      left: 297px;
+    }
+    #img{
+      vertical-align: top;
+      width: 536px;
+      height: 356px;
+    }
+    #txt{
+      width: 536px;
+      height: 71px;
+      position: absolute;
+      left: 297px;
+      bottom: 185px;
+      text-align: center;
+      font: 20px/71px "微软雅黑";
+      color: #666;
+    }
+    #navs {
+      position: absolute;
+      left: 0;
+      bottom: 10px;
+      z-index: 10;
+      width: 100%;
+      text-align: center;
+    }
+    #navs a {
+      margin: 0 3px;
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      border-radius: 50%;
+    }
+    #navs img {
+      position: absolute;
+      left: -17px;
+      top: -35px;
+      width: 40px;
+      display: none;
+      border: 2px solid #fff;
+    }
+    #navs .active {
+      background: #f60;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="pic">
+      <a id="prev" href="javascript:;"></a>
+      <img id="img" src="" />
+      <a id="next" href="javascript:;"></a>
+      <!-- 轮播小点 -->
+      <nav id="navs"></nav>
+    </div>
+    <p id="txt">这是第 <span></span> 张图片</p>
+  </div>
+</body>
+
+<script>
+  /* 获取待操作元素 */
+  var prev = document.getElementById('prev'); // 上一张
+  var next = document.getElementById('next'); // 下一张
+  var imgSrc = document.getElementById('img'); // 当前图片路径
+  var text = document.querySelector('#txt span'); // 文字
+  var pots = document.getElementById('navs'); // 轮播小点
+  var potsLink = ''; // 小点链接
+
+  /* 定义辅助变量 */
+  var imgArr = [ // 图片路径集
+    'img/02-zii.jpg',
+    'img/02-zaa.jpg',
+    'img/02-zpp.jpg',
+    'img/02-zyy.jpg',
+    'img/02-zzz.jpg'
+  ]
+  var textArr = [1, 2, 3, 4, 5]; // 文字集（不一定是数字的）
+  var currentImg = 0; // 当前图片下标值
+  var prevImg = ''; // 记录上一张图片下标值
+
+  /* 初始化 */
+  init(0);
+
+  /* 实现相关事件*/
+  prev.onclick = function () { // 上一页
+    currentImg = (--currentImg < 0) ? (imgArr.length - 1) : currentImg;
+    // 刷新相关显示值
+    refresh(currentImg);
+  }
+  next.onclick = function () { // 下一页
+    currentImg = (++currentImg > imgArr.length - 1) ? 0 : currentImg;
+    // 刷新相关显示值
+    refresh(currentImg);
+  }
+  for(var j = 0; j < potsLink.length; j++){ // 小点批量操作
+    potsLink[j].onmouseover = function () { // 鼠标移入时
+      var abbrImg = this.querySelector('.img');
+      abbrImg.style.display = 'block';
+    };
+    potsLink[j].onmouseout = function () { // 鼠标移出时
+      var abbrImg = this.querySelector('.img');
+      abbrImg.style.display = 'none';
+    };
+    potsLink[j].onclick = function () { // 点击小点时
+      var abbrImg = this.querySelector('.img');
+      currentImg = abbrImg.id;
+      refresh(abbrImg.id);
+    }
+  }
+
+  /* 方法 */
+  function init (activeInx) { // 初始化
+    pots.innerHTML = ''; // 小点渲染
+    var temp = '';
+    for (var i = 0; i < imgArr.length; i++) {
+      temp += '<a class="' + (activeInx === i ? 'active' : '') + '"><img id = "' + i + '" class="img" src="' + imgArr[i] + '" /></a>';
+    }
+    pots.innerHTML = temp;
+    pots.querySelectorAll('a')[activeInx].className = 'active'; // 初始值
+    imgSrc.src = imgArr[activeInx];
+    text.textContent = textArr[activeInx];
+    potsLink = document.querySelectorAll('#navs a');
+    prevImg = activeInx; // 记录上一张
+  }
+  function refresh (currentInx) { // 刷新数据
+    imgSrc.src = imgArr[currentInx];
+    text.textContent = textArr[currentInx];
+    potsLink[prevImg].className = '';
+    potsLink[currentInx].className = 'active';
+    prevImg = currentInx; // 记录上一张
+  }
+</script>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>模拟复选框</title>
+  <link rel="stylesheet" href="./css/03-checkbox.css" />
+  <style>
+    h3{
+      margin: 0;
+      color: #e15671;
+      position: absolute;
+      left: 50%;
+      top: 130px;
+      z-index: 9;
+    }
+    .option{
+      background: url(./img/03-checkboxbg.png) no-repeat 0 -260px;
+    }
+  </style>
+  </head>
+<body>
+  <div class="box">
+    <h3>模拟复选</h3>
+    <div class="option">
+      <a href="javascript:;">美食</a>
+      <a href="javascript:;">逛街</a>
+      <a href="javascript:;">旅游</a>
+    </div>
+  </div>
+</body>
+<script>
+  var options = document.querySelectorAll('.option a');
+  // 一组元素不能直接操作，需要借助循环 & 下标
+  for (var i = 0; i < options.length; i++) {
+    options[i].onclick = function () {
+      // console.log(this);
+      // // this 在事件函数中代表触发事件的元素
+      this.className = this.className === 'checked' ? '' : 'checked';
+      console.log(this.classList);
+    }
+  }
+</script>  
+</html>

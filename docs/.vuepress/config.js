@@ -57,6 +57,7 @@ module.exports = {
           '/weapp/basic/learn-weapp-component.md',
           '/weapp/basic/learn-weapp-api.md',
           '/weapp/basic/learn-weapp-cloud.md',
+          '/weapp/basic/learn-wechat-dev.md',
           // 例子部分
           '/weapp/proj/demo-imooc-movie.md'
         ]

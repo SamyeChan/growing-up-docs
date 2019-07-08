@@ -1,4 +1,4 @@
-# Class |
+# Class | 走入 JavaScript 的世界
 
 ## JavaScript 简介
 
@@ -75,11 +75,24 @@ document/parent.querySelector('...') // . # div 等等
 - `document` / 指定父级；
 - IE8 以下不可使用；
 
+### 获取一组元素（类数组）
+
+```js
+parent.getElementsByTagName("标签名"); // 在父级下通过标签名获取一组元素
+parent.getElementsByTagName("类名"); // 在父级下通过类名获取一组元素
+parent.querySelectorAll("css selector"); // 在父级下通过css选择器获取一组元素
+```
+#### 类数组
+
+- 一组元素不能直接操作，只能通过下标操作；
+- 若需操作一组元素，可以使用循环；
+
 #### 调试
 
 ```js
 console.log(放置想要检查的元素) // F12 - Console控制台
 ```
+- 元素获取完后建议 `console.log()` 检查一遍；
 
 ## 修改属性
 
@@ -93,4 +106,147 @@ ele.style.属性 = "属性值" // 属性值外需要添加引号
 
 ### 如何使用变量？
 
-在使用变量之前，需要先创建变量；
+在使用变量之前，需要先创建变量；、
+
+### 声明变量步骤
+
+- 使用 **关键字** 声明变量（关键字：js 中定义好的有已定特殊含义的单词）→ 如 `var`；
+
+  1. 准备一个变量名
+  ```js
+  var a;
+
+  // var 只是让程序在解析的时候知道，这后面跟着的是一个变量名；
+  ```
+  2. 对变量进行赋值
+  ```js
+  a = 35;
+
+  // 变量名 = 数据
+  ```
+- 合并声明和赋值两个步骤：
+```js
+var a = 35;
+
+// var 变量名 = 赋值;
+// 若想给已声明变量赋值，无需再次声明；
+```
+**当只声明变量，而没有赋值时，默认 `undefined`；**
+
+#### 变量的好处
+
+- 简化代码，增强可读性；
+- 可复用；
+
+### 变量命名规则
+
+- 不允许数字开头；
+- 不允许使用关键字和保留字；
+- 允许字母、数字、下划线、美元符任意组合而成；
+
+* **中文可以用来当作变量名，但不要那么秀，好好用全世界都认得的字母数字好吧...**
+
+##### 若不符合规范会出现如下报错
+
+<p style="color: red;">Uncaught SyntaxError: Invalid or unexpected token</P>
+语法错误：标记无效或意外
+
+### 关键字和保留字
+
+- `关键字` - 当前语法中正在使用的单词；
+- `保留字` - 将来可能在语法中使用的单词；
+
+[MDN | 关键字](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Lexical_grammar#%E5%85%B3%E9%94%AE%E5%AD%97)
+
+#### 保留关键字 - ES6
+
+break | case | catch | class | const | continue
+- | - | - | - | - | -
+debugger | default | delete | do | else | export
+extends | finally | for | function | if | import
+in | instanceof | new | return | super | switch
+this | throw | try | typeof | var | void
+while | with | yield
+
+#### 未来保留关键字
+
+enum | implements | package | public | intetface
+- | - | - | - | -
+private | static | let | protected | await
+
+**直接量 `null` 、`true` 、`false` 亦不可被当作标识使用；**
+
+### 变量的命名风格
+
+- 具有语义化 → 一看就知道是啥；
+- 驼峰命名：
+  1. 大驼峰 → `JavaScript`；
+  2. 小驼峰 → `javaScript` → 多出现在 css：`fontSize`；
+
+### 多变量的同时声明
+
+使用英文逗号对变量名进行间隔，只需要一个关键字：
+```js
+var a = 19,
+    b = 96,
+    c = 35;
+```
+
+## 函数
+
+### 什么是函数？
+
+- 可重复使用的代码块
+
+#### 如何使用函数
+
+在使用函数之前，需要先创建函数；
+
+#### 函数声明
+
+- 有名函数；
+- 匿名函数；
+
+#### 函数声明步骤
+
+- 使用关键字声明函数 → `function`
+
+```js
+// 有名函数
+function fn() { ... }
+
+// 匿名函数（不可直接创建）
+function () { ... }
+```
+
+##### 匿名函数不可以直接定义，否则会报错
+
+<p style="color: red;">Uncaught SyntaxError: Unexpected token</P>
+语法错误：意外标记
+
+#### 函数调用
+
+- 函数创建完成后是需要调用的，否则不执行；
+
+1. `函数名称();` → 有名函数；
+2. 事件调用 → 匿名函数；
+
+#### 标识符
+
+- 变量名；
+- 函数名（函数参数）；
+- 属性名；
+
+
+---
+
+<div class="page-nav">
+  <span class="prev">
+    ←
+    <a href="/js/class/" class="prev">Class |《JS高级工程师》</a>
+  </span>
+  <span class="next">
+    <a href="/js/class/js-2.html" class="">Class | 玩转属性操作</a>
+    →
+  </span>
+</div>
