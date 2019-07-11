@@ -117,7 +117,8 @@ module.exports = {
           '/tools/nginx.md',
           '/tools/http.md',
           '/tools/eslint.md',
-          '/tools/python.md'
+          '/tools/python.md',
+          '/tools/api-map.md'
         ]
       }
     ]

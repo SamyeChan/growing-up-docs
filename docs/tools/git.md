@@ -56,6 +56,12 @@ ssh-keygen -t rsa -C "xxx@xxx.com"
 ssh -T -p 55725 git@gitlab.domain.com  #修改过端口号的测试代码
 ```
 
+###
+
+```bash
+git config --global http.sslVerify false
+```
+
 ## 托管平台
 
 - [GitHub](https://github.com/) - 面向开源及私有软件项目的托管平台
