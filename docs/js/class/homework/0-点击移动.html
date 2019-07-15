@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  .square {
+    width: 100px;
+    height: 100px;
+    background: orange;
+    position: absolute;
+    top: 0;
+  }
+  </style>
+</head>
+<body>
+<div
+  class="square"
+  style="left: 0;"></div>
+<!-- 效果：每次点击都让方块在原有基础位置上向前移动 100 -->
+</body>
+<script>
+var sq = document.querySelector('.square');
+sq.onclick = function () {
+  console.log(this.style.left); // 输出数据会带着单位（px）
+  var temp_left = this.style.left;
+  temp_left = parseInt(temp_left); // parseInt() 会从左向右一位一位进行转换，若遇到非数字就停止
+  console.log(temp_left); // 转换后输出不带单位了
+  this.style.left = temp_left + 10 + 'px';
+  console.log(this.style.left);
+}
+</script>
+</html>
