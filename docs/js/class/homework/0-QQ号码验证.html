@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zn-cn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  <link rel="stylesheet" href="./index.css" />
+</head>
+<body>
+  <div class="box">
+    <input type="text" id="txt" />
+    <input type="button" id="btn" value="验证" />
+    <div class="validate">
+      <div class="arrow"><em></em><span></span></div>
+      <div class="text">请输入5-10位数字</div>
+    </div>
+  </div>
+</body>
+<script>
+/*
+  【要求】
+
+  1. 不为空；
+  2. 5-10位；
+  3. 合法的数字；
+  4. 整数；
+  5. 不以0开始；
+*/
+
+var text = document.getElementById('txt'); // input 中获取的是一个字符串
+var btn = document.getElementById('btn');
+btn.onclick = function() {
+  var val = text.value;
+  if (val === '') {
+    alert('1. 不为空');
+  } else if (val.length < 5 || val.length > 10) {
+    alert('2. 需5-10位');
+  } else if (isNaN(val)) {
+    alert('3. 合法数字');
+  } else if (val !== String(parseInt(val))) { // ！POINT - 检测小数部分
+    alert('4. 需整数');
+  } else if (val[0] === '0') {
+    alert('5. 不以0开始');
+  }
+  // != 会隐式类型转换
+  // == 不会进行隐式类型转换
+}
+</script>
+</html>
