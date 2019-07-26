@@ -85,19 +85,11 @@ git config --global http.sslVerify false
 合并冲突 | MERGE - xxx | 多
 无需记录操作 | NO RECORD | 多
 
+#### 克隆指定分支
 
-
-
-
-
-
-
-
-
-
-
-
-
+```bash
+git clone -b 分支名称 仓库地址
+```
 
 
 
