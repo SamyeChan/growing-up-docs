@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="cn-zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Tween 运动算法</title>
+  <style>
+  #box {
+    position: absolute;
+    left: 0;
+    top: 100;
+    width: 100px;
+    height: 100px;
+    background-color: red;
+  }
+  </style>
+</head>
+<body>
+    <button>跑</button>
+    <button>停</button>
+    <div id="box1"></div>
+</body>
+<script>
+/*
+ * - t tcurrent time (当前时间)
+ * - b beginning value (初始值)
+ * - c change in value (变化值) = 目标点 - 初始值
+ * - d duration (持续时间)
+ */
+(function () {
+  var box = document.querySelector('#box');
+  var btn = document.querySelectorAll('button');
+  btn[0].onclick = function () {
+
+  }
+})();
+</script>
+</html>

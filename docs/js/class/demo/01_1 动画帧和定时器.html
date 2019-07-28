@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="cn-zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>动画帧和定时器</title>
+  <style>
+  div {
+    position: relative;
+    height: 100px;
+  }
+  .box {
+    position: absolute;
+    left: 0;
+    top: 100;
+    width: 100px;
+    height: 100px;
+    background-color: red;
+  }
+  </style>
+</head>
+<body>
+  <!-- 定时器动画 -->
+
+  <h1>定时器动画</h1>
+  <button>跑</button>
+  <button>停</button>
+  <div>
+    <div id="box1" class="box"></div>
+  </div>
+
+  <!-- 动画帧动画 -->
+
+  <h1>动画帧动画</h1>
+  <button>跑</button>
+  <button>停</button>
+  <div>
+    <div id="box2" class="box"></div>
+  </div>
+</body>
+<script>
+(function () {
+  var btn = document.querySelectorAll('button');
+  var box1 = document.querySelector('#box1');
+  var box2 = document.querySelector('#box2');
+  var timer = 0;
+  var nub = 0;
+  /* = = = = = = 定时器动画 = = = = = =  */ 
+  btn[0].onclick = function () {
+    console.time(nub); // 用于监测时间
+    // 定时器 - 不是精准的间隔时间执行
+    timer = setInterval(function () {
+      console.timeEnd(nub);
+      var l1 = parseInt(getComputedStyle(box1)['left']);
+      box1.style.left = l1 + 5 + 'px';
+      nub++;
+      console.time(nub);
+    }, 20);
+  }
+  btn[1].onclick = function () {
+    clearInterval(timer);
+  }
+  /* 1- 偶尔顿一下 - 丢帧；
+  - 屏幕渲染帧频
+  - 电脑屏幕帧频大概在60帧，即每秒渲染60次，间隔时间大概16.7ms（每隔16.7ms重新绘制一次屏幕）；
+  - 上述定时器中是每隔 20ms 就重新绘制一次，这可能就会出现在同一间隔中渲染多次，那么可能就会出现丢帧情况；
+  */
+
+  /* = = = = = = 动画帧动画 = = = = = =  */ 
+  btn[2].onclick = function () {
+    // 动画帧
+    // requestAnimationFrame(function () {
+    //   var l = parseInt(getComputedStyle(box2)['left']);
+    //   box.style.left = l + 5 + 'px';
+    // });
+    // 动画帧没有第二参数；
+    // 动画帧递归；
+    move();
+  }
+  // 动画帧每次只会执行一帧画面 - 要去重复递归；
+  function move () {
+    console.time(nub);
+    timer = requestAnimationFrame(function () {
+      console.timeEnd(nub)
+      var l2 = parseInt(getComputedStyle(box2)['left']);
+      if (l2 >= 500) {
+        console.log('停止');
+      } else {
+        box2.style.left = l2 + 5 + 'px';
+        nub++;
+        move();
+      } 
+    });
+    // 当屏幕渲染时，会通知这帧所有的动画帧该执行了 - 跟着电脑屏幕渲染帧频
+  }
+  btn[3].onclick = function () {
+    cancelAnimationFrame(timer)
+  }
+})();
+</script>
+</html>

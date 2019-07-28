@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="cn-zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>动画帧和定时器的区别</title>
+  <style>
+  #box {
+    position: relative;
+  }
+  #box div {
+    position: absolute;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    background-color: red;
+  }
+  </style>
+</head>
+<body>
+  <button>跑</button>
+  <button>停</button>
+  <div id="box">
+
+  </div>
+</body>
+<script>
+/* 兼容低版本 - 不用通过是否浏览器版本来判断，直接判断当前浏览器是否支持该方法 */
+
+(function () {
+  console.log(window.requestAnimationFrame); // 支持就返回函数，不支持就返回 undefined
+  if (!window.requestAnimationFrame) {
+    console.log('低版本');
+    // 当为低版本的时候，自己写一个替代函数 - 基于setInterval()的简单兼容方案
+    // 一个函数 + 有返回值 + 返回的是编号
+    window.requestAnimationFrame = function (callback) {
+      var nowTime = Date.now();
+      var dely = Math.max(16.7 - (nowTime - lastTime)); // 控制误差
+      lastTime = nowTime;
+      return setTimeout(callback, dely);
+    };
+    window.cancelAnimationFrame = function (index) {
+      clearTimeout(index);
+    }
+  }
+})
+
+(function () {
+  var box = document.querySelector('#box');
+  var inner = '';
+  for (var i = 0; i < 200; i++) {
+    inner += '<div style="top:' + i * 100 + 'px;"></div>'
+  }
+  box.innerHTML = inner;
+  var btn = document.querySelectorAll('button');
+  var divs = document.querySelectorAll('div');
+  
+  btn[0].onclick = function () {
+    divs.forEach(function (div) {
+      /* = = = = = 定时器动画(数量一多，超级卡) = = = = = */
+      // setInterval(function () {
+      //   var l = parseInt(getComputedStyle(div)['left']);
+      //   div.style.left = l + 3 + 'px'
+      // }, 1000 / 60)
+      /* = = = = = 动画帧动画(数量一多，其实也卡) = = = = = */
+      move(div)
+
+      // 从动画流程度来说（1000时），二者区别不大；但 200 时，定时器动画出现明显丢帧现象；（虽然动画帧需要的递归也很毫性能...）
+    })
+  };
+  function move (div) {
+    requestAnimationFrame(function () {
+      var l = parseInt(getComputedStyle(div)['left']);
+      div.style.left = l + 3 + 'px';
+      move(div);
+    });
+  }
+})();
+</script>
+</html>
