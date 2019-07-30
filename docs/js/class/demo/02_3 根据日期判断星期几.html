@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="cn-zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>根据日期判断星期几</title>
+</head>
+<body>
+  <input type="text" />
+  <button>今天星期几？</button>
+  <h1></h1>
+</body>
+<script>
+var input = document.querySelector('input');
+var btn = document.querySelector('button');
+var showText = document.querySelector('h1');
+
+btn.onclick = function () {
+  var txt = input.value;
+  var date = new Date(txt);
+  var temp = '';
+  console.log(new Date(txt));
+  console.log(date.getDay());
+  switch (date.getDay()) {
+    case 0:
+      temp = '天';
+      break;
+    case 1:
+      temp = '一';
+      break;
+    case 2:
+      temp = '二';
+      break;
+    case 3:
+      temp = '三';
+      break;
+    case 4:
+      temp = '四';
+      break;
+    case 5:
+      temp = '五';
+      break;
+    case 6:
+      temp = '六';
+      break;
+  }
+  showText.innerText = '今天星期' + temp;
+}
+</script>
+</html>

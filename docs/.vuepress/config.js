@@ -118,7 +118,8 @@ module.exports = {
           '/tools/http.md',
           '/tools/eslint.md',
           '/tools/python.md',
-          '/tools/api-map.md'
+          '/tools/api-map.md',
+          '/tools/地图坐标转换.md'
         ]
       }
     ]
