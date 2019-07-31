@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ES6 | 学员列表</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body a {
+      text-decoration: none;
+      color: #0d3a4b;
+    }
+    .active {
+      color: #ffffff;
+    }
+    .wrap {
+      width: 700px;
+      height: 500px;
+      background-image: url(./images/bg.png);
+      background-repeat: no-repeat;
+      margin: 0 auto;
+      position: relative;
+    }
+    .wrap #table {
+      width: 460px;
+      border-radius: 12px;
+      position: absolute;
+      left: 50%;
+      top: 160px;
+      transform: translateX(-50%);
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    .wrap #table thead {
+      width: 100%;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      color: #fff;
+      background: #4cbfe5;
+    }
+    .wrap #table thead a {
+      color: #fff;
+    }
+    .wrap #table tbody {
+      color: #19c2ff;
+    }
+    .wrap #table tbody a {
+      color: #19c2ff;
+    }
+    .wrap #table tbody tr {
+      background: #fff;
+    }
+    .ctrl {
+      position: absolute;
+      left: 200px;
+      top: 100px;
+    }
+    .ctrl div {
+      width: 300px;
+      line-height: 30px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="ctrl">
+      <div class="age_sort nu">
+        <a href="javascript:;">年龄从小到大</a>
+        <a href="javascript:;">年龄从大到小</a>
+        <a href="javascript:;" class="active">默认排序</a>
+      </div>
+      <div class="gender_show">
+        <a href="javascript:;">只显示男性</a>
+        <a href="javascript:;">只显示女性</a>
+        <a href="javascript:;" class="active">默认</a>
+      </div>
+    </div>
+    <table id="table">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>姓名</th>
+          <th>年龄</th>
+          <th>性别</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- 表格数据渲染处 -->
+      </tbody>
+    </table>
+</div>
+</body>
+<script>
+// 数据    
+let data = [
+  {
+    id: 0,
+    name: '小明',
+    age: 24,
+    gender: '男'
+  },
+  {
+    id: 1,
+    name: '小芳',
+    age: 30,
+    gender: '女'
+  },
+  {
+    id: 2,
+    name: '小美',
+    age: 31,
+    gender: '女'
+  },
+  {
+    id: 3,
+    name: '小刚',
+    age: 21,
+    gender: '男'
+  },
+  {
+    id: 4,
+    name: '小琪',
+    age: 18,
+    gender: '女'
+  }
+];
+
+/**
+ * 待操作元素
+ */
+let tBody = document.querySelector('#table tbody');
+let ageSort = document.querySelectorAll('.age_sort a');
+let genderShow = document.querySelectorAll('.gender_show a');
+
+/**
+ * 表格数据渲染函数 - ES6规定了的，先声明再使用哟
+ */
+let render = (data) => {
+  let tempTbody = ''
+  data.forEach(item => {
+    tempTbody += `<tr>
+                    <td>${item.id}</td>
+                    <td>${item.name}</td>
+                    <td>${item.age}</td>
+                    <td>${item.gender}</td>
+                  </tr>`;
+  });
+  tBody.innerHTML = tempTbody;
+}
+render(data);
+
+/**
+ * 【第一行】年龄排序
+ */
+
+// 第一行年龄排序相关函数 - 一个“函数”数组
+let sortType = [
+  () => data.sort((n1, n2) => n1.age - n2.age), // 01. 升序
+  () => data.sort((n1, n2) => n2.age - n1.age), // 02. 降序
+  () => data.sort((n1, n2) => n1.id - n2.id) // 03. 原序（id升序）
+]
+
+// 为每一项添加不同排序效果的点击事件
+ageSort.forEach((item, index) => {
+  item.onclick = () => {
+    // data.sort((n1, n2) => n1.age - n2.age); // 01. 升序
+    // data.sort((n1, n2) => n2.age - n1.age); // 02. 降序
+    // data.sort((n1, n2) => n1.id - n2.id); // 03. 原序（id升序）
+    sortType[index](); // 函数自执行
+    render(data);
+  }
+})
+
+/**
+ * 【第二行】性别筛选
+ */
+
+// 将需执行的函数存于数组
+let genderType = [
+  () => data.filter(item => item.gender === '男'), // 01. 男生
+  () => data.filter(item => item.gender === '女'), // 02. 女生
+  () => data.filter(item => item) // 03. 默认
+];
+
+genderShow.forEach((item, index) => {
+  item.onclick = () => {
+    // data = data.filter(item => item.gender === '男'); // 01. 男生
+    // data = data.filter(item => item.gender === '女'); // 02. 女生
+    // data = data.filter(item => item); // 03. 默认
+    newData = genderType[index]();
+    render(newData);
+  }
+})
+
+</script>
+</html>

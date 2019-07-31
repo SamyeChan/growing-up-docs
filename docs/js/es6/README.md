@@ -1,3 +1,7 @@
+---
+sidebarDepth: 3
+---
+
 # Learn | ECAMScript 6
 
 ## 简介
@@ -7,6 +11,12 @@
   2. DOM - 文档对象模型；
   3. BOM - 浏览器对象模型；
 - ECMAScrpit 发展史：[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Language_Resources](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Language_Resources)
+
+---
+
+#### 练习
+
+- [学员列表](./练习_学员列表.md)
 
 <!-- + + + + + + + + + + + + + + + + +  -->
 
