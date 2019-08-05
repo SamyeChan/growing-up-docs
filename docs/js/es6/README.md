@@ -481,15 +481,161 @@ fn2(); // 15 - Nice!!!
 
 <!-- + + + + + + + + + + + + + + + + +  -->
 
-## 新增数组扩展
+## 数组新增扩展
+
+- 对象本身方法 & 构造函数本身方法；
 
 - 手册：
 
-### Array.form()、Array.of()
+<!-- Array.form()、Array.of() -->
 
-### find()、findIndex()、includes()
+### Array.form()
 
-### flat()、flatMap()
+- 将一个类数组转换成真正的数组；
+- 类数组：有下标有length；
+- 返回转换之后的新数组；
+- 基础用法：
+```js
+let lis = document.querySelectorAll('li');
+arr = Array.form(lis);
+```
+- 完整方法：
+```js
+Array.from(arrLike[, mapFn[, thisArg]])
+/**
+ * arrLike - 类数组
+ * mapFn - 一个 map 方法，返回新数组
+ * thisArg - mapFn执行时的 this 指向
+ */
+```
+- 例子：
+```js
+let lis = document.querySelectorAll('li');
+let arr = [];
+lis = Array.from(lis, function (item, index) {
+  console.log(item, index, this); // 注意用箭头函数的话是指向 Window 的哟
+  return index;
+}, arr)
+```
+
+#### 另一种将类数组转换成数组的方法 - 利用展开运算符实现
+
+```js
+lis = [...lis];
+```
+### Array.of()
+- 将参数转成一个数组；
+```js
+Array.of(element0[, element0[, ...[elementN]]])
+/**
+ * element - 要放入数组的数据
+ */
+```
+- 返回一个新数组；
+- 例子：
+```js
+Array.of(1, 2, 3, 4, 5); // [1, 2, 3, 4, 5]
+```
+### Array.isArray()
+
+- 判断是否为数组；
+```js
+Array.isArray()
+```
+
+### find()
+
+- 
+
+### findIndex()
+
+
+<!-- 数组扁平化处理 -->
+
+### arr.flat()
+
+- 扁平化多维数组；
+
+```js
+arr.flat([depth])
+```
+
+### arr.flatMap()
+
+### fill()
+
+- 用一个固定值填充一个数组中从起始索引到终止索引内的全部元素（ps：不包括终止索引）；
+
+```js
+arr.fill(value[, start[, end]])
+
+/**
+ * value - 用于填充数组元素的值
+ * start - 起始索引，默认0
+ * end - 终止索引，默认 arr.lenght
+ */
+```
+- 返回一个数组；
+
+### arr.includes()
+
+- 判断数组中是否包含一个指定的值；
+
+```js
+arr.includes(valueToFind[, fromIndex])
+
+/**
+ * valueToFind - 需要查找的值
+ * fromIndex - 从这儿开始向后查找
+ */
+```
+- 返回布尔值；
+
+<!-- + + + + + + + + + + + + + + + + +  -->
+
+## 字符串新增扩展
+
+### str.includes
+
+- 判断字符串中是否包含一个指定的值；
+```js
+str.includes(valueToFind[, fromIndex])
+
+/**
+ * valueToFind - 需要查找的值
+ * fromIndex - 从这儿开始向后查找
+ */
+```
+- 返回布尔值；
+
+### str.startsWith
+
+```js
+str.startsWith(searchString[, position])
+
+/**
+ * searchString - 要搜索的字符串
+ * position - 
+ */
+```
+- 返回布尔值；
+
+### str.endsWith
+
+```js
+str.endsWith(searchString[, length])
+
+/**
+ * searchString - 要搜索的字符串
+ * length - 
+ */
+```
+- 返回布尔值；
+
+### str.repeat
+
+### 模版字符串
+
 
 
 <!-- + + + + + + + + + + + + + + + + +  -->

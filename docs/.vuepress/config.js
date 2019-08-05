@@ -69,7 +69,8 @@ module.exports = {
           '/html/',
           '/html/canvas/',
           '/html/canvas/canvas-colorful-ball.md',
-          '/html/canvas/canvas-asteroids.md'
+          '/html/canvas/canvas-asteroids.md',
+          '/html/basic-meta.md'
         ]
       },
       {

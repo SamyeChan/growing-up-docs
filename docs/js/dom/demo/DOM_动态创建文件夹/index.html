@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>动态创建文件夹</title>
+</head>
+<body>
+  <div class="wrap">
+    <a href="javascript:;" id="create">新建文件夹</a>
+    <ul id="folder">
+
+    </ul>
+  </div>
+</body>
+<script>
+let btn = document.querySelector('#create');
+btn.onclick = () => {
+  let li = document.createElement('li');
+  li.innerHTML = `<div class=""></div>
+                  <div class="">新建文件夹</div>`;
+  li.onclick = function () {
+    li.classList.toggle('border');
+    let box = li.querySelector('.checkbox');
+    if (li.classList.contains('border')) {
+      box.innerHTML = 'V'
+    } else {
+      box.innerHTML = '';
+    }
+  }
+
+  ul.appendChild(li);
+}
+</script>
+</html>

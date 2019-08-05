@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zn-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ES6 | 百度音乐榜单</title>
+  <link rel="stylesheet" href="./index.css" />
+</head>
+<body>
+  <section id="wrap">
+    <h2 class="title">百度音乐榜单</h2>
+    <ul id="list">
+      <!-- 结构渲染区域 -->
+    </ul>
+    <footer class="footer">
+      <label><input type="checkbox" id="checkAll" />全选/全不选</label>
+      <a href="javascript:;" id="remove">删除</a>
+      <input type="text" id="newInfo" />
+      <a href="javascript:;" id="add">添加</a>
+    </footer>
+  </section>
+</body>
+<script>
+  // 数据
+  let data = [
+    {
+      id: 0,
+      title: "残酷月光 - 费启鸣", 
+      checked: true,
+      collect: true
+    },{
+      id: 1,
+      title: "兄弟 - 艾热", 
+      checked: false,
+      collect: false
+    },{
+      id: 2,
+      title: "毕生 - 夏增祥", 
+      checked: false,
+      collect: true
+    },{
+      id: 3,
+      title: "公子向北去 - 李春花", 
+      checked: false,
+      collect: false
+    },{
+      id: 4,
+      title: "战场 - 沙漠五子", 
+      checked: true,
+      collect: false //是否收藏 true 收藏 false 没有收藏
+    }
+  ];
+
+  /* 待处理元素 */
+  let list = document.querySelector('#list');
+  let checkAllBtn = document.querySelector('#checkAll');
+  let deleteLotsBtn = document.querySelector('#remove');
+  let addBtn = document.querySelector('#add');
+
+  /* 数据渲染 */
+  let render = () => {
+    let listHtml = '';
+    data.forEach(item => {
+      listHtml += `
+                  <li>
+                    <input type="checkbox" ${ item.checked ? 'checked' : '' } />
+                    <span>${ item.title }</span>
+                    ${ !item.collect ?
+                    '<a href="javascript:;" class="collect">收藏</a>' :
+                    '<a href="javascript:;" class="cancelCollect">取消收藏</a>'
+                    }
+                    <a href="javascript:;" class="remove">删除</a>
+                  </li>`
+    })
+    list.innerHTML = listHtml;
+
+    /* 单项选框整体对全选框的状态影响 */
+    // 用 every 判断单项框整体状态对全选框状态的影响（还需要注意如果data空了，全选框也应该判false）
+    let isAllChecked = data.every(item => item.checked) && data.length;
+    checkAllBtn.checked = isAllChecked;
+
+    // 为行内元素添加事件
+    addEv();
+  }
+
+  render();
+
+  function addEv () {
+    let listLis = list.querySelectorAll('li');
+    listLis.forEach((item, index) => {
+      // 获取行内需添加事件的元素
+      let checkBox = item.querySelector('input');
+      let collectBtn = item.querySelector('.collect');
+      let cancelCollectBtn = item.querySelector('.cancelCollect');
+      let deleteBtn = item.querySelector('.remove');
+      
+      /* 多选框 */
+      // onchange - input数据发生变化时触发(仅针对表单) 
+      checkBox.onchange = () => {
+        // data[index].checked = !item.checked; // !!!注意：这里不能通过 item 赋值（item在赋予事件时是一个固定值了）
+        data[index].checked = checkBox.checked; // data数据跟随checkbox元素状态改变
+        render(); // 可以不加 render - 原生checkbox本身就有选中/取消的视觉效果
+      }
+      /* 收藏 */
+      // && - 判断元素是否存在
+      collectBtn && (collectBtn.onclick = () => {
+        data[index].collect = true;
+        render();
+      })
+      /* 取消收藏 */
+      cancelCollectBtn && (cancelCollectBtn.onclick = () => {
+        data[index].collect = false;
+        render();
+      })
+      /* 删除 */
+      deleteBtn.onclick = () => {
+        data.splice(index, 1);
+        render();
+      }
+
+      // !!!!! 数据驱动
+    })
+  }
+
+  /* 全选操作 */
+  checkAllBtn.onclick = () => {
+    data.forEach(item => {
+      item.checked = checkAllBtn.checked // 每一项的input选中状态与全选框一致
+    })
+    render();
+  }
+
+  /* 批量删除 */
+  deleteLotsBtn.onclick = () => {
+    data = data.filter(item => !item.checked); // 返回满足条件项（过滤掉不符合项）
+    render();
+  }
+
+</script>
+<!-- ！！！数据驱动 -->
+</html>

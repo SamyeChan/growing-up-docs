@@ -21,6 +21,7 @@
       width: 700px;
       height: 500px;
       background-image: url(./images/bg.png);
+      /* background: #eee; */
       background-repeat: no-repeat;
       margin: 0 auto;
       position: relative;
@@ -135,6 +136,8 @@ let data = [
   }
 ];
 
+/* - - - - - - - - - - - - - - - - - - - - - - - */
+
 /**
  * 待操作元素
  */
@@ -157,6 +160,7 @@ let render = (data) => {
   });
   tBody.innerHTML = tempTbody;
 }
+// 数据初始化
 render(data);
 
 /**
@@ -170,35 +174,94 @@ let sortType = [
   () => data.sort((n1, n2) => n1.id - n2.id) // 03. 原序（id升序）
 ]
 
-// 为每一项添加不同排序效果的点击事件
-ageSort.forEach((item, index) => {
-  item.onclick = () => {
-    // data.sort((n1, n2) => n1.age - n2.age); // 01. 升序
-    // data.sort((n1, n2) => n2.age - n1.age); // 02. 降序
-    // data.sort((n1, n2) => n1.id - n2.id); // 03. 原序（id升序）
-    sortType[index](); // 函数自执行
-    render(data);
-  }
-})
+// // 为每一项添加不同排序效果的点击事件
+// ageSort.forEach((item, index) => {
+//   item.onclick = () => {
+//     // data.sort((n1, n2) => n1.age - n2.age); // 01. 升序
+//     // data.sort((n1, n2) => n2.age - n1.age); // 02. 降序
+//     // data.sort((n1, n2) => n1.id - n2.id); // 03. 原序（id升序）
+//     ageSort.forEach(item => { // 先批量移除 active 样式
+//       item.classList.remove('active');
+//     })
+//     item.classList.add('active'); // 再增加 active 样式
+//     sortType[index](); // 函数自执行
+//     render(newData);
+//   }
+// })
 
 /**
  * 【第二行】性别筛选
  */
 
-// 将需执行的函数存于数组
-let genderType = [
+// filter是一个过滤条件，会直接执行并返回一个值，此处不以“函数”形式存储，但是在数据体量大的情况下多少影响性能；
+// 三个已筛选好的数组对象
+let filterType = [
   () => data.filter(item => item.gender === '男'), // 01. 男生
   () => data.filter(item => item.gender === '女'), // 02. 女生
-  () => data.filter(item => item) // 03. 默认
+  () => [...data] // 03. 默认（将原数组直接“拷贝”一份）
 ];
+// 存函数也行，且对数据量大时友好 --> 不建议如上直接执行的哟
 
+// genderShow.forEach((item, index) => {
+//   item.onclick = () => {
+//     // data = data.filter(item => item.gender === '男'); // 01. 男生
+//     // data = data.filter(item => item.gender === '女'); // 02. 女生
+//     // data = data.filter(item => item); // 03. 默认
+//     genderShow.forEach(item => { // 先批量移除 active 样式
+//       item.classList.remove('active');
+//     })
+//     item.classList.add('active'); // 再增加 active 样式
+//     let newData = filterType[index];
+//     render(newData);
+//   }
+// })
+
+/**
+ * 第一、二行选择结果联动 
+ */
+
+let sortIndex = 2; // 记录第一行选项： 0.小到大 1.大到小 2.默认
+let filterIndex = 2; // 记录第二行选项： 0.男 1.女 2.默认
+
+// 根据最新选项搭配进行数据渲染
+let renderNew = () => {
+  sortType[sortIndex](); // data 获新序
+  let newData = filterType[filterIndex](); // 新序基础上过滤
+  render(newData); // 数据渲染
+}
+
+// 第一行选项响应
+ageSort.forEach((item, index) => {
+  item.onclick = () => {
+    ageSort.forEach(item => {
+      item.classList.remove('active');
+    })
+    item.classList.add('active');
+    /**
+      * !!!!!!!!!!! 问题在这里 !!!!!!!!!!!!!!
+      * 描述：目前是在做那个 年龄排序选择 和 性别过滤选择 的整合效果，
+      *     但是如代码，记录了各自选择项，也写了新的渲染函数，功能就是不得行，
+      *     主要是点击第一行 年龄排序 相关选项时无反应，性别过滤倒是正常，
+      *     请问小姐姐，我的问题出在哪儿啊 =.=
+      */ 
+    // 记录当前选择
+    sortIndex = index;
+    renderNew();
+    // sortType[index]();
+    // render(data);
+  }
+})
+
+// 第二行选项响应
 genderShow.forEach((item, index) => {
   item.onclick = () => {
-    // data = data.filter(item => item.gender === '男'); // 01. 男生
-    // data = data.filter(item => item.gender === '女'); // 02. 女生
-    // data = data.filter(item => item); // 03. 默认
-    newData = genderType[index]();
-    render(newData);
+    genderShow.forEach(item => {
+      item.classList.remove('active');
+    })
+    item.classList.add('active');
+    // 记录当前选择
+    filterIndex = index;
+    renderNew();
   }
 })
 
