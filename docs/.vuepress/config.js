@@ -86,6 +86,10 @@ module.exports = {
         title: 'JavaScript',
         collapsable: true,
         children: [
+          // DOM
+          '/js/dom/',
+          // BOM
+          '/js/bom/',
           // javascript
           '/js/js/',
           '/js/js/js-function.md',
