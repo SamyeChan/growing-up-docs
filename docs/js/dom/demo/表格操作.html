@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>表格操作</title>
+</head>
+<body>
+<table id="table" border="1" width="400">
+  <thead>
+    <tr>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+  <tbody>
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+    </tbody>
+</table>
+</body>
+<script>
+let table = document.querySelector('#table');
+console.log('- - - - - table - - - - -');
+console.log(table);
+console.log('- - - - - table.tHead - - - - -');
+console.log(table.tHead);
+console.log('- - - - - table.tBodies - - - - -');
+console.log(table.tBodies);
+console.log(table.tBodies[0].rows);
+console.log(table.tBodies[0].rows[0].cells);
+</script>
+</html>

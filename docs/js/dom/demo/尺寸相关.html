@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Offset</title>
+  <style>
+  #box {
+    width: 500px;
+    height: 500px;
+    position: relative;
+    margin: 50px auto;
+    border: 1px solid yellowgreen;
+  }
+  #div {
+    width: 100px;
+    height: 100px;
+    margin: 50px 0 0 0;
+    padding: 10px 20px;
+    border: 5px dotted palevioletred;
+    position: absolute;
+    top: 100px; 
+    left: 100px;
+    background: orange;
+  }
+  #box-scroll {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    margin: 50px auto;
+    border: 1px solid yellowgreen;
+    overflow: auto;
+  }
+  #div-scroll {
+    width: 100px;
+    padding: 10px 20px;
+    border: 5px dotted palevioletred;
+    background: orange;
+  }
+  </style>
+</head>
+<body>
+  <div id="box">
+    <div id="div"></div>
+  </div>
+
+  <div id="box-scroll">
+      <div id="div-scroll">
+          不建议：直接在 innerHTML 中直接 `+=` 的（这样的性能会很差，数量很多的时候可能就会添加一个渲染一次哟）；
+          建议：先用字符串将 元素数据 加一起，最后再使用 innerHTML 进行赋值（这样就只会往页面添加一次咯）；
+          不建议：直接在 innerHTML 中直接 `+=` 的（这样的性能会很差，数量很多的时候可能就会添加一个渲染一次哟）；
+          建议：先用字符串将 元素数据 加一起，最后再使用 innerHTML 进行赋值（这样就只会往页面添加一次咯）；
+      </div>
+    </div>
+</body>
+<script>
+let div = document.querySelector('#div');
+let boxScroll = document.querySelector('#box-scroll');
+console.log('定义宽高：100，100');
+
+console.log('- - - - - - offset - - - - - - -');
+console.log(`width/height + padding + border：${div.offsetWidth}，${div.offsetHeight}`);
+console.log(`元素距离定为父级左上角的距离：${div.offsetTop}，${div.offsetLeft}`);
+
+console.log('- - - - - - client - - - - - - -');
+console.log(`width/height + padding：${div.clientWidth}，${div.clientHeight}`);
+console.log(`border：${div.clientTop}，${div.clientLeft}`);
+
+console.log('- - - - - - scroll - - - - - - -');
+console.log(`内容高度：${boxScroll.scrollWidth}，${boxScroll.scrollHeight}`);
+setTimeout(() => {
+  console.log(`border：${boxScroll.scrollTop}，${boxScroll.scrollLeft}`);
+}, 2000)
+
+boxScroll.onscroll = () => {
+  console.log(boxScroll.scrollTop);
+}
+</script>
+</html>

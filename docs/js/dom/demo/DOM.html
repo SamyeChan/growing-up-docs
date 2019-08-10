@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>DOM</title>
+</head>
+<body>
+<ul id="list">
+  <li>li-1</li>
+  <li>li-2</li>
+  <li>li-3</li>
+  <li>li-4</li>
+  <li>
+    <span>span-1</span>
+  </li>
+</ul>
+<div id="box" data-xxx="xxxx">xxx</div>
+</body>
+<script>
+let list = document.querySelector('#list');
+console.log(list.childNodes); // NodeList(11)
+
+/**
+ * 换行也会生成一个节点...
+ * 所以上面是11个childNodes
+ * 而非5个
+ */
+
+ console.log(document.childNodes);
+</script>
+</html>

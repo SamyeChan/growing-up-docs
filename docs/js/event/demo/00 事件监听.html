@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>事件流</title>
+  <style>
+  div {
+    width: 400px;
+    height: 400px;
+    background-color: cadetblue;
+  }
+  p {
+    width: 200px;
+    height: 200px;
+    background-color: orange;
+  }
+  #add {
+    width: 100px;
+    height: 100px;
+    background-color: olivedrab;
+  }
+  </style>
+</head>
+<body>
+  <!-- 事件流 -->
+  <div>
+    <p></p>
+  </div>
+  <!-- 默认事件 -->
+  <a href="https://juejin.im/post/5b3b56a1e51d4519646204bb">CSS布局学习指南</a>
+  <!-- 取消事件监听 -->
+  <div id="add"></div>
+  <button>取消事件监听</button>
+</body>
+<script>
+let div = document.querySelector('div');
+let p = document.querySelector('p');
+let a = document.querySelector('a');
+
+/**
+ * js特性：事件会冒泡（执行子元素事件的同时，若父元素也有相同事件，那么也会执行）
+ */
+// document.body.addEventListener('click', function () {
+//   alert('body');
+// })
+div.addEventListener('click', function () {
+  alert('div');
+})
+p.addEventListener('click', function () {
+  alert('p');
+})
+div.addEventListener('click', function () {
+  alert('div2');
+}, true)
+
+// 阻止浏览器默认行为
+a.addEventListener('click', function (e) {
+  e.preventDefault();
+}, {
+  passive: true
+})
+
+let add = document.querySelector('#add');
+let btn = document.querySelector('button');
+
+let fn = function () { alert('事件监控ing'); }
+add.addEventListener('click', fn)
+btn.addEventListener('click', function () {
+  // add.removeEventListener('click',  function () {
+  //   alert('事件监控ing'); // 注意：『不能使用匿名函数，必须是命名函数』
+  // });
+  add.removeEventListener('click',  fn);
+})
+</script>
+</html>

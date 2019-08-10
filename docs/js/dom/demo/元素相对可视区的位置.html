@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>元素相对可视区的位置</title>
+  <style>
+  div {
+    height: 200px;
+    border: 1px dotted orangered;
+  }
+  #box {
+    background: palevioletred;
+  }
+  </style>
+</head>
+<body>
+<div></div>
+<div></div>
+<div></div>
+<div id="box"></div>
+<div></div>
+<div></div>
+<div></div>
+</body>
+<script>
+let box = document.querySelector('#box');
+box.onclick = function () {
+  console.log(this.getBoundingClientRect());
+}
+</script>
+</html>

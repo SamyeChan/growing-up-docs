@@ -90,6 +90,8 @@ module.exports = {
           '/js/dom/',
           // BOM
           '/js/bom/',
+          // event
+          '/js/event/',
           // javascript
           '/js/js/',
           '/js/js/js-function.md',
