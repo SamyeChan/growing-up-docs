@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>事件委托</title>
+</head>
+<body>
+<div class="box">
+  <input type="text" id="usr" value="cc" />
+  <textarea id="message">I'm cc.</textarea>
+  <button id="btn">提交留言</button>
+  <ul id="list">
+    <li style="height: auto;">
+      <h2 class="usr">小小小说</h2>
+      <p>hi hi hi</p>
+      <a href="javascript:;" class="clos">删除<span>X</span></a>
+    </li>
+    <li style="height: auto;">
+      <h2 class="usr">大大大说</h2>
+      <p>hey hey hey</p>
+      <a href="javascript:;" class="clos">删除<span>X</span></a>
+    </li>
+  </ul>
+</div>
+</body>
+<script>
+/* 信息获取/显示元素 */
+let usr = document.querySelector('#usr');
+let msg = document.querySelector('#message');
+let list = document.querySelector('#list');
+/* 事件元素 */
+let btn = document.querySelector('#btn');
+
+/**
+ * 动态添加元素中的方法也要“动态添加”哟
+ * 
+ * 解决：将事件添加到“一直存在”的父级身上 - 事件委托
+ */
+
+list.addEventListener('click', function (e) {
+  if (e.target.className === 'clos') {
+    let li = e.target.parentNode;
+    console.log(li);
+    list.removeChild(li)
+  }
+})
+
+btn.addEventListener('click', function () {
+  let li = document.createElement('li');
+  li.innerHTML = `
+  <h2 class="usr">${usr.value}</h2>
+  <p>${msg.value}</p>
+  <a href="javascript:;" class="clos">删除<span>X</span></a>`;
+  list.appendChild(li);
+  // 注意：append 亦可，但其为实验性方法，浏览器有兼容性问题
+})
+
+</script>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>鼠标位置获取</title>
+  <style>
+    div {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: yellowgreen;
+    }
+    body {
+      border: 2px dotted orangered;
+    }
+  </style>
+</head>
+<body style="height: 2000px;">
+  <div>
+    <!-- <p></p> -->
+  </div>
+</body>
+<script>
+let body = document.body;
+body.addEventListener('click', function (e) {
+  console.log(e);
+  console.log('- - - - - clientX/Y | 相对于可视区域 - - - -');
+  console.log(`鼠标点击位置：(${e.clientX},${e.clientY})`);
+  console.log('- - - - - pageX/Y | 相对于页面 - - - -');
+  console.log(`鼠标点击位置：(${e.pageX},${e.pageY})`);
+})
+
+/**
+ * 效果：元素跟随鼠标走
+ */
+let div = document.querySelector('div');
+document.addEventListener('mousemove', function (e) {
+  // 注意：这个要设置以下 position 噢
+
+  // div 可跟随鼠标变动，但出了可视区宽高就傻了吧
+  div.style.left = e.clientX + 'px';
+  div.style.top = e.clientY + 'px';
+
+  // 所以此处需要用 pageX、pageY
+  div.style.left = e.pageX + 'px';
+  div.style.top = e.pageY + 'px';
+
+  // 但其实走出最大那个元素的限定范围也还是有问题der，但...这就是个demo啊
+})
+</script>
+</html>

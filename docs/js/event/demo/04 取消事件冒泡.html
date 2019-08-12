@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>取消事件冒泡</title>
+  <style>
+    div {
+      width: 200px;
+      height: 200px;
+      background: yellowgreen;
+      margin: 100px auto;
+    }
+    p {
+      width: 100px;
+      height: 100px;
+      background: orange;
+      margin: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <p></p>
+  </div>
+</body>
+<script>
+  /**
+   * 想要的实现的效果：父子元素上都有事件，且互不干扰
+   */
+  let div = document.querySelector('div');
+  let p = document.querySelector('p');
+
+  div.addEventListener('click', function () {
+    alert('div');
+  })
+  // 直接酱紫，点 p 的时候事件会冒泡哟，就是 p 事件、div 事件都会执行咯
+  // p.addEventListener('click', function () {
+  //   alert('p');
+  // })
+
+  // 要取消掉 p 的事件冒泡啊
+  p.addEventListener('click', function (e) {
+    // 1. 一个旧方法 - ie先支持，后续chrome、firefox才又支持（兼容ok）
+    e.cancelBubble = true;
+    // 2. 真正 w3c 中规范的取消冒泡的方法哟
+    e.stopPropagation();
+    alert('p');
+  })
+</script>
+</html>

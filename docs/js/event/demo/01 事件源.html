@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>事件委托</title>
+  <style>
+    li {
+      width: 100px;
+      height: 100px;
+      background: orange;
+      margin: 10px 0;
+    }
+    p {
+      width: 50px;
+      height: 50px;
+      background: orangered;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <ul>
+      <li>
+        <p></p>
+      </li>
+      <li>
+        <p></p>
+      </li>
+      <li>
+        <p></p>
+      </li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+</body>
+<script>
+  // 事件委托
+  var ul = document.querySelector('ul');
+  ul.addEventListener('click', function (e) {
+    // 给 ul（父级）添加事件，同时也给它的儿子们（li）一并加了事件
+    alert('balabababa');
+    // 获取事件源(点的是哪个就返回哪个)
+    console.log(e.target);
+    e.target.style.background = 'pink';
+    /**
+     * 如果ul内还有孙子（如<p>）
+     * 那其实也只会响应点击的那个元素哟（具体效果自己看）
+     */
+    // 可利用 tagName 判断目标元素是否是自己想添加事件的元素 - 返回的是标签大写
+    console.log(e.target.tagName);
+    if (e.target.tagName === 'P') {
+      alert('这是p，不是li');
+    }
+  })
+</script>
+</html>

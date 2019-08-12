@@ -126,7 +126,8 @@ module.exports = {
           '/tools/eslint.md',
           '/tools/python.md',
           '/tools/api-map.md',
-          '/tools/地图坐标转换.md'
+          '/tools/地图坐标转换.md',
+          '/tools/禅道管理.md'
         ]
       }
     ]

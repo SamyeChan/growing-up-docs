@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>右键事件</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    ul {
+      width: 250px;
+      border: 2px solid orange;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none;
+    }
+    li {
+      padding: 10px;
+      border: 2px solid yellowgreen;
+    }
+  </style>
+</head>
+<body style="height: 2000px;">
+  <ul>
+    <li>刷新</li>
+    <li>跳转</li>
+    <li>加载</li>
+    <li>首页</li>
+  </ul>
+</body>
+<script>
+let ul = document.querySelector('ul');
+
+// document.addEventListener('contextmenu', function (e) {
+//   // contextmenu - “文本菜单”
+//   // alert('鼠标点了右键');
+
+//   /**
+//    * 想要的效果：自定义右键列表
+//    */
+
+//   // 1. 自定义菜单跟随鼠标
+//   ul.style.display = 'block';
+//   let x = e.pageX;
+//   let y = e.pageY;
+//   ul.style.left = x + 'px';
+//   ul.style.top = y + 'px';
+
+//   // 2. 阻止浏览器默认行为（第二种方式见下面的 oncontextmenu 方法）
+//   e.preventDefault(); 
+// })
+
+document.oncontextmenu = function (e) {
+  ul.style.display = 'block';
+  let x = e.pageX;
+  let y = e.pageY;
+  ul.style.left = x + 'px';
+  ul.style.top = y + 'px';
+  // 只能在直接添加事件的写法下使用
+  return false;
+}
+</script>
+</html>

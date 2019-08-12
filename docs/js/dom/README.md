@@ -208,6 +208,16 @@ document.createElement('tagName');
 
 ##### 在使用 `appendChild` 和 `insertBefore` 时，若添加的是页面上已存在节点，则会先从原位置将其删除，而后将节点添加到新位置；
 
+#### 关于 append()
+
+- 它是 node 节点上的方法，但浏览器兼容有问题，尽量不要使用
+
+```
+ParentNode.append 方法在 ParentNode的最后一个子节点之后插入一组 Node 对象或 DOMString 对象；
+被插入的 DOMString 对象等价为 Text 节点；
+```
+- [一个实验性方法 | MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/ParentNode/append)
+
 ### 替换节点
 
 #### parent.replaceChild(newNode, oldNode)

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>键盘事件</title>
+</head>
+<body>
+  <h1>随意按键盘，好吧</h1>
+</body>
+<script>
+let h1 = document.querySelector('h1');
+
+document.addEventListener('keydown', function (e) {
+  h1.innerHTML = '键盘按下';
+  console.log('e.key - - - - - ' + e.key);
+  console.log('e.keyCode - - - ' + e.keyCode);
+  console.log('是否按下ctrl - - ' + e.ctrlKey);
+  console.log('是否按下alt - - - ' + e.altKey);
+  console.log('是否按下shift - - ' + e.shiftKey);
+  console.log('=  =  =  =  =  =  =  =  =  =  =');
+})
+
+document.addEventListener('keyup', function () {
+  h1.innerHTML = '键盘抬起';
+})
+</script>
+</html>

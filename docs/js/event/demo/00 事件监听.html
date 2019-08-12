@@ -45,13 +45,19 @@ let a = document.querySelector('a');
 // document.body.addEventListener('click', function () {
 //   alert('body');
 // })
-div.addEventListener('click', function () {
+div.addEventListener('click', function (e) {
+  console.log('- - - - - - 事件对象 - - - - - -');
+  console.log(e);
+  console.log('- - - - - - e.target - - - - - -');
+  console.log(e.target);
+  console.log('- - - - - - e.currentTarget - - - - - -');
+  console.log(e.currentTarget);
   alert('div');
 })
-p.addEventListener('click', function () {
+p.addEventListener('click', function (e) {
   alert('p');
 })
-div.addEventListener('click', function () {
+div.addEventListener('click', function (e) {
   alert('div2');
 }, true)
 
@@ -67,7 +73,9 @@ let btn = document.querySelector('button');
 
 let fn = function () { alert('事件监控ing'); }
 add.addEventListener('click', fn)
-btn.addEventListener('click', function () {
+btn.addEventListener('click', function (e) {
+  console.log('- - - - - - 事件对象 - - - - - -');
+  console.log(e);
   // add.removeEventListener('click',  function () {
   //   alert('事件监控ing'); // 注意：『不能使用匿名函数，必须是命名函数』
   // });

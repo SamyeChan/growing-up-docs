@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>mouse相关事件</title>
+  <style>
+    div {
+      width: 200px;
+      height: 200px;
+      background: yellowgreen;
+      margin: 100px auto;
+    }
+    p {
+      width: 100px;
+      height: 100px;
+      background: orange;
+      margin: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <p></p>
+  </div>
+</body>
+<script>
+  let div = document.querySelector('div');
+  /**
+   * 若鼠标移入/移出子元素范围，mouseover/mouseout 都会被触发der
+   */
+  // div.addEventListener('mouseover', function () {
+  //   console.log('移入了');
+  // })
+  // div.addEventListener('mouseout', function () {
+  //   console.log('移出了');
+  // })
+
+  /* - - - - - - - - - - - - - - - */
+
+  div.addEventListener('mouseenter', function () {
+    console.log('移入了');
+  })
+  div.addEventListener('mouseleave', function () {
+    console.log('移出了');
+  })
+
+  /**
+   * mouseenter/mouseleave 不受子元素范围干扰
+   */
+</script>
+</html>
