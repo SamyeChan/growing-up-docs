@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>表单方法</title>
+</head>
+<body>
+  <form id="form">
+    <input type="text" name="" id="txt"> 
+    <input type="submit" name="" id="submit">
+    <input type="reset" name="" id="reset">
+  </form>
+</body>
+<script>
+var form = document.querySelector('#form');
+var submit = document.querySelector('#submit');
+var reset = document.querySelector('#reset');
+
+// 表单
+form.addEventListener('submit', function (e) {
+  // 去取默认行为（解决提交后页面抖动刷新问题）
+  e.preventDefault();
+  console.log('submit - 提交表单事件');
+})
+form.addEventListener('reset', function (e) {
+  console.log('reset - 重置表单事件');
+})
+document.addEventListener('keydown', function (e) {
+  // 查看按键键码
+  console.log(e.keyCode);
+  /**
+   * 想实现效果 - 回车失焦，空格聚焦
+   */
+  if (e.keyCode == 13) {
+    txt.blur(); // 失去焦点【方法】
+  }
+  if (e.keyCode == 32) {
+    txt.focus(); // 获取焦点【方法】
+  }
+  /**
+   * 想实现效果：shift选中文本框内容
+   */
+  if (e.shiftKey) {
+    txt.select(); // 选中文本框内容
+  }
+})
+</script>
+</html>

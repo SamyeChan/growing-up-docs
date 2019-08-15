@@ -92,6 +92,8 @@ module.exports = {
           '/js/bom/',
           // event
           '/js/event/',
+          // 同步和异步
+          '/js/async/',
           // javascript
           '/js/js/',
           '/js/js/js-function.md',

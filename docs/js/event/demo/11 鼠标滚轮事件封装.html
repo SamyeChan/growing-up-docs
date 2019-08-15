@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>鼠标滚动事件（函数封装）</title>
+  <style>
+  div {
+    width: 100px;
+    height: 100px;
+    background: orange;
+  }
+  </style>
+</head>
+<body>
+  <div></div>
+</body>
+<script>
+/**
+ * 想要的效果：通过滚轮上下改变 div 宽度
+ */
+var div = document.querySelector('div');
+var h = 100;
+
+toWheel(div, function () {
+  console.log(this) 
+  /**
+   *  这里的this是指向window
+   * （想要改变this指向，那么需要在封装函数里改变指向，令其指向el - call()）
+   */
+  h += 5;
+  // div.style.height = h + 'px';
+  this.style.height = h + 'px';
+}, function () {
+  h -= 5;
+  // div.style.height = h + 'px';
+  this.style.height = h + 'px';
+})
+
+/**
+ * el - 滚动的元素
+ * downFn - 鼠标滚轮向下时执行的函数
+ * upFn - 鼠标滚轮向上时执行的函数
+ */
+function toWheel (el, downFn, upFn) {
+  /**
+   * Chrome & IE
+   */
+  el.addEventListener('mousewheel', function (e) {
+    if (e.wheelDelta > 0) {
+      // 向上
+      // upFn && upFn();
+      upFn && upFn.call(el); // 改变 this 指向 el 咯
+    } else {
+      // downFn && downFn();
+      downFn && downFn.call(el);
+    }
+  })
+  /**
+   * FireFox
+   */
+  el.addEventListener('DOMMouseScroll', function (e) {
+    if (e.detail < 0) {
+      // 向上
+      // upFn && upFn();
+      upFn && upFn.call(el);
+    } else {
+      // downFn && downFn();
+      downFn && downFn.call(el);
+    }
+  })
+}
+
+</script>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Promise</title>
+</head>
+<body>
+  
+</body>
+<script>
+// promise有两个参数：resolve、reject（这两个参数名不是固定死的，但一般别太秀好吧）
+let p = new Promise((resolve, reject) => {
+  // 成功的回调函数 - 加在成功的地方（进then）
+  // resolve('成功');
+  // 失败的回调函数 - 加在失败的地方（进catch：【catch是捕获then里所有的reject】）
+  // reject('失败');
+
+  // 模拟一个异步处理
+  setTimeout(function () {
+    resolve('resolve');
+    reject('reject');
+  }, 1000)
+});
+// then是在promise返回结果之后才执行的
+p.then(info => {
+  console.log(`我是从${info}到的then啦～`);
+}, info => {
+  console.log(`我是从${info}到的then啦～`);
+})
+console.log(p);
+</script>
+</html>

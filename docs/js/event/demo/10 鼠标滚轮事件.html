@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>鼠标滚动事件</title>
+  <style>
+  div {
+    width: 100px;
+    height: 100px;
+    background: orange;
+  }
+  </style>
+</head>
+<body>
+  <div></div>
+</body>
+<script>
+/**
+ * 想要的效果：通过滚轮上下改变 div 宽度
+ */
+var div = document.querySelector('div');
+var w = 100;
+
+/**
+ *  mousewheel - 兼容Chrome & IE
+ */
+document.addEventListener('mousewheel', function (e) {
+  /**
+   * e.wheelDelta - 滚轮（上：120 / 下：-120）
+   * 
+   */
+  console.log(e.wheelDelta);
+
+  if (e.wheelDelta > 0) {
+    // 向上 - 
+    w += 5;
+    div.style.width = w + 'px';
+  } else {
+    // 向下
+    w -= 5;
+    div.style.width = w + 'px';
+  }
+})
+/**
+ * DOMMouseScroll - 兼容Firefox
+ */
+document.addEventListener('DOMMouseScroll', function (e) {
+  /**
+   * e.detail - 滚轮（上：-3 / 下：3）
+   * 
+   */
+  console.log(e.detail);
+
+  // 注意：火狐与谷歌[上、下]&[正、负]对应关系相反
+  if (e.detail < 0) {
+    // 向上 - 
+    w += 5;
+    div.style.width = w + 'px';
+  } else {
+    // 向下
+    w -= 5;
+    div.style.width = w + 'px';
+  }
+})
+
+// mousewheel & DOMMouseScroll - 各有所属，同存情况下互不影响
+</script>
+</html>

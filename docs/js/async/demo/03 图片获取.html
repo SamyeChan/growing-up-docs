@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>图片获取</title>
+</head>
+<body>
+  
+</body>
+<script>
+let p = new Promise((resolve, reject) => {
+  // 请求一张图片
+  let img = new Image();
+  img.src = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565793881341&di=0d0e4ae0a5907546a6804201e7f678b0&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201210%2F04%2F20121004233010_y2xNS.jpeg'
+  img.onload = function () {
+    resolve('成功了！');
+  }
+  img.onerror = function () {
+    reject('失败了...');
+  }
+})
+p.then(info => {
+  console.log('图片 - ' + info);
+}, msg => {
+  console.log('图片 - ' + msg);
+})
+</script>
+</html>

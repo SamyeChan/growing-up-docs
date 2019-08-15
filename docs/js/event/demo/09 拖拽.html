@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>拖拽</title>
+  <style>
+  div {
+    width: 100px;
+    height: 100px;
+    background: orange;
+  }
+  </style>
+</head>
+<body>
+  <div></div>
+</body>
+<script src="mTween.js"></script>
+<script>
+/**
+ * 鼠标按下 mousedown
+ * 鼠标移动 mousemove - 不断改变元素的top/left
+ * 鼠标抬起 mouseup
+ */
+
+var div = document.querySelector('div');
+
+// 1. 鼠标点击的位置
+var startPos = {}
+// 2. 元素的初始位置
+var boxPos = {}
+
+div.addEventListener('mousedown', function (e) {
+  startPos.x = e.clientX;
+  startPos.y = e.clientY;
+  boxPos.x = css(div, 'left');
+  boxPos.y = css(div, 'top');
+
+  // 鼠标移动的过程中不断改变元素位置
+  // div.addEventListener('mousemove', drag)
+  document.addEventListener('mousemove', drag)
+
+  // 清除鼠标移动事件
+  document.addEventListener('mouseup', function () {
+    // 清除的必须是匿名函数噢
+    document.removeEventListener('mousemove', drag)
+  }, {
+    // 解决每次 mouseup 都会添加一次事件的问题(事件累加) - 只执行一次
+    once: true
+  })
+})
+
+function drag () {
+  // 当前位置
+  var nowPos = {
+    x: e.clientX,
+    y: e.clientY
+  }
+
+  // 移动距离 = 当前鼠标位置 - 初始鼠标位置
+  var dis = {
+    x: nowPos.x - startPos.x,
+    y: nowPos.y - startPos.y
+  }
+
+  // 元素最新位置 = 元素初始位置 + 移动距离
+  var newPos = {
+    l: dis.x + boxPos.x,
+    t: dis.y + boxPos.y
+  }
+
+  // 限制范围 - 浏览器可视区
+
+  // 左
+  (newPos.l < 0) && (newPos.l = 0)
+  // 右（最大left = 浏览器可视区宽度 - 自身宽度）
+  var maxL = document.documentElement.clientWidth - div.offsetWidth;
+  (newPos.l > maxL) && (newPos.l = maxL)
+  // 上
+  (newPos.l < 0) && (newPos.l = 0)
+  // 下（最大top = 浏览器可视区高度 - 自身高度）
+  var maxT = document.documentElement.clientHeight - div.offsetHeight;
+  (newPos.t > maxT) && (newPos.t = maxT)
+
+  // 修改样式
+  css(div, 'top', newPos.t);
+  css(div, 'left', newPos.l);
+}
+</script>
+</html>
