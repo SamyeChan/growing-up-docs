@@ -1,6 +1,12 @@
-# 动画专题
+---
+sidebarDepth: 3
+---
 
-## 动画帧 requestAnimationFrame
+# Learn | 动画
+
+## 动画帧
+
+### requestAnimationFrame
 
 - `window` 下的一个方法；
 - 把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并重绘或回流的时间间隔紧紧跟随浏览器的刷新频率；
@@ -39,7 +45,7 @@ window.cancelAnimationFrame(index)
 
 浏览器的前缀说明 - 已取消
 
-### Tween 运动算法
+## Tween 运动算法
 
 以下为非完整版哟，完整版自己去文件夹中看：
 
@@ -173,97 +179,17 @@ var Tween = {
 		return Tween['bounceOut'](t*2-d, 0, c, d) * 0.5 + c*0.5 + b;
 	}
 };
-(function(){
-    if(!window.requestAnimationFrame){
-        var lastTime = 0;
-        window.requestAnimationFrame = function(callback){
-            var nowTime = Date.now();
-            var dely = Math.max(0,16.7 - (nowTime - lastTime));
-            lastTime = nowTime;
-            return setTimeout(callback,dely);
-        };
-        window.cancelAnimationFrame = function(index){
-           clearTimeout(index);
-        };
-    }
-})();
-
-/*
-    作用：获取和设置样式
-    el,attr,val
-*/
-function css(el,attr,val){
-    if(val === undefined){
-        return parseFloat(getComputedStyle(el)[attr]);
-    } else {
-        if(attr == "opacity"){
-            el.style[attr] = val;
-            el.style.filter = "alpha(opacity="+(val*100)+")";
-        } else {
-            el.style[attr] = val + "px";
-        }
-    }
-}
-/*
-op: {
-    el: 要运动的元素
-    attrs: {
-        样式：目标点
-    },
-    duration: 300 ||{
-        multiple
-    },
-    fx: "easeOut",
-    cb: function(){
-        动画结束之后要做的事情
-    }    
-}
-*/
-function mTween(op){
-    var el = op.el,
-    attr = op.attr,
-    fx = op.fx||"easeOut",
-    duration = op.duration||400,
-    maxC = 0;
-    //let {el,attr,fx,duration } = op;
-    if(el.animationTimer){
-        return;
-    }
-    var t = 0;
-    var b = {};
-    var c = {};
-    for(var s in attr){
-        b[s] = css(el,s);
-        c[s] = attr[s] - b[s];
-        maxC = Math.max(maxC,Math.abs(c[s]));
-    }
-    if(typeof duration === "object"){
-        var durationOption = duration;
-        durationOption.multiple =  durationOption.multiple||2;
-        duration = maxC * duration.multiple;
-        duration =  durationOption.max?Math.min(duration,durationOption.max):duration;
-        duration =  durationOption.min?Math.max(duration,durationOption.min):duration;
-    }
-    var d = Math.ceil(duration/(1000/60));
-    move();
-    function move(){
-        el.animationTimer = requestAnimationFrame(function(){
-            t++;
-            if(t > d){
-                el.animationTimer = null;
-                op.cb&&op.cb();
-            } else {
-                for(var s in attr){
-                    var val = Tween[fx](t,b[s],c[s],d);
-                    css(el,s,val);
-                }
-                move();
-            }
-        });
-    }
-}
-mTween.stop = function(el){
-    cancelAnimationFrame(el.animationTimer);
-    el.animationTimer = null;
-};
 ```
+
+### Tween 参数解析
+
+- t - current time（当前时间）
+- b - beginning value（初始值）
+- c - change in value（变化值）
+- d - duration（持续时间）
+
+### 封装基于 Tween 的动画框架
+
+#### css方法
+
+#### mTween

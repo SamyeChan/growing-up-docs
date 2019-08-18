@@ -1,49 +1,3 @@
-# 动画专题
-
-## 动画帧 requestAnimationFrame
-
-- `window` 下的一个方法；
-- 把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并重绘或回流的时间间隔紧紧跟随浏览器的刷新频率；
-- 在隐藏或不可见的元素中，`requestAnimationFrame` 将不会进行重绘或回流；
-- 动画帧的最大好处就在于性能；
-- `requestAnimationFrame` 作为新的 API，对 IE 的兼容旨在 10 及以上；
-
-### 动画帧 vs 定时动画
-
-#### 定时器动画
-
-1. 丢帧；
-2. console.Time(); & console.TimeEnd();
-
-- 可能会出现一个电脑重塑时间间隔内渲染2次的情况 - 导致丢帧；
-
-#### 动画帧动画
-
-
-### 动画帧用法
-
-```js
-window.requestAnimationFrame(callback)
-```
-- `requestAnimationFrame` 是 `window` 下的一个方法；
-- `callback` 下一次重绘之前更新动画帧所调用的函数；
-- 动画帧只执行一次，需要重复执行，可使用递归；
-- 返回值：动画编号；
-
-```js
-// 取消动画帧
-window.cancelAnimationFrame(index)
-```
-
-### 动画帧兼容
-
-浏览器的前缀说明 - 已取消
-
-### Tween 运动算法
-
-以下为非完整版哟，完整版自己去文件夹中看：
-
-```js
 var Tween = {
 	linear: function (t, b, c, d){  //匀速
 		return c*t/d + b;
@@ -187,45 +141,99 @@ var Tween = {
         };
     }
 })();
-
-/*
-    作用：获取和设置样式
-    el,attr,val
-*/
+var transformAttr = [
+    "rotate",
+    "rotateX",
+    "rotateY",
+    "rotateZ",
+    "translateX",
+    "translateY",
+    "translateZ",
+    "scale",
+    "scaleX",
+    "scaleY",
+    "skewX",
+    "skewY"
+]; 
+var normalAttr = [
+    "width",
+    "height",
+    "left",
+    "top",
+    "right",
+    "bottom",
+    "marginBottom",
+    "marginleft",
+    "marginRight",
+    "marginTop",
+    "paddingLeft",
+    "paddingRight",
+    "paddingTop",
+    "paddingBottom"
+];
 function css(el,attr,val){
+    if(typeof attr == "object"){
+        for(var s in attr){
+            css(el,s,attr[s]);
+        }
+        return ;
+    }
+    if(transformAttr.indexOf(attr) >= 0){
+        return setTransform(el,attr,val);
+    }
     if(val === undefined){
-        return parseFloat(getComputedStyle(el)[attr]);
+        val = getComputedStyle(el)[attr]; 
+        return normalAttr.indexOf(attr)>=0||!isNaN(val)?parseFloat(val):val;
     } else {
         if(attr == "opacity"){
             el.style[attr] = val;
             el.style.filter = "alpha(opacity="+(val*100)+")";
-        } else {
+        } else if(normalAttr.indexOf(attr)>=0) {
             el.style[attr] = val + "px";
+        } else if(attr == "zIndex") {
+            el.style[attr] = Math.round(val);
+        } else {
+            el.style[attr] = val;
         }
     }
 }
-/*
-op: {
-    el: 要运动的元素
-    attrs: {
-        样式：目标点
-    },
-    duration: 300 ||{
-        multiple
-    },
-    fx: "easeOut",
-    cb: function(){
-        动画结束之后要做的事情
-    }    
+function setTransform(el,attr,val){
+    el.transform = el.transform||{};
+    if(val === undefined){
+        return  el.transform[attr];
+    }
+    el.transform[attr] = val;
+    var transformVal = "";
+    for(var s in  el.transform){
+        switch(s){
+            case "rotate":
+            case "rotateX":
+            case "rotateY":
+            case "rotateZ":
+            case "skewX":
+            case "skewY":
+                transformVal += s+'('+ el.transform[s]+'deg) ';
+                break;
+            case "translateX":
+            case "translateY":
+            case "translateZ":
+                transformVal += s+'('+ el.transform[s]+'px) ';
+                break;
+            case "scale":
+            case "scaleX":
+            case "scaleY":
+                transformVal += s+'('+ el.transform[s]+') ';
+                break;       
+        }
+    }
+    el.style.WebkitTransform = el.style.transform = transformVal.trim();
 }
-*/
 function mTween(op){
     var el = op.el,
     attr = op.attr,
     fx = op.fx||"easeOut",
     duration = op.duration||400,
     maxC = 0;
-    //let {el,attr,fx,duration } = op;
     if(el.animationTimer){
         return;
     }
@@ -266,4 +274,3 @@ mTween.stop = function(el){
     cancelAnimationFrame(el.animationTimer);
     el.animationTimer = null;
 };
-```

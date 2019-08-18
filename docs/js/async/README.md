@@ -1,7 +1,3 @@
-<!-- ---
-sidebarDepth: 3
---- -->
-
 # Learn | 异步处理
 
 - Promise

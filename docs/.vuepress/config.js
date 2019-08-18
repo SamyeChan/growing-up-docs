@@ -94,6 +94,8 @@ module.exports = {
           '/js/event/',
           // 同步和异步
           '/js/async/',
+          // 动画
+          '/js/animation/',
           // javascript
           '/js/js/',
           '/js/js/js-function.md',
