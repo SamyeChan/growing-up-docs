@@ -116,7 +116,8 @@ module.exports = {
         children: [
           // 面试题目
           '/topic/html5-semanticization.md',
-          '/topic/note-pay.md'
+          '/topic/note-pay.md',
+          '/read/2019-08/00 异步编程.md'
         ]
       }, {
         title: '其他辅助',

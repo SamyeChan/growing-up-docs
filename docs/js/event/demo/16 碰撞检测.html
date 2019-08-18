@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>碰撞检测</title>
+  <style>
+  div {
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    font-size: 40px;
+  }
+  .box1 {
+    background: orange;
+    top: 10px;
+    left: 10px;
+  }
+  .box2 {
+    background: yellowgreen;
+    top: 250px;
+    left: 250px;
+  }
+  </style>
+</head>
+<body>
+  <div class="box1">BOX-01</div>
+  <div class="box2">BOX-02</div>
+</body>
+<script>
+let box1 = document.querySelector('.box1');
+let box2 = document.querySelector('.box2');
+
+/**
+ *  封装方法 - 获取/设置样式
+ * 
+ *  设置：3个参数 / 获取：2个参数
+ */
+function css (el, attr, val) {
+  if (arguments.length == 3) {
+    el.style[attr] = val + 'px';
+  } else {
+    return parseInt(getComputedStyle(el)[attr]);
+  }
+}
+drag(box1);
+drag(box2);
+/**
+ * 单元素的鼠标拖动封装
+ */
+function drag (el) {
+  // 01 为元素添加鼠标点击事件
+  el.addEventListener('mousedown', function (e) {
+    // 02 获取当前鼠标坐标
+    let start = {
+      l: e.clientX,
+      t: e.clientY
+    }
+    let startPos = {
+      l: css(el, 'left'),
+      t: css(el, 'top')
+    }
+    // 03 目标元素宽高变化设置
+    function move (e) {
+      let dis = {
+        l: e.clientX - start.l,
+        t: e.clientY - start.t
+      }
+      el.style.left = dis.l + startPos.l + 'px';
+      el.style.top = dis.t + startPos.t + 'px';
+
+      if (isContact(box1, box2)) {
+        box2.style.background = 'yellow';
+      } else {
+        box2.style.background = 'yellowgreen';
+      }
+
+      e.preventDefault();
+      /**
+       *  这个阻止浏览器默认行为是解决啥问题啊...
+       * 
+       *  看录播里老师说是点击时
+       */
+    }
+    // 04 为元素添加鼠标移动事件
+    document.addEventListener('mousemove', move)
+    document.addEventListener('mouseup', function () {
+      document.removeEventListener('mousemove', move)
+    }, {
+      once: true
+    })
+  })
+}
+/**
+ * 封装 - 元素是否发生碰撞
+ */
+function isContact (el1, el2) {
+  // 获取两个元素得四条边位置
+  let el1Pos = el1.getBoundingClientRect();
+  let el2Pos = el2.getBoundingClientRect();
+  //  console.log(el1Pos);
+
+  /**
+  * [分析]第一种思路：没碰上的时候（假定 el2Pos 不动）
+  * 
+  * el2Pos左：el2Pos.left > el1Pos.right
+  *       右：el2Pos.right < el1Pos.left
+  *       上：el2Pos.top > el1Pos.bottom
+  *       下：el2Pos.bottom < el1Pos.top
+  */
+  if (
+    el2Pos.left > el1Pos.right ||
+    el2Pos.right < el1Pos.left ||
+    el2Pos.top > el1Pos.bottom ||
+    el2Pos.bottom < el1Pos.top
+  ) {
+    return false // 没碰上
+  } else {
+    return true // 碰上
+  }
+
+  /**
+  * [分析]第二种思路：碰上的时候（假定 el2Pos 不动）
+  * 
+  * el2Pos左：el2Pos.left < el1Pos.right
+  *       右：el2Pos.right > el1Pos.left
+  *       上：el2Pos.top < el1Pos.bottom
+  *       下：el2Pos.bottom > el1Pos.top
+  */
+  if (
+    el2Pos.left < el1Pos.right &&
+    el2Pos.right > el1Pos.left &&
+    el2Pos.top < el1Pos.bottom &&
+    el2Pos.bottom > el1Pos.top
+  ) {
+    return true // 碰上
+  } else {
+    return false // 没碰上
+  }
+}
+</script>
+</html>

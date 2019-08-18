@@ -7,7 +7,7 @@ sidebarDepth: 3
 
 ### 事件监听和事件绑定的区别
 
-- 直接使用 onclick 类似的方式添加方法，最后的方法会覆盖掉其前面的方法 - 事件不可累加；
+- 直接使用 onclick 类似的方式添加方法，最后的方法会覆盖掉其前面的方法 - **事件不可累加**；
 - 事件监听器就不会；
 - 事件监听，事件名称不需要加“on”，且事件可累加，并不会相互覆盖；
 ```js
@@ -444,4 +444,360 @@ document.addEventListener('keydown', function (e) {
 
 ## 小栗子
 
-### 键盘LTRB的八个放向控制
+### 键盘LTRB的八个方向控制
+
+<!-- = = = = = = = = = = = = = = = = = = = = = = -->
+
+### 拖拽画框
+
+**[ 想要的效果 ]** 鼠标点击网页，而后拖拽，一个矩形框随之变大变小 -（类似绘图中的画框框啊～）;
+
+#### 创建 div 元素
+
+```js
+// 鼠标按下时，进行一系列操作
+document.addEventListener('mousedown', function (e) {
+  // 01 会创建一个 div
+  let box = document.createElement('div');
+  // 02 为 div 添加样式，让效果显示出来
+  box.classList.add('box');
+  // 03 div 在上一步被设为绝对定位（其位置即为鼠标按下的那一个坐标点）
+  box.style.left = e.clientX + 'px';
+  box.style.top = e.clientY + 'px';
+  // 04 在 body 中添加该 div
+  document.body.appendChild(box);
+})
+```
+效果：
+
+![创建元素](./imgs/1501_tuozhuai.gif)
+
+#### 鼠标移动时设置 div 的宽高
+
+```js
+// 鼠标按下时，进行一系列操作
+  document.addEventListener('mousedown', function (e) {
+    // 05 获取 div 初始位置
+    let startPos = {
+      l: e.clientX,
+      t: e.clientY
+    }
+
+    /**
+     *  此处忽略上一步的 div 创建步骤
+     */
+
+    // 鼠标移动时设置 div 的宽高 - 使其会根据鼠标移动而变化 
+    document.addEventListener('mousemove', function (e) {
+      // 06 实时计算鼠标移动到的当前位置与初始位置间的水平/竖直距离
+      let dis = {
+        l: e.clientX - startPos.l,
+        t: e.clientY - startPos.t
+      }
+      // 07 设置 div 宽高
+      box.style.width = dis.l + 'px';
+      box.style.height = dis.t + 'px';
+    })
+  })
+```
+
+效果：
+
+![元素跟随鼠标大小变化](./imgs/1502_tuozhuai.gif)
+
+任存问题：
+  1. 鼠标松开后仍可控制 div 大小；
+  2. 鼠标多次点击，生成多个 div，并会一同影响；
+  3. “反向”拖拽不得行；
+
+#### 解决鼠标松开仍可控制 div 问题
+
+- 添加 `mouseup` 事件，并在此取消此前的 `mousemove` 事件；
+- 记得封装函数；
+
+```js
+// 08 封装函数 - 解决鼠标松开仍可控制 div 问题
+function move (e) {
+  // 06 实时计算鼠标移动到的当前位置与初始位置间的水平/竖直距离
+  let dis = {
+    l: e.clientX - startPos.l,
+    t: e.clientY - startPos.t
+  }
+  // 07 设置 div 宽高
+  box.style.width = dis.l + 'px';
+  box.style.height = dis.t + 'px';
+}
+
+// 鼠标移动时设置 div 的宽高 - 使其会根据鼠标移动而变化 
+document.addEventListener('mousemove', move)
+// 09 添加 mouseup 事件，并在此取消此前的 `mousedown` 事件
+document.addEventListener('mouseup', function () {
+  document.removeEventListener('mousemove', move)
+}, {
+  once: true // 只需要将当前的取消啦
+})
+```
+效果：
+
+![解决鼠标松开仍可控制 div 问题](./imgs/1503_tuozhuai.gif)
+
+#### 解决“反向”拖拽不得行问题
+
+- 代表 div 移动距离的 dis 对象应该均为负值；
+- div 坐标由初始、当前坐标中的小值决定（div定位基准：左上角）；
+
+```js
+// 08 封装函数 - 解决鼠标松开仍可控制 div 问题
+function move (e) {
+  // 06 实时计算鼠标移动到的当前位置与初始位置间的水平/竖直距离
+  let dis = {
+    // 10 保证距离中的 l、t均为正值 - 让坐标正负去影响左右拖拽
+    l: Math.abs(e.clientX - startPos.l),
+    t: Math.abs(e.clientY - startPos.t)
+  }
+
+  // 11 div 坐标由初始、当前坐标中的小值决定
+  //（要知道div的基准一直会是左上角哟）
+  box.style.left = Math.min(startPos.l, e.clientX) + 'px';
+  box.style.top = Math.min(startPos.t, e.clientY) + 'px';
+  // 07 设置 div 宽高
+  box.style.width = dis.l + 'px';
+  box.style.height = dis.t + 'px';
+}
+```
+
+效果：
+
+![解决“反向”拖拽不得行问题](./imgs/1504_tuozhuai.gif)
+
+<!-- = = = = = = = = = = = = = = = = = = = = = = -->
+
+### 碰撞检测
+
+**[ 想要的效果 ]** 两个元素可分别拖动，且重叠时会触发元素的检测标识
+
+![碰撞检测](./imgs/1602_pengzhuangjiance.gif)
+
+#### 实现元素的拖拽
+
+这一部分的实现原理与拖拽画框相类似：
+
+```js
+/**
+ * 封装方法 - 单个元素的鼠标拖动效果
+ */
+function drag (el) {
+  // 01 为元素添加鼠标点击事件
+  el.addEventListener('mousedown', function (e) {
+    // 02 获取当前鼠标坐标
+    let start = {
+      l: e.clientX,
+      t: e.clientY
+    }
+    let startPos = {
+      l: css(el, 'left'),
+      t: css(el, 'top')
+    }
+    // 03 目标元素宽高变化设置
+    function move (e) {
+      let dis = {
+        l: e.clientX - start.l,
+        t: e.clientY - start.t
+      }
+      el.style.left = dis.l + startPos.l + 'px';
+      el.style.top = dis.t + startPos.t + 'px';
+      e.preventDefault(); // 这个阻止浏览器默认行为是解决啥问题啊...
+    }
+    // 04 为元素添加鼠标移动事件
+    document.addEventListener('mousemove', move)
+    document.addEventListener('mouseup', function () {
+      document.removeEventListener('mousemove', move)
+    }, {
+      once: true
+    })
+  })
+}
+```
+任存问题：
+  1. 浏览器默认行为；
+
+#### 获取到元素的四边相关信息
+
+- `el.getBoundingClientRect()`
+
+```js
+// 获取元素四条边位置
+let el1Pos = el1.getBoundingClientRect();
+console.log(el1Pos);
+```
+获取结果：
+
+![获取元素四条边位置](./imgs/1601_pengzhuangjiance.png)
+
+- 如上，通过 `el.getBoundingClientRect()`，我们可以拿到元素4个方向 `top`、`right`、`bottom`、`left` 的绝对定位值；
+
+#### 判断元素是否发生碰撞的方法
+
+```js
+/**
+ * 封装 - 元素是否发生碰撞
+ */
+function isContact (el1, el2) {
+  // 获取两个元素得四条边位置
+  let el1Pos = el1.getBoundingClientRect();
+  let el2Pos = el2.getBoundingClientRect();
+
+  /**
+  * [分析]第一种思路：没碰上的时候（假定 el2Pos 不动）
+  * 
+  * el2Pos左：el2Pos.left > el1Pos.right
+  *       右：el2Pos.right < el1Pos.left
+  *       上：el2Pos.top > el1Pos.bottom
+  *       下：el2Pos.bottom < el1Pos.top
+  */
+  if (
+    el2Pos.left > el1Pos.right ||
+    el2Pos.right < el1Pos.left ||
+    el2Pos.top > el1Pos.bottom ||
+    el2Pos.bottom < el1Pos.top
+  ) {
+    return false // 没碰上
+  } else {
+    return true // 碰上
+  }
+
+  /**
+  * [分析]第二种思路：碰上的时候（假定 el2Pos 不动）
+  * 
+  * el2Pos左：el2Pos.left < el1Pos.right
+  *       右：el2Pos.right > el1Pos.left
+  *       上：el2Pos.top < el1Pos.bottom
+  *       下：el2Pos.bottom > el1Pos.top
+  */
+  if (
+    el2Pos.left < el1Pos.right &&
+    el2Pos.right > el1Pos.left &&
+    el2Pos.top < el1Pos.bottom &&
+    el2Pos.bottom > el1Pos.top
+  ) {
+    return true // 碰上
+  } else {
+    return false // 没碰上
+  }
+}
+```
+- 将该方法放于 `mousemove` 触发的函数下，并可根据返回值设定不同的情形：
+
+```js
+// 元素碰撞就变色
+if (isContact(box1, box2)) {
+  box2.style.background = 'yellow';
+} else {
+  box2.style.background = 'yellowgreen';
+}
+```
+
+### 画框选择
+
+**[ 想要的效果 ]** 类似 windows 系统那种选择文件夹啊，然后选了以后直接把它们移到框框可咯
+
+--> 批量元素的碰撞检测
+
+#### 基本布局
+
+大概就酱紫：
+
+![基本布局](./imgs/1701_huakuangxuanze.png)
+
+#### 实现框选功能
+
+大致实现思路和上面的 demo 相似：
+
+```js
+// 实现话框选择功能
+document.addEventListener('mousedown', function (e) {
+  // 创建 div
+  let box = document.createElement('div');
+  box.classList.add('box');
+  document.body.appendChild(box);
+
+  
+  // 获取鼠标点击时的坐标
+  let startPos = {
+    l: e.clientX,
+    t: e.clientY
+  }
+
+  function move (e) {
+    // 获得鼠标移动时与鼠标点击时的坐标水平/竖直距离（正值）
+    let dis = {
+      l: Math.abs(e.clientX - startPos.l),
+      t: Math.abs(e.clientY - startPos.t)
+    }
+    // 给新创建 div 添加宽高
+    box.style.left = Math.min(e.clientX, startPos.l) + 'px';
+    box.style.top = Math.min(e.clientY, startPos.t) + 'px';
+    box.style.width = dis.l + 'px';
+    box.style.height = dis.t + 'px';
+
+    // 浏览器默认行为会让画框框选到下面的 li 时，文字自动被选上了，要阻止它
+    e.preventDefault();
+  }
+  document.addEventListener('mousemove', move);
+  document.addEventListener('mouseup', function () {
+    document.removeEventListener('mousemove', move);
+    // 一次只应该出现创建的一个框选效果div哟 - 再move就移除上一个
+    // remove() - 删除节点
+    box.remove();
+  }, {
+    once: true
+  })
+})
+```
+效果：
+
+![实现框选功能](./imgs/1702_huakuangxuanze.gif)
+
+#### 实现框选框中的元素选中
+
+- 选框要和每一个 `<li>` 做碰撞检测；
+- 使用上面demo所写的判断方法；
+
+```js
+let listLis = document.querySelectorAll('li');
+// 循环解决多个碰撞检测
+listLis.forEach(item => {
+  // 判断是否框选
+  if (isContact(item, box)) {
+    item.classList.add('active');
+  } else {
+    item.classList.remove('active');
+  }
+});
+```
+效果：
+
+![实现框选框中的元素选中](./imgs/1703_huakuangxuanze.gif)
+
+待改进：
+  1. 选中后，点击页面空白部分，选中不清除；
+
+#### 将选中元素添加至画框中
+
+在 mouseup 时进行操作：
+
+```js
+document.addEventListener('mouseup', function () {
+  let activeBox = document.querySelectorAll('.active');
+  activeBox.forEach(item => {
+    bigBox.appendChild(item);
+  })
+  ...
+}, {
+  once: true
+})
+```
+
+效果：
+
+![将选中元素添加至画框中](./imgs/1704_huakuangxuanze.gif)

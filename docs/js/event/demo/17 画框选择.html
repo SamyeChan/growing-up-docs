@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>画框选择</title>
+  <style>
+  .box {
+    border: 1px solid yellowgreen;
+    position: absolute;
+    background: rgba(154, 205, 50, .3)
+  }
+  .bigBox {
+    height: 300px;
+    border: 1px solid orangered;
+  }
+  .list {
+    list-style: none;
+  }
+  .bigBox li, .list li {
+    width: 50px;
+    height: 50px;
+    background: orange;
+    float: left;
+    margin: 10px;
+  }
+  /* 样式优先级问题 --> 权重 */
+  .list .active {
+    background: yellowgreen;
+  }
+  /** 
+   * 移动端需适配的，布局最好用 flex；
+   * PC端的标准化页面还是使用 float 好；
+   */
+  </style>
+</head>
+<body>
+  <div class="bigBox"></div>
+  <ul class="list">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>9</li>
+  </ul>
+</body>
+<script>
+let listLis = document.querySelectorAll('li');
+let bigBox = document.querySelector('.bigBox');
+
+// 实现话框选择功能
+document.addEventListener('mousedown', function (e) {
+  // 创建 div
+  let box = document.createElement('div');
+  box.classList.add('box');
+  document.body.appendChild(box);
+
+  
+  // 获取鼠标点击时的坐标
+  let startPos = {
+    l: e.clientX,
+    t: e.clientY
+  }
+
+  function isContact (el1, el2) {
+    // 获取两个元素得四条边位置
+    let el1Pos = el1.getBoundingClientRect();
+    let el2Pos = el2.getBoundingClientRect();
+
+    if (
+      el2Pos.left > el1Pos.right ||
+      el2Pos.right < el1Pos.left ||
+      el2Pos.top > el1Pos.bottom ||
+      el2Pos.bottom < el1Pos.top
+    ) {
+      return false // 没碰上
+    } else {
+      return true // 碰上
+    }
+  }
+
+  function move (e) {
+    // 获得鼠标移动时与鼠标点击时的坐标水平/竖直距离（正值）
+    let dis = {
+      l: Math.abs(e.clientX - startPos.l),
+      t: Math.abs(e.clientY - startPos.t)
+    }
+    // 给新创建 div 添加宽高
+    box.style.left = Math.min(e.clientX, startPos.l) + 'px';
+    box.style.top = Math.min(e.clientY, startPos.t) + 'px';
+    box.style.width = dis.l + 'px';
+    box.style.height = dis.t + 'px';
+
+    // 循环解决多个碰撞检测
+    listLis.forEach(item => {
+      // 判断是否框选
+      if (isContact(item, box)) {
+        item.classList.add('active');
+      } else {
+        item.classList.remove('active');
+      }
+    });
+
+    // 浏览器默认行为会让画框框选到下面的小div时，文字自动被选上了，要阻止它
+    e.preventDefault();
+  }
+  document.addEventListener('mousemove', move);
+  document.addEventListener('mouseup', function () {
+
+    let activeBox = document.querySelectorAll('.active');
+    activeBox.forEach(item => {
+      bigBox.appendChild(item);
+    })
+    document.removeEventListener('mousemove', move);
+    // 一次只应该出现创建的一个框选效果div哟 - 再move就移除上一个
+    // remove() - 删除节点
+    box.remove();
+  }, {
+    once: true
+  })
+})
+</script>
+</html>

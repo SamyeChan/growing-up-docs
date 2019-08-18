@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>拖拽划框</title>
+  <style>
+  .box {
+    border: 2px solid orangered;
+    position: absolute;
+  }
+  </style>
+</head>
+<body>
+</body>
+<script>
+  /**
+   * 想要的效果：鼠标点击网页，而后拖拽，一个矩形框随之变大变小
+   * （类似绘图中的画框框啊～）
+   * 
+   */
+
+  // 鼠标按下时，进行一系列操作
+  document.addEventListener('mousedown', function (e) {
+    // 05 获取 div 初始位置
+    let startPos = {
+      l: e.clientX,
+      t: e.clientY
+    }
+
+    // 01 会创建一个 div
+    let box = document.createElement('div');
+    // 02 为 div 添加样式，让效果显示出来
+    box.classList.add('box');
+    // 03 div 在上一步被设为绝对定位（其位置即为鼠标按下的那一个坐标点）
+    box.style.left = e.clientX + 'px';
+    box.style.top = e.clientY + 'px';
+    // 04 在 body 中添加该 div
+    document.body.appendChild(box);
+
+    // 08 封装函数 - 解决鼠标松开仍可控制 div 问题
+    function move (e) {
+      // 06 实时计算鼠标移动到的当前位置与初始位置间的水平/竖直距离
+      let dis = {
+        // 10 保证距离中的 l、t均为正值 - 让坐标正负去影响左右拖拽
+        l: Math.abs(e.clientX - startPos.l),
+        t: Math.abs(e.clientY - startPos.t)
+      }
+
+      // 11 div 坐标由初始、当前坐标中的小值决定（要知道div的基准一直会是左上角哟）
+      box.style.left = Math.min(startPos.l, e.clientX) + 'px';
+      box.style.top = Math.min(startPos.t, e.clientY) + 'px';
+      // 07 设置 div 宽高
+      box.style.width = dis.l + 'px';
+      box.style.height = dis.t + 'px';
+    }
+    // 鼠标移动时设置 div 的宽高 - 使其会根据鼠标移动而变化 
+    document.addEventListener('mousemove', move)
+    // 09 添加 mouseup 事件，并在此取消此前的 `mousedown` 事件
+    document.addEventListener('mouseup', function () {
+      document.removeEventListener('mousemove', move)
+    }, {
+      once: true // 只需要将当前的取消啦
+    })
+  })
+
+</script>
+</html>
