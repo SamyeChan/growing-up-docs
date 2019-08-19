@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>new运算符</title>
+</head>
+<body>
+<div class="div1">
+    <button style="background: orange;">Btn-01</button>
+    <button>Btn-02</button>
+    <button>Btn-03</button>
+    <p style="display: block;">ONE</p>
+    <p style="display: none;">TWO</p>
+    <p style="display: none;">THREE</p>
+  </div>
+  <div class="div2">
+    <button style="background: orange;">Btn-01</button>
+    <button>Btn-02</button>
+    <button>Btn-03</button>
+    <button>Btn-04</button>
+    <p style="display: block;">ONE</p>
+    <p style="display: none;">TWO</p>
+    <p style="display: none;">THREE</p>
+    <p style="display: none;">FOUR</p>
+  </div>
+  <button class="nextBtn">点击 --> 下一页</button>
+  <button class="autoPlayBtn">点击 --> 自动轮播</button>
+</body>
+<script>
+/*
+ * new 运算符
+ *
+ * 功能： 1- 执行函数
+ *       2- 自动创建一个空对象；
+ *       3- 把空对象指向另外一个对象；
+ *       4- 将 this 绑定到这个空对象；
+ *       5- 隐式返还 this；
+ */
+let _obj = {};
+let obj = new Object();
+
+function test () {
+  console.log('test...');
+}
+test();
+new test;
+new test();
+
+/**
+ * 工厂模式 - 使用 new 运算符的话
+ */
+ function Tab () {
+  // 00 加原料
+  // let obj = {}; ---> 将 this 绑定到这个空对象（所以new的话，直接可以使用this 进行后续操作，而不需要）
+  // 01 加工原料
+  this.tabNum = 4;
+  this.psFor = function () {
+    console.log('psFor');
+  };
+  // 02 出厂
+  // return obj; ---> new 可以隐式返还 this，故此处可以省略 return
+  /**
+   * 有 return 执行 return，没 return 就会把 this 返回来
+   * 
+   * （但一般不会自己返换，直接返回 this 就好啦）
+   */
+}
+// new 实例化：this 指向 实例化对象
+// new 把空对象指向另外一个对象 ---> 所以方法中返回的 this 就指向了新的那个 tab
+let tab = new Tab();
+tab.psFor();
+
+
+// /**
+//  * 封装 - 选项卡
+//  */
+// function Tab (btns, ps) {
+//   // 00 加原料
+//   let obj = {};
+
+//   btns.forEach((item, index) => {
+//     item.onclick = function () {
+//       psFor(index);
+//     }
+//   })
+//   /**
+//    * 封装 - 选中与否的处理差异
+//    */
+//   function psFor (val) {
+//     ps.forEach((it, idx) => {
+//       if (idx == val) {
+//         // 选中项
+//         btns[idx].style.background = 'orange';
+//         ps[idx].style.display = 'block';
+//       } else {
+//         // 未选中项
+//         btns[idx].style.background = '';
+//         ps[idx].style.display = 'none';
+//       }
+//     })
+//   }
+//   // 加工原料
+//   obj.TabNum = btns.length;
+//   obj.psFor = psFor;
+//   // 出厂
+//   return obj;
+// }
+
+// let btns = document.querySelectorAll('.div1 button');
+// let ps = document.querySelectorAll('.div1 p');
+// // 拿到的
+// let tab = Tab(btns, ps, true, false);
+// // 有下一页功能
+// let num = 0;
+// document.querySelector('.nextBtn').onclick = function () {
+//   num++;
+//   num = num > (tab.TabNum - 1) ? 0 : num;
+//   tab.psFor(num);
+// }
+
+// let btns2 = document.querySelectorAll('.div2 button');
+// let ps2 = document.querySelectorAll('.div2 p');
+// let tab2 = Tab(btns2, ps2, false, true);
+// // 控制自动轮播
+// let num2 = 0;
+// document.querySelector('.autoPlayBtn').onclick = function () {
+//   setInterval(() => {
+//     num2++;
+//     num2 = num2 > (tab2.TabNum - 1) ? 0 : num2;
+//     tab2.psFor(num2);
+//   }, 500)
+// }
+</script>
+</html>

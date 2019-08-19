@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>工厂模式</title>
+</head>
+<body>
+<div class="div1">
+    <button style="background: orange;">Btn-01</button>
+    <button>Btn-02</button>
+    <button>Btn-03</button>
+    <p style="display: block;">ONE</p>
+    <p style="display: none;">TWO</p>
+    <p style="display: none;">THREE</p>
+  </div>
+  <div class="div2">
+    <button style="background: orange;">Btn-01</button>
+    <button>Btn-02</button>
+    <button>Btn-03</button>
+    <button>Btn-04</button>
+    <p style="display: block;">ONE</p>
+    <p style="display: none;">TWO</p>
+    <p style="display: none;">THREE</p>
+    <p style="display: none;">FOUR</p>
+  </div>
+  <button class="nextBtn">点击 --> 下一页</button>
+  <button class="autoPlayBtn">点击 --> 自动轮播</button>
+</body>
+<script>
+/*
+ * 工厂模式
+ *
+ function Tab(btns, ps) {
+  +++++ 加原料 +++++
+  let obj = {};
+  +++++ 加工原料 +++++
+  obj.tabNum = 4;
+  obj.psFor = function () {
+    console.log('psFor');
+  };
+  +++++ 出厂 +++++
+  return obj;
+}
+let tab1 = Tab('参数1', '参数2')
++++++ 自己的逻辑 +++++
+let tab2 = Tab('参数1', '参数2')
++++++ 自己的逻辑 +++++
+**/
+
+
+/**
+ * 封装 - 选项卡
+ */
+function Tab (btns, ps) {
+  // 00 加原料
+  let obj = {};
+
+  btns.forEach((item, index) => {
+    item.onclick = function () {
+      psFor(index);
+    }
+  })
+  /**
+   * 封装 - 选中与否的处理差异
+   */
+  function psFor (val) {
+    ps.forEach((it, idx) => {
+      if (idx == val) {
+        // 选中项
+        btns[idx].style.background = 'orange';
+        ps[idx].style.display = 'block';
+      } else {
+        // 未选中项
+        btns[idx].style.background = '';
+        ps[idx].style.display = 'none';
+      }
+    })
+  }
+  // 加工原料
+  obj.TabNum = btns.length;
+  obj.psFor = psFor;
+  // 出厂
+  return obj;
+}
+
+let btns = document.querySelectorAll('.div1 button');
+let ps = document.querySelectorAll('.div1 p');
+// 拿到的
+let tab = Tab(btns, ps, true, false);
+// 有下一页功能
+let num = 0;
+document.querySelector('.nextBtn').onclick = function () {
+  num++;
+  num = num > (tab.TabNum - 1) ? 0 : num;
+  tab.psFor(num);
+}
+
+let btns2 = document.querySelectorAll('.div2 button');
+let ps2 = document.querySelectorAll('.div2 p');
+let tab2 = Tab(btns2, ps2, false, true);
+// 控制自动轮播
+let num2 = 0;
+document.querySelector('.autoPlayBtn').onclick = function () {
+  setInterval(() => {
+    num2++;
+    num2 = num2 > (tab2.TabNum - 1) ? 0 : num2;
+    tab2.psFor(num2);
+  }, 500)
+}
+</script>
+</html>

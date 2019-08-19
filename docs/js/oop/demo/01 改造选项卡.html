@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>选项卡</title>
+</head>
+<body>
+  <div class="div1">
+    <button style="background: orange;">Btn-01</button>
+    <button>Btn-02</button>
+    <button>Btn-03</button>
+    <p style="display: block;">ONE</p>
+    <p style="display: none;">TWO</p>
+    <p style="display: none;">THREE</p>
+  </div>
+  <div class="div2">
+    <button style="background: orange;">Btn-01</button>
+    <button>Btn-02</button>
+    <button>Btn-03</button>
+    <p style="display: block;">ONE</p>
+    <p style="display: none;">TWO</p>
+    <p style="display: none;">THREE</p>
+  </div>
+  <button class="nextBtn">点击 --> 下一页</button>
+  <button class="autoPlayBtn">点击 --> 自动轮播</button>
+</body>
+<script>
+/**
+ * 封装 - 选项卡
+ * 
+ * btns - 选项卡按钮
+ * ps - 选项卡内容
+ * isNext - 是否含有下一页功能
+ * （要实现第一个选项卡下一页切换，必须设置一个控制变量，否则会被后面的选项卡覆盖）
+ * isAutoPlay - 是否自动轮播
+ */
+function Tab (btns, ps) {
+  btns.forEach((item, index) => {
+    item.onclick = function () {
+      psFor(index);
+    }
+  })
+  /**
+   * 封装 - 选中与否的处理差异
+   */
+    function psFor (val) {
+    ps.forEach((it, idx) => {
+      if (idx == val) {
+        // 选中项
+        btns[idx].style.background = 'orange';
+        ps[idx].style.display = 'block';
+      } else {
+        // 未选中项
+        btns[idx].style.background = '';
+        ps[idx].style.display = 'none';
+      }
+    })
+  }
+  /**
+   * 某个函数必须存在于封装函数内部，
+   * 但其又具有一定的特殊性，
+   * 那就可以向外返回这个函数啊，
+   * 让它在封装函数外使用
+   */
+  return psFor;
+}
+
+let btns = document.querySelectorAll('.div1 button');
+let ps = document.querySelectorAll('.div1 p');
+// 拿到的
+let tab = Tab(btns, ps, true, false);
+// 有下一页功能
+let num = 0;
+document.querySelector('.nextBtn').onclick = function () {
+  num++;
+  num = num > (btns.length - 1) ? 0 : num;
+  tab(num);
+}
+
+let btns2 = document.querySelectorAll('.div2 button');
+let ps2 = document.querySelectorAll('.div2 p');
+let tab2 = Tab(btns2, ps2, false, true);
+// 控制自动轮播
+let num2 = 0;
+document.querySelector('.autoPlayBtn').onclick = function () {
+  setInterval(() => {
+    num2++;
+    num2 = num2 > (btns.length - 1) ? 0 : num2;
+    tab2(num2);
+  }, 500)
+}
+</script>
+</html>

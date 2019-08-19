@@ -36,7 +36,7 @@
   </style>
 </head>
 <body>
-  <div class="bigBox"></div>
+  <ul class="bigBox"></ul>
   <ul class="list">
     <li>1</li>
     <li>2</li>
@@ -113,7 +113,11 @@ document.addEventListener('mousedown', function (e) {
   document.addEventListener('mouseup', function () {
 
     let activeBox = document.querySelectorAll('.active');
+    // 将选中添加到大框中
     activeBox.forEach(item => {
+      /**
+        * appendChild() - 直接将元素节点从一个地方移到另一个地方
+        */
       bigBox.appendChild(item);
     })
     document.removeEventListener('mousemove', move);

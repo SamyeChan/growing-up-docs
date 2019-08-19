@@ -96,6 +96,8 @@ module.exports = {
           '/js/async/',
           // 动画
           '/js/animation/',
+          // 面向对象
+          '/js/oop/',
           // javascript
           '/js/js/',
           '/js/js/js-function.md',

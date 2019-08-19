@@ -1,6 +1,7 @@
 ---
 sidebarDepth: 3
 ---
+
 # Learn | Event
 
 ## 事件监听器
@@ -366,7 +367,7 @@ toWheel(div, function () {
 
 ### 其他常用事件
 
-- `dblclick` - 双击事件：
+- `dblclick` - 双击事件（在移动端也有效，但不建议在移动端使用）：
 ```js
 btn.addEventListener('dblclick', function () {
   alert('dblclick - 双击666');
@@ -790,6 +791,9 @@ listLis.forEach(item => {
 document.addEventListener('mouseup', function () {
   let activeBox = document.querySelectorAll('.active');
   activeBox.forEach(item => {
+    /**
+      * appendChild() - 直接将元素节点从一个地方移到另一个地方（“移动”）
+      */
     bigBox.appendChild(item);
   })
   ...
@@ -801,3 +805,54 @@ document.addEventListener('mouseup', function () {
 效果：
 
 ![将选中元素添加至画框中](./imgs/1704_huakuangxuanze.gif)
+
+<!-- = = = = = = = = = = = = = = = = = = = = = = -->
+
+## 习题
+
+#### 01 不是事件代理的优点的是：
+
+1. 可以为将来元素绑定事件；
+2. 减少事件注册； - 绑定于父级，父级下的子级数量不定的喔
+3. 减少内存消耗； - DOM事件少了，内存消耗自然就少了
+4. 不用查找元素； - 需要判断事件发生的元素在哪儿啊
+
+#### 02 onclick 事件绑定的说明正确的是：
+
+1. 可以多次绑定； - 可多次添加，但最终方法会覆盖掉先前的所有方法（事件不可累加）
+2. 事件函数中有一个参数，是事件对象；
+3. 只能绑定在 document 上；
+4. 一个鼠标连点两次时触发的事件；
+
+#### 03 addEventListen 方法正确的是：
+
+1. 添加事件的一种方式；
+2. 不能用在捕获节点绑定事件； - 其参数三专门用于处理捕获控制的
+3. 绑定同一个处理函数会被覆盖； - onclick 这种才会啦
+4. 不能解除绑定； - removeEventListen 了解一下
+
+#### 事件流的执行顺序：
+
+捕获 - 目标 - 冒泡
+
+```
+目标：事件源
+捕获：目标元素之外的
+冒泡：目标元素之外的
+```
+
+#### 目标元素指的是什么： target 不是 currentTarget
+
+1. 绑定了事件的元素的子元素；
+2. 绑定事件的元素的父元素；
+3. 触发事件流的元素；
+4. 绑定了事件的元素；
+
+#### 下面关于事件绑定说法错误的是：
+
+1. addEventListener 是标准浏览器下所支持的事件绑定方法；
+2. addEventListener 的 passive 设置为 true 才可以阻止默认事件； - 是 false 啦
+3. 事件绑定函数内的 this 指向是 window； - 这个有争议！！！
+4. addEventListener 必须要传递 2 个参数，分别是事件名和绑定函数；
+
+#### 

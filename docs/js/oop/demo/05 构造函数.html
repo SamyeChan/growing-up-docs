@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>构造函数</title>
+</head>
+<body>
+  
+</body>
+<script>
+// 构造函数
+function Tab () {
+  this.tabNum = 4;
+  this.psFor = function () {
+    console.log('psFor');
+  };
+}
+/**
+ * 仿写 new 运算符（new 的运行原理）
+ */
+function myNew (constructor, ...arg) {
+  let obj = {};
+  constructor.call(obj, ...arg); // 改变传入函数指向新创建的对象
+  obj._proto_ = constructor.prototype;
+  return obj;
+}
+let tab = myNew(Tab);
+tab.psFor();
+
+</script>
+</html>
