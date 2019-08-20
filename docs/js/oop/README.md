@@ -152,6 +152,8 @@ document.querySelector('.nextBtn').onclick = function () {
   tab(num);
 }
 ```
+- 共性特征，放函数/类里；
+- 少数（传参数配置）/个别特殊，返还单独处理；
 
 #### 需求变更：多个选项卡分别更改数量
 
@@ -358,12 +360,110 @@ console.log(tab1.hobby == tab2.hobby); // true
  * 都 true 了，有没有！！！
  * 
  * ps：对象比较 ---> 1.值一样； 2.地址一样；
+ *     简单数据类型都是新开辟地址，不涉及传值传参问题；
  */
 ```
+- 每一个函数都会有一个 prototype；
+- 一般 prototype 都写在函数外面，这样会更好区分；
 
 
 ## 原型 prototype
 
+- `obj._proto_ === Obj.prototype`；
+
+```js
+// 继续上例
+console.log(tab1._proto_ === Tab1.prototype) // true
+```
+- 通过 new 实例化出来的对象，其属性和行为来自两个部分：
+  1. 来自构造函数；
+  2. 来自原型；
+- 当声明一个函数时，同时也声明了一个原型；
+- 原型本身就是一个对象；
+- 对象属性方法查找规则：
+
+#### 两种写法
+
+- 基于上述栗子的比较（如果你不记得栗子了，那就跳过，直接看下一个代码）：
+
+```js
+// 01 最佳 - 不会弄丢 constructor
+Tab2.prototype.hobby = function () {
+  console.log('loves swimming');
+}
+// 02 原型又一个预定义属性：constructor，指向构造函数
+cosnole.log(Tab2/prototype.constructor === Tab2); // true
+// 如果像下面直接这样写，会把预定义的 constructor 弄丢(覆盖)噢
+Tab2.prototype = {
+  hobby() {
+    console.log('loves swimming');
+  }
+}
+// 所以如果要用 02 的方式写，得再加上 constructor 啊
+Tab2.prototype = {
+  constructor: Tab2,
+  hobby() {
+    console.log('loves swimming');
+  }
+}
+```
+- 简单总结：
+
+```js
+let prototype = {
+  constructor: '构造函数' // 这看作 ---> 预定义（系统自己给我们写好的）
+};
+// 下面就像是在追加属性或方法咯
+prototype.hobby = function () {
+  console.log('喜欢篮球');
+}
+// 但如果你是酱紫写的话...
+prototype = {
+  hobby () {
+    console.log('喜欢唱歌');
+  }
+}
+/**
+ * 是不是就直接把系统预定义的部分一并覆盖了啊～～～当然是
+ * 所以当以上面这种覆盖的方法写的时候，要把预定义的部分也一并写一写噢
+ */
+ prototype = {
+  constructor: '构造函数',
+  hobby () {
+    console.log('喜欢唱歌');
+  }
+}
+```
+- 二者，一个是 **追加**，一个是 **覆盖**；
+- 实例化的对象包含了**构造函数** & **原型**；
+```js
+// new一个对象
+let obj = new Object();
+obj.name = 'c';
+obj.age = 22;
+console.log(' - - - - - new 出来的 - - - - -');
+console.log(obj);
+// 直接加在了原型上
+let obj2 = Object.create({
+  name: 'cc',
+  age: 18
+});
+console.log(' - - - - - create 出来的 - - - - -');
+console.log(obj2);
+```
+输出：
+
+![创建对象的两种方式差异](./imgs/0104_initObj.png)
+
+- 前者直接赋值于实例化的对象，后者是将属性/方法添加到了原型之中；
+- 相同的东西放在原型上对内存友好，能提高性能；
+- 就虽说放构造函数中也能完成功能，但是没实例化一个对象，就会为这些“相同”的属性/方法开辟新的地方 ---> 你说浪不浪费空间，占不占内存啊？
+
 ## 面向对象和面向过程编程
 
+- 面向过程 - 注重步骤；
+
 ## 类和对象
+
+- 类 - 笼统，共性；
+- 对象 - 具体的某一个；

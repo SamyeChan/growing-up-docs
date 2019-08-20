@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>原型prototype</title>
+</head>
+<body>
+  
+</body>
+<script>
+let prototype = {
+  constructor: '构造函数' // 这看作 ---> 预定义（系统自己给我们写好的）
+};
+// 下面就像是在追加属性或方法咯
+prototype.hobby = function () {
+  console.log('喜欢篮球');
+}
+// 但如果你是酱紫写的话...
+prototype = {
+  hobby () {
+    console.log('喜欢唱歌');
+  }
+}
+/**
+ * 是不是就直接把系统预定义的部分一并覆盖了啊～～～当然是
+ * 所以当以上面这种覆盖的方法写的时候，要把预定义的部分也一并写一写噢
+ */
+ prototype = {
+  constructor: '构造函数',
+  hobby () {
+    console.log('喜欢唱歌');
+  }
+}
+</script>
+</html>
