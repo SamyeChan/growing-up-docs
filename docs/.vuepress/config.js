@@ -33,6 +33,7 @@ module.exports = {
           '/vue/basic/learn-lifecycle.md',
           '/vue/basic/vue-cli-3.md',
           '/vue/basic/vue-router.md',
+          '/vue/basic/mixins/',
           // 项目 & 练习
           '/vue/proj/proj-business-report.md',
           '/vue/proj/proj-realtime-video.md',
@@ -128,13 +129,23 @@ module.exports = {
         collapsable: true,
         children: [
           '/tools/git.md',
-          '/tools/nginx.md',
+          '/tools/nginx/',
+          '/tools/md5/',
+          '/tools/lodash/',
           '/tools/http.md',
           '/tools/eslint.md',
           '/tools/python.md',
           '/tools/api-map.md',
           '/tools/地图坐标转换.md',
           '/tools/禅道管理.md'
+        ]
+      },
+      {
+        title: '有点儿意思',
+        collapsable: true,
+        children: [
+          '/hobby/',
+          '/hobby/chemicalElement/'
         ]
       }
     ]

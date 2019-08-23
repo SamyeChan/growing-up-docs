@@ -392,7 +392,7 @@ Tab2.prototype.hobby = function () {
   console.log('loves swimming');
 }
 // 02 原型又一个预定义属性：constructor，指向构造函数
-cosnole.log(Tab2/prototype.constructor === Tab2); // true
+cosnole.log(Tab2.prototype.constructor === Tab2); // true
 // 如果像下面直接这样写，会把预定义的 constructor 弄丢(覆盖)噢
 Tab2.prototype = {
   hobby() {
@@ -427,7 +427,7 @@ prototype = {
  * 是不是就直接把系统预定义的部分一并覆盖了啊～～～当然是
  * 所以当以上面这种覆盖的方法写的时候，要把预定义的部分也一并写一写噢
  */
- prototype = {
+prototype = {
   constructor: '构造函数',
   hobby () {
     console.log('喜欢唱歌');
