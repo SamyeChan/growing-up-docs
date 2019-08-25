@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>拖拽_继承</title>
+  <style>
+  .div1 {
+    width: 100px;
+    height: 100px;
+    background: orange;
+    position: absolute;
+  }
+  .div2 {
+    width: 100px;
+    height: 100px;
+    background: yellowgreen;
+    position: absolute;
+    left: 200px;
+  }
+  </style>
+</head>
+<body>
+  <div class="div1"></div>
+  <div class="div2"></div>
+</body>
+<script>
+/**
+ * 面向过程 - 注重步骤，一步步走
+ */
+let div1 = document.querySelector('.div1');
+let div2 = document.querySelector('.div2');
+
+/**
+ * 拖拽类
+ */
+function Drag (el) {
+  this.el = el;
+  this.downFn();
+}
+/**
+ * 要避免过多的迭代 - 方法无论多小都要分开写 - 利于维护
+ */
+// 鼠标点击
+Drag.prototype.downFn = function () {
+  this.el.onmousedown = e => {
+    let ev = e || window.event; // 兼容
+    let x = ev.clientX - this.el.offsetLeft;
+    let y = ev.clientY - this.el.offsetTop;
+    this.moveFn(x, y);
+    this.upFn();
+  }
+}
+// 鼠标移动
+Drag.prototype.moveFn = function (x, y) {
+  this.el.onmousemove = e => {
+    let ev = e || window.event; // 兼容
+    let xx = ev.clientX;
+    let yy = ev.clientY;
+    this.setStyle(xx - x, yy - y);
+  }
+}
+Drag.prototype.setStyle = function (leftNum, topNum) {
+  this.el.style.left = leftNum + 'px';
+  this.el.style.top = topNum + 'px';
+}
+// 鼠标抬起
+Drag.prototype.upFn = function () {
+  document.onmouseup = () => {
+    this.el.onmousemove = '';
+  }
+}
+
+/**
+ * 第一个拖拽限定范围 - 使用“继承”实现
+ */
+function LimtDrag (el) {
+  Drag.call(this, el);
+}
+LimtDrag.prototype = deepCopy(Drag.prototype);
+LimtDrag.prototype.constructor = LimtDrag;
+// 重写样式设置
+LimtDrag.prototype.setStyle = function (leftNum, topNum) {
+  // 限定区域
+  (leftNum < 0) && (leftNum = 0);
+  (topNum < 0) && (topNum = 0);
+  this.el.style.left = leftNum + 'px';
+  this.el.style.top = topNum + 'px';
+}
+
+let drag = new LimtDrag(div1);
+let drag2 = new Drag(div2);
+
+// 递归深拷贝
+function deepCopy (obj) {
+  // 判断是对象还是数组
+  let newObj = Array.isArray(obj) ? [] : {};
+  // 【 for...in 会循环原型上的东西，但这些东西又不一定要啊 】
+  for (let key in obj) {
+    // 判断是否是自身的属性
+    if (obj.hasOwnProperty(key)) {
+      if (typeof obj[key] == 'object') {
+        // 如果对象下的属性还是一个对象，再调用处理
+        newObj[key] = deepCopy(obj[key]);
+      } else {
+        newObj[key] = obj[key];
+      }
+    }
+  }
+  return newObj;
+}
+</script>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>传值和传地址</title>
+</head>
+<body>
+  
+</body>
+<script>
+let proto = {
+  name: 'c'
+};
+// let copy_proto = proto;
+// console.log(proto, copy_proto);
+
+/**
+ * 深拷贝 - JSON 序列化
+ */
+let copy_proto = JSON.parse(JSON.stringify(proto));
+copy_proto.name = 'cs';
+console.log(proto, copy_proto);
+/**
+ * JSON 序列化的不足
+ */
+let p = {
+  c: 'chen',
+  s: 'sheng',
+  y: 'yi',
+  test1: null,
+  test2: undefined,
+  fn: () => { console.log("it's fn"); },
+  obj: { sub: 'sub', subobj: { sub: 'subsub'} }
+}
+
+// 递归深拷贝
+function deepCopy (obj) {
+  // 判断是对象还是数组
+  let newObj = Array.isArray(obj) ? [] : {};
+  // 【 for...in 会循环原型上的东西，但这些东西又不一定要啊 】
+  for (let key in obj) {
+    // 判断是否是原型上的东东
+    if (obj.hasOwnProperty(key)) {
+      if (typeof obj[key] == 'object') {
+        // 如果对象下的属性还是一个对象，再调用处理
+        newObj[key] = deepCopy(obj[key]);
+      } else {
+        newObj[key] = obj[key];
+      }
+    }
+  }
+  return newObj;
+}
+
+// let copy_p = JSON.parse(JSON.stringify(p));
+let copy_p = deepCopy(p);
+copy_p.c = 'chan';
+console.log(p, copy_p);
+
+/**
+ * for...in 会循环原型上的东西
+ */
+let test = {
+  test: 'test'
+};
+test.__proto__.t = 'proto_t';
+for (let i in test) {
+  console.log(test[i]);
+}
+</script>
+</html>

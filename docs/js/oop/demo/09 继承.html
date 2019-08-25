@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>继承</title>
+</head>
+<body>
+  <div class="div1"></div>
+  <div class="div2"></div>
+</body>
+<script>
+// 递归深拷贝
+function deepCopy (obj) {
+  // 判断是对象还是数组
+  let newObj = Array.isArray(obj) ? [] : {};
+  // 【 for...in 会循环原型上的东西，但这些东西又不一定要啊 】
+  for (let key in obj) {
+    // 判断是否是原型上的东东
+    if (obj.hasOwnProperty(key)) {
+      if (typeof obj[key] == 'object') {
+        // 如果对象下的属性还是一个对象，再调用处理
+        newObj[key] = deepCopy(obj[key]);
+      } else {
+        newObj[key] = obj[key];
+      }
+    }
+  }
+  return newObj;
+}
+
+function Dad () {
+  this.name = 'Bingo';
+  this.age = 50;
+  this.money = '$12345678';
+}
+Dad.prototype.hobby = function () {
+  console.log('喜欢下棋');
+}
+function Son () {
+  Dad.call(this);
+}
+/**
+ * 下面这深拷贝的方式其实是一种“覆盖”
+ */
+Son.prototype = deepCopy(Dad.prototype);
+// "继承爸爸的原型方法啦～～" - 但这种方法容易被爸爸打...cause影响了爸爸
+// Son.prototype = Dad.prototype;
+Son.prototype.constructor = Son; // 需要将自己的构造函数也加进来噢
+let dad = new Dad();
+console.log(dad);
+dad.hobby();
+let son = new Son();
+// 可判断实例是属于哪个构造函数的
+console.log(son.constructor);
+son.name = 'Sam';
+son.hobby();
+</script>
+</html>

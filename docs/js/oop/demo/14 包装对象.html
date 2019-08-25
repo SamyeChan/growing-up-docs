@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>包装对象</title>
+</head>
+<body>
+
+</body>
+<script>
+/**
+ * 一些数据类型啊，string/number/boolean
+ * 没有用 new 的方式创建的话，输出也就是一个字符串/数字/布尔值
+ * 但!是!你在后续的使用中，又可以以“.”的方式使用它相对应提供的方法诶
+ */
+let str = 'c,s,y';
+console.log(str); // c,s,y
+let str_arr = str.split(',');
+console.log(str_arr); // ["c", "s", "y"]
+
+// 当你是 new 出来的时候
+let str2 = new String('c,s,y');
+console.log(str2); // 老多方法了。。。
+
+/** 系统可能就大概像酱紫做了些处理
+ * 
+ * str - 字符串
+ * method - 方法
+ * arg - 通过什么切割
+ */
+ function mySplit (str, method, arg) {
+  // 创建临时对象（代码完成就会自动销毁的了）
+  let temp = new String(str);
+  // 包装
+  return temp[method](arg);
+}
+
+console.log(mySplit(str, 'split', ',')); // ["c", "s", "y"] 
+</script>
+</html>

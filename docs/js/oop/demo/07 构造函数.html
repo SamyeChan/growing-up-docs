@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>构造函数改造</title>
+</head>
+<body>
+  <div class="div1">
+    <button style="background: orange;">Btn-01</button>
+    <button>Btn-02</button>
+    <button>Btn-03</button>
+    <p style="display: block;">ONE</p>
+    <p style="display: none;">TWO</p>
+    <p style="display: none;">THREE</p>
+  </div>
+  <div class="div2">
+    <button style="background: orange;">Btn-01</button>
+    <button>Btn-02</button>
+    <button>Btn-03</button>
+    <button>Btn-04</button>
+    <p style="display: block;">ONE</p>
+    <p style="display: none;">TWO</p>
+    <p style="display: none;">THREE</p>
+    <p style="display: none;">FOUR</p>
+  </div>
+  <button class="nextBtn">点击 --> 下一页</button>
+  <button class="autoPlayBtn">点击 --> 自动轮播</button>
+</body>
+<script>
+  /**
+   * 构造函数 - 在构造函数里写各种属性，一般不写方法
+   * 
+   * new的时候，只会执行构造函数中的内容，而不会执行原型链上的东西
+   */
+  function Tab (btns, ps) {
+    this.btns = btns;
+    this.ps = ps;
+    this.TabNum = btns.length;
+    this.btnsFor(); // 在构造函数中就执行 - new的时候就给按钮赋上事件
+  }
+  /** 
+   * prototype 是一个公共的空间 - 在原型上写各种方法（解约内存）
+   * 
+   * btnsFor - 点击按钮事件
+   */
+  Tab.prototype.btnsFor = function () {
+    this.btns.forEach((item, index) => {
+      // let _this = this
+      // item.onclick = function () {
+      //   _this.psFor(index);
+      //   // 这里的 this 是指向函数里面那个 this，谁创建指向谁，并不是构造函数中那个全局 this
+      // }
+      item.onclick = () => {
+        this.psFor(index);
+        // 箭头函数中的 this 就会跟随它前面的 this指向，此处就是指向全局 this
+        // [ 箭头函数 this 指向外部 this ]
+        //
+        // 箭头函数好用，但不要滥用
+      }
+    })
+  }
+  /**
+   * psFor - 改变按钮变化选中时的样式
+   */
+  Tab.prototype.psFor = function (num) {
+    this.ps.forEach((item, index) => {
+      if (index == num) {
+        this.btns[index].style.background = 'orange';
+        this.ps[index].style.display = 'block';
+      } else {
+        this.btns[index].style.background = '';
+        this.ps[index].style.display = 'none';
+      }
+    })
+  }
+  /**
+   * getIndex - 获取当前按钮点击项
+   */
+   Tab.prototype.getIndex = function () {
+    for (let i = 0; i < this.TabNum; i++) {
+      if (this.btns[i].style.background == 'orange') {
+        return i;
+      }
+    }
+  }
+
+  let btns = document.querySelectorAll('.div1 button');
+  let ps = document.querySelectorAll('.div1 p');
+  let tab1 = new Tab(btns, ps);
+  document.querySelector('.nextBtn').onclick = function () {
+    let num = tab1.getIndex();
+    num++;
+    num = num > tab1.TabNum - 1 ? 0 : num;
+    tab1.psFor(num);
+  }
+
+  let btns2 = document.querySelectorAll('.div2 button');
+  let ps2 = document.querySelectorAll('.div2 p');
+  let tab2 = new Tab(btns2, ps2);
+  document.querySelector('.autoPlayBtn').onclick = function () {
+    setInterval(() => {
+      let num2 = tab2.getIndex();
+      num2++;
+      num2 = num2 > tab2.TabNum - 1 ? 0 : num2;
+      tab2.psFor(num2);
+    }, 1000)
+  }
+</script>
+</html>
