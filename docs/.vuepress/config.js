@@ -105,8 +105,9 @@ module.exports = {
           '/js/js/js-face-to-object.md',
           '/js/note-about-this.md',
           '/js/note-js-es6.md',
-          // ECMAScript
+          // ECMAScript 6 
           '/js/es6/',
+          '/js/es6/es6_HC.md',
           '/js/ts/',
           '/js/note-useful-function.md',
           // 阅读 | 你不知道的JavaScript
@@ -132,7 +133,8 @@ module.exports = {
           '/tools/nginx/',
           '/tools/md5/',
           '/tools/lodash/',
-          '/tools/http.md',
+          '/tools/postman/',
+          '/tools/http/',
           '/tools/eslint.md',
           '/tools/python.md',
           '/tools/api-map.md',

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>差值表达式</title>
+</head>
+<body>
+  
+</body>
+<script>
+// let obj = {
+//   name: 'samyechan',
+//   age: '23'
+// }
+// console.log(obj);
+let obj2 = {}
+/**
+ * 使用 defineProperty() 对 obj2 进行重构
+ */
+Object.defineProperty(obj2, 'name', {
+  configurable: true, // 可配置（对象属性是否可被操作[修改/删除] - 默认false）
+  // enumerable: true, // 可枚举（对象是否可被循环 - 默认false）
+  get () {
+    console.log('get - - - name');
+    return 'samyechan';
+  },
+  set (newVal) {
+    console.log('set - - - ' + newVal);
+  }
+})
+Object.defineProperty(obj2, 'age', {
+  get () {
+    console.log('get - - - age');
+    return 22
+  },
+  set (newVal) {
+    console.log('set - - - ' + newVal);
+  }
+})
+console.log(obj2);
+/**
+ * configurable - 属性是否可操作（默认false: 不可对进行修改/删除）
+ */
+obj2.name;
+obj2.name = 'sc';
+console.log(obj2);
+// delete obj2.age;
+console.log(obj2);
+/**
+ * enumerable - 属性是否可被循环（默认false）
+ */
+ for (let i in obj) {
+  console.log(i);
+}
+</script>
+</html>
