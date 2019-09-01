@@ -149,7 +149,29 @@ Object.assign
 ## Proxy代理
 
 vue2.0 --> defineProperty + 订阅
-vue3.0 --> Proxy + TS
+vue3.0 --> ES6 - Proxy + TS
+
+```js
+let obj = {
+  name: 'samye',
+  age: 23
+}
+/**
+ * ES6 - proxy 不用像 defineProperty 那样单个单个属性设置
+ */
+obj = new Proxy(obj, {
+  get (target, key) {
+    console.log('get...');
+    return target[key];
+  },
+  set (target, key, value) {
+    console.log('set...');
+    target[key] = value;
+  }
+})
+obj.name;
+obj.age = 18;
+```
 
 ## 数据劫持
 
@@ -166,6 +188,10 @@ js数据 - 对象数组
 
 vue、angular
 
+1. 编译模块
+2. 数据劫持
+3. 发布订阅（自定义事件：系统预定义好了）
+
 ```js
 // view model
 let vm = new Vue({
@@ -176,10 +202,6 @@ let vm = new Vue({
 })
 
 ```
-
-## ES6 模块化
-
-## AMD / CMD 模块化
 
 ## 小栗子
 
@@ -349,12 +371,86 @@ defineReact (data, key, value) {
 2. 自定义事件实现
 
 ```js
-// Cvue 继承 EventTarget
+// Cvue 继承 EventTarget（系统预定义的一个类）
 class Cvue extends EventTarget {
   constructor (options) {
     super();
   ......
+
+// 在 set() 函数中使用自定义事件
+set (newVal) {
+  console.log('set');
+  // let event = new Event(key);
+  // 自定义事件
+  let event = new CustomEvent(key, {
+    detail: newVal
+  });
+  _this.dispatchEvent(event);
+  value = newVal;
+}
+
+// 监听 $1 ---> 不是很懂的亚子
+
+// 更新渲染视图（将传递过来的新值全局替换）
+this.addEventListener($1, e => {
+  console.log('值：' + e.detail);
+  let newVal = e.detail;
+  let oldVal = this.options.data[$1];
+  // 全局匹配 oldVal 变量值，并将其替换为新值
+  let reg = new RegExp(oldVal, 'g');
+  node.textContent = node.textContent.replace(reg, newVal);
+})
 ```
 **发布订阅**
 
+#### ES6 - Proxy 版
+
+```js
+/**
+ * 不需要循环啦～～～
+ */
+
+```
+
 ### 指令
+
+原理与上述 **双向绑定** 类似，就是在获取到节点后，判断出相应的指令符号，再做下一步操作；
+
+
+## ES6 模块化
+
+- 独立命名空间 - 防止变量污染；
+- 原生模块化需要声明 `type='module'`：
+
+```html
+<script src="./a.js" type="module"></script>
+
+<script type="module">
+...
+</script>
+ <!-- emmmm...这个效果好像将页面以服务形式运行才可以看见正常效果... -->
+ <!-- a.j 里面逻辑可执行，但一些实际赋值啥的就不行了 - 新点的chrome支持 -->
+```
+```js
+let name = "I'm a.js";
+console.log('这种console的逻辑还是会执行的，但上面那个就不行了噢');
+
+/**
+ * 1- export defalut xxx; --> 每个文件只能导出一个
+ * 1- import xxx from './a.js'
+ * 
+ * 2- export let a = 35; --> 一个或多个
+ *    export let b = 23;
+ * 2- import { a, b as c } from './a.js'
+ *         --> 给了b一个新名字，使用时就用c了
+ * 
+ * 3- import * as obj from './a.js';
+ * 
+ * 4- export { a, b };
+ */
+```
+
+- 将文件拆分多个，有独立的命名空间;
+- ES5没有模块化；
+
+## AMD / CMD 模块化

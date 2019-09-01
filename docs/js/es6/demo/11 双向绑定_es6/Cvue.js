@@ -7,29 +7,20 @@ class Cvue extends EventTarget {
   }
   // 对数据进行监听
   observer (data) {
-    // Object.keys(data) - 获取到数据对象里面每一个定义变量的 key 值；
-    Object.keys(data).forEach(key => {
-      this.defineReact(data, key, data[key]);
-    })
-  }
-  // 劫持数据
-  defineReact (data, key, value) {
     let _this = this;
-    Object.defineProperty(data, key, {
-      configurable: true,
-      enumerable: true,
-      get () {
-        return value;
+    this.options.data = new Proxy(data, {
+      get (target, key) {
+        console.log('get...');
+        return target[key];
       },
-      set (newVal) {
-        console.log('set');
-        // let event = new Event(key);
-        // 自定义事件
+      set (target, key, value) {
+        console.log('set...');
         let event = new CustomEvent(key, {
-          detail: newVal
-        });
+          detail: value
+        })
         _this.dispatchEvent(event);
-        value = newVal;
+        target[key] = value;
+        return true; // Proxy 在严格模式下需要一个返回值，虽然这里也不是严格模式，但就是一个坑啊...
       }
     })
   }

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ES6模块化</title>
+  <script src="./a.js" type="module"></script>
+</head>
+<body></body>
+<script type="module">
+import { age } from './a.js';
+console.log(age);
+import * as obj from './a.js';
+console.log(obj);
+</script>
+</html>

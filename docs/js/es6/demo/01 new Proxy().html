@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>new Proxy()</title>
+</head>
+<body>
+  
+</body>
+<script>
+let obj = {
+  name: 'samye',
+  age: 23
+}
+/**
+ * ES6 - proxy 不用像 defineProperty 那样单个单个属性设置
+ */
+obj = new Proxy(obj, {
+  get (target, key) {
+    console.log('get...');
+    return target[key];
+  },
+  set (target, key, value) {
+    console.log('set...');
+    target[key] = value;
+  }
+})
+obj.name;
+obj.age = 18;
+</script>
+</html>

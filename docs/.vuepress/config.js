@@ -79,8 +79,9 @@ module.exports = {
         collapsable: true,
         children: [
           '/css/',
-          '/css/three-characteristic.md',
+          '/css/CSS三大特性.md',
           '/read/2019-05/2019-05-17.md',
+          '/css/CSS重置.md',
         ]
       },
       {
@@ -110,6 +111,8 @@ module.exports = {
           '/js/es6/es6_HC.md',
           '/js/ts/',
           '/js/note-useful-function.md',
+          // Node.js
+          '/js/node/',
           // 阅读 | 你不知道的JavaScript
           '/js/js/uDontKnowJS/book-1.md',
           // 课程 | JavaScript高级工程师
