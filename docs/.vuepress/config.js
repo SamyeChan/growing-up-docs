@@ -1,16 +1,17 @@
 module.exports = {
+  title: 'Hey, I\'m Front C',
+  description: 'Just note all I know OR don\'t know',
   themeConfig: {
     search: true, // 禁用内置搜索（内置搜索仅可对h2、h3构成索引）
     searchMaxSuggestions: 10, // 对内置搜索最多结果数量进行限制
     // navbar: false, // 禁用导航栏
     nav: [
       { text: '首页', link: '/' },
-      { text: '快速跳转', items: [ // 下拉选项
-        // { text: 'HTML', link: '/html/' },
-        // { text: 'CSS', link: '/CSS/' },
-        // { text: 'JavaScript', link: '/JavaScript/' },
-        { text: 'Vue', link: '/vue/learn-basic.md' }
-      ]}
+      { text: '基础', link: '/'},
+      { text: '工具库', link: '/'},
+      { text: 'Vue', link: '/'},
+      { text: '微信开发', link: '/'},
+      { text: '文章', link: '/'}
     ],
     /* 侧边栏 */
     // sidebar: 'auto'
@@ -100,6 +101,8 @@ module.exports = {
           '/js/animation/',
           // 面向对象
           '/js/oop/',
+          // 前后端交互
+          '/js/interaction/',
           // javascript
           '/js/js/',
           '/js/js/js-function.md',

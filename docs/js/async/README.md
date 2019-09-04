@@ -91,3 +91,7 @@ p.then(info => {
 ## Async 函数和 await
 ## 链式动画
 
+## await-to-js
+
+- [简书 | JavaScript 如何优雅的处理 async/await 异常](https://www.jianshu.com/p/2935c0330dd2)
+- [Github | await-to-js](https://github.com/scopsy/await-to-js)

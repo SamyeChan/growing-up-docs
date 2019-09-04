@@ -88,6 +88,7 @@ https://n3-components.github.io/N3-components/) - N3组件库是基于Vue.js构�
 - [地图 | Vue Baidu Map](https://dafrok.github.io/vue-baidu-map/#/zh/start/installation) - 基于Vue 2.x的百度地图组件
 - [简历 | Best Resume Ever](https://salomonelli.github.io/best-resume-ever/#/) - 一个帮助你快速生成漂亮简历的工具，它基于 Vue 和 LESS，生成的简历可导出为 PDF 格式
 - [列表 | Vue-recyclerview](https://github.com/hilongjw/vue-recyclerview) - 使用vue-recyclerview掌握大型列表
+- [文档 | VuePress](http://caibaojian.com/vuepress/) - 以 Vue 驱动的主题系统的简约静态网站生成工具
 
 ### <a name="REQUEST"></a>请求
 
@@ -118,7 +119,8 @@ https://n3-components.github.io/N3-components/) - N3组件库是基于Vue.js构�
 
 ### 图片相关
 
-01 [在线图像压缩](https://img.top/)
+- [在线图像压缩](https://img.top/)
+- [图片处理 | photopea](https://www.photopea.com/) - 超强大的在线 PS
 
 ## 书籍
 
