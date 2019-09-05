@@ -141,6 +141,7 @@ module.exports = {
           '/tools/lodash/',
           '/tools/postman/',
           '/tools/http/',
+          '/tools/security/',
           '/tools/eslint.md',
           '/tools/python.md',
           '/tools/api-map.md',
