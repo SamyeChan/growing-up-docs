@@ -50,6 +50,13 @@ module.exports = {
         ]
       },
       {
+        title: 'React',
+        collapsable: true,
+        children: [
+          '/react/'
+        ]
+      },
+      {
         title: '公众号/小程序',
         collapsable: true,
         children: [
@@ -142,6 +149,7 @@ module.exports = {
           '/tools/postman/',
           '/tools/http/',
           '/tools/security/',
+          '/tools/reg/',
           '/tools/eslint.md',
           '/tools/python.md',
           '/tools/api-map.md',
