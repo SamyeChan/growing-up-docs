@@ -202,3 +202,7 @@ let reg = /(\d{4})-(\d{1,2})-(\d{1,2})/g;
 
 console.log(time.replace(reg, '2019/09/24'));
 ```
+
+---
+
+[常用正则式](https://juejin.im/post/5d8ac836518825090d61c569?utm_source=gold_browser_extension)
