@@ -1,3 +1,12 @@
+const FOLDER = 'menu-modules'
+const MENU_VUE = require(`./${FOLDER}/vue`)
+const MENU_REACT = require(`./${FOLDER}/react`)
+const MENU_WEAPP = require(`./${FOLDER}/weapp`)
+const MENU_HTML = require(`./${FOLDER}/html`)
+const MENU_CSS = require(`./${FOLDER}/css`)
+const MENU_JS = require(`./${FOLDER}/js`)
+const MENU_TOOLS = require(`./${FOLDER}/tools`)
+
 module.exports = {
   title: 'Hey, I\'m Front C',
   description: 'Just note all I know OR don\'t know',
@@ -28,106 +37,32 @@ module.exports = {
       {
         title: 'Vue',
         collapsable: true,
-        children: [
-          // 基础部分
-          '/vue/basic/learn-basic.md',
-          '/vue/basic/learn-lifecycle.md',
-          '/vue/basic/vue-cli-3.md',
-          '/vue/basic/vue-router.md',
-          '/vue/basic/mixins/',
-          // 项目 & 练习
-          '/vue/proj/proj-business-report.md',
-          '/vue/proj/proj-realtime-video.md',
-          '/vue/proj/demo-where-to-go.md',
-          // 李西康分享
-          '/vue/note/note-set_delete.md',
-          '/vue/note/note-compress.md',
-          '/vue/note/note-draggable.md',
-          '/vue/note/note-md5.md',
-          '/vue/note/note-qrcode.md',
-          // 组件
-          '/vue/component/'
-        ]
+        children: [ ...MENU_VUE ]
       },
       {
         title: 'React',
         collapsable: true,
-        children: [
-          '/react/'
-        ]
+        children: [ ...MENU_REACT ]
       },
       {
         title: '公众号/小程序',
         collapsable: true,
-        children: [
-          '/weapp/wechat.md',
-          // 基础部分
-          '/weapp/basic/learn-weapp-basic.md',
-          '/weapp/basic/learn-weapp-component.md',
-          '/weapp/basic/learn-weapp-api.md',
-          '/weapp/basic/learn-weapp-cloud.md',
-          '/weapp/basic/learn-wechat-dev.md',
-          // 例子部分
-          '/weapp/proj/demo-imooc-movie.md'
-        ]
+        children: [ ...MENU_WEAPP ]
       },
       {
         title: 'HTML',
         collapsable: true,
-        children: [
-          '/html/',
-          '/html/canvas/',
-          '/html/canvas/canvas-colorful-ball.md',
-          '/html/canvas/canvas-asteroids.md',
-          '/html/basic-meta.md'
-        ]
+        children: [ ...MENU_HTML ]
       },
       {
         title: 'CSS',
         collapsable: true,
-        children: [
-          '/css/',
-          '/css/CSS三大特性.md',
-          '/read/2019-05/2019-05-17.md',
-          '/css/CSS重置.md',
-        ]
+        children: [ ...MENU_CSS ]
       },
       {
         title: 'JavaScript',
         collapsable: true,
-        children: [
-          // DOM
-          '/js/dom/',
-          // BOM
-          '/js/bom/',
-          // event
-          '/js/event/',
-          // 同步和异步
-          '/js/async/',
-          // 动画
-          '/js/animation/',
-          // 面向对象
-          '/js/oop/',
-          // 前后端交互
-          '/js/interaction/',
-          // javascript
-          '/js/js/',
-          '/js/js/js-function.md',
-          '/js/js/js-face-to-object.md',
-          '/js/note-about-this.md',
-          '/js/note-js-es6.md',
-          // ECMAScript 6 
-          '/js/es6/',
-          '/js/es6/es6_HC.md',
-          '/js/ts/',
-          '/js/note-useful-function.md',
-          // Node.js
-          '/js/node/',
-          // 阅读 | 你不知道的JavaScript
-          '/js/js/uDontKnowJS/book-1.md',
-          // 课程 | JavaScript高级工程师
-          '/js/class/'
-        ]
+        children: [ ... MENU_JS ]
       },
       {
         title: '阅读理解',
@@ -141,21 +76,7 @@ module.exports = {
       }, {
         title: '其他辅助',
         collapsable: true,
-        children: [
-          '/tools/git.md',
-          '/tools/nginx/',
-          '/tools/md5/',
-          '/tools/lodash/',
-          '/tools/postman/',
-          '/tools/http/',
-          '/tools/security/',
-          '/tools/reg/',
-          '/tools/eslint.md',
-          '/tools/python.md',
-          '/tools/api-map.md',
-          '/tools/地图坐标转换.md',
-          '/tools/禅道管理.md'
-        ]
+        children: [ ...MENU_TOOLS ]
       },
       {
         title: '有点儿意思',

@@ -202,6 +202,17 @@ let reg = /(\d{4})-(\d{1,2})-(\d{1,2})/g;
 
 console.log(time.replace(reg, '2019/09/24'));
 ```
+### 命名分租 --> `?<name>`
+
+```js
+let str = 'yuiyhu3ihsai11dyqhpoqw';
+let reg = /(?<num>\d+)/;
+let res = str.match(reg);
+console.log(res.groups.num);
+```
+
+## 零宽断言：正向（后面）/负向（前面）
+
 
 ---
 
