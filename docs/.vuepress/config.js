@@ -1,3 +1,5 @@
+/* ========================= 模块 ============================ */
+
 const FOLDER = 'menu-modules'
 const MENU_VUE = require(`./${FOLDER}/vue`)
 const MENU_REACT = require(`./${FOLDER}/react`)
@@ -6,6 +8,8 @@ const MENU_HTML = require(`./${FOLDER}/html`)
 const MENU_CSS = require(`./${FOLDER}/css`)
 const MENU_JS = require(`./${FOLDER}/js`)
 const MENU_TOOLS = require(`./${FOLDER}/tools`)
+
+/* ========================= 配置 ============================ */
 
 module.exports = {
   title: 'Hey, I\'m Front C',

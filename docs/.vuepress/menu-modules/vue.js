@@ -19,6 +19,7 @@ module.exports = [
   '/vue/proj/proj-business-report.md',
   '/vue/proj/proj-realtime-video.md',
   '/vue/proj/demo-where-to-go.md',
+  '/vue/proj/Md-统一身份认证和权限管理平台/',
   // 李西康分享
   '/vue/note/note-set_delete.md',
   '/vue/note/note-compress.md',
