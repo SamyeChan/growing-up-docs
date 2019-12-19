@@ -10,6 +10,7 @@ const BASIC = '/basic'
 // 菜单
 module.exports = [
   '/weapp/wechat.md',
+  '/weapp/01 小程序.md',
   // 基础部分
   '/weapp/basic/learn-weapp-basic.md',
   '/weapp/basic/learn-weapp-component.md',

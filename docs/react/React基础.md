@@ -144,7 +144,7 @@ SELECT * FROM `USER` WHERE `gender`='男' ORDER BY `age` DESC;
 
 ## 使用 <u>JSX</u>
 
-`JSX` 是一个基于 `JavaScript` + `XML` 的一个扩展语法
+`JSX` 是一个基于 `JavaScript` + `XML` 的一个扩展语法：
 
 - 它可以作为 `值` 使用；
 - 它并不是 `字符串`；
@@ -155,7 +155,7 @@ SELECT * FROM `USER` WHERE `gender`='男' ORDER BY `age` DESC;
 
 ```jsx
 ReactDOM.render(
-  <div>开课吧</div>,
+  <div>CS</div>,
   document.getElementById('app')
 );
 ```
@@ -341,7 +341,7 @@ const App = (
 **数据**
 
 ```jsx
-let zMouse = {
+let samyeC = {
   name: '子鼠',
   gender: '男',
   skills: ['JavaScript', 'Node.js'],
@@ -349,13 +349,13 @@ let zMouse = {
 };
 ```
 
-##### 数组
+#### 数组
 
 ```jsx
 function getSkills() {
   return (
     <ul>
-      {zMouse.skills.map(skill => <li>{skill}</li>)}
+      {samyeC.skills.map(skill => <li>{skill}</li>)}
     </ul>
   );
 }
@@ -366,18 +366,18 @@ const App = (
 const App = (
     <div>
     		<ul>
-          	{zMouse.skills.map(skill => <li>{skill}</li>)}
+          	{samyeC.skills.map(skill => <li>{skill}</li>)}
     		</ul>
   	</div>
 );
 ```
 
-##### 对象
+#### 对象
 
 ```tsx
 function getKeys() {
     let arr = [];
-    for (let k in zMouse) {
+    for (let k in samyeC) {
         arr.push(<li>{k}</li>);
     }
     return arr;
@@ -394,39 +394,38 @@ const App = (
 const App = (
     <div>
     		<ul>
-          	{Object.keys(zMouse).map(key => <li>{key}</li>)}
+          	{Object.keys(samyeC).map(key => <li>{key}</li>)}
     		</ul>
   	</div>
 );
 ```
 
-##### key
+#### key
 
-> 默认情况下，React 从性能上考虑，会尽可能的复用结构，针对 <u>同组可变列表</u> 结构，为了避免出现某些方面的问题，通常会给每一个列表添加一个 <u>唯一的 key</u>
->
-> ```jsx
-> <ul>
-> {[{id:1,name:'zMouse',id:2,name:'MT'}].map(user => <li key={user.id}>{user.name}</li>)}
-> </ul>
-> ```
->
-> > <span style="color:red">注意：key 的值不推荐使用数组的下标，具体原因，章节最后详细解释</span>
+默认情况下，React 从性能上考虑，会尽可能的复用结构，针对 <u>同组可变列表</u> 结构，为了避免出现某些方面的问题，通常会给每一个列表添加一个 <u>唯一的 key</u>
+
+```jsx
+<ul>
+{[{id:1,name:'samyeC',id:2,name:'MT'}].map(user => <li key={user.id}>{user.name}</li>)}
+</ul>
+```
+<span style="color:red">注意：key 的值不推荐使用数组的下标，具体原因，章节最后详细解释</span>
 
 ### 条件渲染
 
 ```jsx
 function moreInterests() {
-    if (zMouse.interests.length > 2) {
-        return <a href="#">更多</a>
-    }
+  if (samyeC.interests.length > 2) {
+    return <a href="#">更多</a>
+  }
 }
 const App = (
-		<div>
-    		爱好：{zMouse.interests.map(interest=>{
-            return <span style={{marginRight:"10px"}}>{interest}</span>
-        })}
-        {moreInterests()}
-  	</div>
+  <div>
+    爱好：{samyeC.interests.map(interest=>{
+      return <span style={{marginRight:"10px"}}>{interest}</span>
+    })}
+    {moreInterests()}
+  </div>
 );
 ```
 
@@ -434,12 +433,12 @@ const App = (
 
 ```jsx
 const App = (
-		<div>
-    		爱好：{zMouse.interests.map(interest=>{
-            return <span style={{marginRight:"10px"}}>{interest}</span>
-        })}
-        {zMouse.interests.length > 2 ? <a href="#">更多</a> : null}
-  	</div>
+  <div>
+    爱好：{samyeC.interests.map(interest=>{
+      return <span style={{marginRight:"10px"}}>{interest}</span>
+    })}
+    {samyeC.interests.length > 2 ? <a href="#">更多</a> : null}
+  </div>
 );
 ```
 
@@ -447,13 +446,13 @@ const App = (
 
 ```jsx
 const App = (
-		<div>
-    		爱好：{zMouse.interests.map(interest=>{
-            return <span style={{marginRight:"10px"}}>{interest}</span>
-        })}
-				{zMouse.interests.length > 2 && <a href="#">更多</a>}
-				{zMouse.interests.length < 4 || <a href="#">更多</a>}
-  	</div>
+  <div>
+    爱好：{samyeC.interests.map(interest=>{
+      return <span style={{marginRight:"10px"}}>{interest}</span>
+    })}
+    {samyeC.interests.length > 2 && <a href="#">更多</a>}
+    {samyeC.interests.length < 4 || <a href="#">更多</a>}
+  </div>
 );
 ```
 

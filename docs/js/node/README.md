@@ -178,3 +178,8 @@ server.listen(3000);
 ## stream
 
 ## buffer
+
+
+## 问题
+
+1- `sudo:npm 找不到命令` 

@@ -12,19 +12,27 @@ const MENU_TOOLS = require(`./${FOLDER}/tools`)
 /* ========================= 配置 ============================ */
 
 module.exports = {
+  dest: './build', // 打包路径
   title: 'Hey, I\'m Front C',
   description: 'Just note all I know OR don\'t know',
+  head: [ // 头部信息
+    // ['link', { rel: 'icon', href: '/' }]
+  ],
+  theme: '@vuepress/vue',
   themeConfig: {
+    repo: 'vuejs/vuepress',
+    editLinks: true,
+    smoothScroll: true,
     search: true, // 禁用内置搜索（内置搜索仅可对h2、h3构成索引）
     searchMaxSuggestions: 10, // 对内置搜索最多结果数量进行限制
     // navbar: false, // 禁用导航栏
     nav: [
       { text: '首页', link: '/' },
-      { text: '基础', link: '/'},
-      { text: '工具库', link: '/'},
-      { text: 'Vue', link: '/'},
-      { text: '微信开发', link: '/'},
-      { text: '文章', link: '/'}
+      { text: '基础', link: '/' },
+      { text: '工具库', link: '/' },
+      { text: 'Vue', link: '/' },
+      { text: '微信开发', link: '/' },
+      { text: '文章', link: '/' }
     ],
     /* 侧边栏 */
     // sidebar: 'auto'
@@ -41,32 +49,32 @@ module.exports = {
       {
         title: 'Vue',
         collapsable: true,
-        children: [ ...MENU_VUE ]
+        children: [...MENU_VUE]
       },
       {
         title: 'React',
         collapsable: true,
-        children: [ ...MENU_REACT ]
+        children: [...MENU_REACT]
       },
       {
         title: '公众号/小程序',
         collapsable: true,
-        children: [ ...MENU_WEAPP ]
+        children: [...MENU_WEAPP]
       },
       {
         title: 'HTML',
         collapsable: true,
-        children: [ ...MENU_HTML ]
+        children: [...MENU_HTML]
       },
       {
         title: 'CSS',
         collapsable: true,
-        children: [ ...MENU_CSS ]
+        children: [...MENU_CSS]
       },
       {
         title: 'JavaScript',
         collapsable: true,
-        children: [ ... MENU_JS ]
+        children: [...MENU_JS]
       },
       {
         title: '阅读理解',
@@ -80,7 +88,7 @@ module.exports = {
       }, {
         title: '其他辅助',
         collapsable: true,
-        children: [ ...MENU_TOOLS ]
+        children: [...MENU_TOOLS]
       },
       {
         title: '有点儿意思',
@@ -89,7 +97,39 @@ module.exports = {
           '/hobby/',
           '/hobby/chemicalElement/'
         ]
+      },
+      {
+        title: '杂项',
+        collapsable: true,
+        children: [
+          '/others/规则/'
+        ]
       }
     ]
   }
+}
+
+// 侧边栏 - 基础
+function getBasicSidebar () {
+  return []
+}
+// 侧边栏 - 工具库
+function getToolsSidebar () {
+  return []
+}
+// 侧边栏 - Vue 
+function getVueSidebar () {
+  return []
+}
+// 侧边栏 - 微信开发
+function getWeappSidebar () {
+  return []
+}
+// 侧边栏 - React
+function getReactSidebar () {
+  return []
+}
+// 侧边栏 - 文章
+function getActiclesSidebar () {
+  return []
 }
