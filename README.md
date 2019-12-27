@@ -7,28 +7,26 @@
 ```
 ├── docs
 │   ├── .vuepress
-│   │    ├── public
-│   │    └── config.js
-│   ├── css                【css部分】
-│   ├── html               【html部分】
-│   │    └── canvas
-│   ├── js                 【js部分】
-│   │    ├── class
-│   │    ├── es6
-│   │    ├── js
-│   │    └── ts
-│   ├── read                【阅读笔记】
-│   ├── start               【开始】
-│   ├── tools               【工具部分】
-│   ├── topic                 
-│   ├── vue                  【vue部分】
-│   │    ├── basic
-│   │    ├── component
-│   │    ├── note
-│   │    └── proj 
-│   └── weapp                【微信开发/小程序】               
-│   │    ├── basic
-│   │    └── proj
+│   │    ├── config           【文件夹 | 模块配置】
+│   │    │    ├── nav
+│   │    │    ├── sidebar
+│   │    │    └── methods.js
+│   │    ├── public           【文件夹 | 静态资源】
+│   │    └── config.js        【文件 | 文档主配置文件】
+│   ├── start                 【模块 | 起始】
+│   ├── basic                 【模块 | 基础】
+│   │    ├── html
+│   │    ├── css
+│   │    └── js
+│   ├── frame                 【模块 | 框架】
+│   │    ├── vue
+│   │    └── react
+│   └── weapp                 【模块 | 微信开发】  
+│   │    ├── platform
+│   │    └── miniprogram
+│   ├── tools                 【模块 | 工具库】
+│   └── life                  【模块 | 记录life】
+├── package-lock.json
 ├── package.json
 └── README.md
 ```

@@ -1,14 +1,3 @@
-/* ========================= 模块 ============================ */
-
-const FOLDER = 'menu-modules'
-const MENU_VUE = require(`./${FOLDER}/vue`)
-const MENU_REACT = require(`./${FOLDER}/react`)
-const MENU_WEAPP = require(`./${FOLDER}/weapp`)
-const MENU_HTML = require(`./${FOLDER}/html`)
-const MENU_CSS = require(`./${FOLDER}/css`)
-const MENU_JS = require(`./${FOLDER}/js`)
-const MENU_TOOLS = require(`./${FOLDER}/tools`)
-
 /* ========================= 配置 ============================ */
 
 module.exports = {
@@ -18,118 +7,32 @@ module.exports = {
   head: [ // 头部信息
     // ['link', { rel: 'icon', href: '/' }]
   ],
-  theme: '@vuepress/vue',
   themeConfig: {
-    repo: 'vuejs/vuepress',
-    editLinks: true,
+    repo: 'SamyeChan/growing-up-docs',     // 仓库地址
+    editLinks: true, // 编辑页连接
+    editLinkText: '在 GitHub 上编辑此页',
+    docsDir: 'packages/docs/docs', // TODO - 编辑文档链接
+    lastUpdated: '上次编辑', // 设置了该属性就会自动获取上次编辑时间 --> 应该是获取的最近一次推向github的时间？？？  
     smoothScroll: true,
     search: true, // 禁用内置搜索（内置搜索仅可对h2、h3构成索引）
     searchMaxSuggestions: 10, // 对内置搜索最多结果数量进行限制
     // navbar: false, // 禁用导航栏
-    nav: [
-      { text: '首页', link: '/' },
-      { text: '基础', link: '/' },
-      { text: '工具库', link: '/' },
-      { text: 'Vue', link: '/' },
-      { text: '微信开发', link: '/' },
-      { text: '文章', link: '/' }
-    ],
-    /* 侧边栏 */
-    // sidebar: 'auto'
-    sidebar: [
-      {
-        title: '起始',
-        collapsable: true,
-        children: [
-          '/start/',
-          '/start/basic-frame.md',
-          '/start/list.md'
-        ]
-      },
-      {
-        title: 'Vue',
-        collapsable: true,
-        children: [...MENU_VUE]
-      },
-      {
-        title: 'React',
-        collapsable: true,
-        children: [...MENU_REACT]
-      },
-      {
-        title: '公众号/小程序',
-        collapsable: true,
-        children: [...MENU_WEAPP]
-      },
-      {
-        title: 'HTML',
-        collapsable: true,
-        children: [...MENU_HTML]
-      },
-      {
-        title: 'CSS',
-        collapsable: true,
-        children: [...MENU_CSS]
-      },
-      {
-        title: 'JavaScript',
-        collapsable: true,
-        children: [...MENU_JS]
-      },
-      {
-        title: '阅读理解',
-        collapsable: true,
-        children: [
-          // 面试题目
-          '/topic/html5-semanticization.md',
-          '/topic/note-pay.md',
-          '/read/2019-08/00 异步编程.md'
-        ]
-      }, {
-        title: '其他辅助',
-        collapsable: true,
-        children: [...MENU_TOOLS]
-      },
-      {
-        title: '有点儿意思',
-        collapsable: true,
-        children: [
-          '/hobby/',
-          '/hobby/chemicalElement/'
-        ]
-      },
-      {
-        title: '杂项',
-        collapsable: true,
-        children: [
-          '/others/规则/'
-        ]
-      }
-    ]
+    nav: require('./config/nav/nav'),
+    /* 侧边栏 --> 根据路径生成对应侧边栏sidebar */
+    sidebar: {
+      // 主模块
+      '/start/': require('./config/sidebar/start'),
+      '/basic/html/': require('./config/sidebar/basic_html'),
+      '/basic/css/': require('./config/sidebar/basic_css'),
+      '/basic/js/': require('./config/sidebar/basic_js'),
+      '/frame/vue/': require('./config/sidebar/frame_vue'),
+      '/frame/react/': require('./config/sidebar/frame_react'),
+      '/weapp/platform/': require('./config/sidebar/weapp_platform'),
+      '/weapp/miniprogram/': require('./config/sidebar/weapp_miniprogram'),
+      '/tools/': require('./config/sidebar/tools'),
+      '/life/': require('./config/sidebar/life'),
+      // 更多模块
+      '/standard/': require('./config/sidebar/standard'),
+    }
   }
-}
-
-// 侧边栏 - 基础
-function getBasicSidebar () {
-  return []
-}
-// 侧边栏 - 工具库
-function getToolsSidebar () {
-  return []
-}
-// 侧边栏 - Vue 
-function getVueSidebar () {
-  return []
-}
-// 侧边栏 - 微信开发
-function getWeappSidebar () {
-  return []
-}
-// 侧边栏 - React
-function getReactSidebar () {
-  return []
-}
-// 侧边栏 - 文章
-function getActiclesSidebar () {
-  return []
 }

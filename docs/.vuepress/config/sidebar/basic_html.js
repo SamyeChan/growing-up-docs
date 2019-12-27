@@ -1,0 +1,12 @@
+/**
+ * 侧边栏【基础 > HTML】配置
+ */
+module.exports = [
+  {
+    title: 'HTML',
+    collapsable: false,
+    children: [
+      ''
+    ]
+  }
+]
