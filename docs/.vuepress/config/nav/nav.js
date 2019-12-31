@@ -1,5 +1,7 @@
 /**
  * 文档横向【版块】配置
+ * 
+ * 匹配 config.js --> nav 项
  */
 module.exports = [
   {

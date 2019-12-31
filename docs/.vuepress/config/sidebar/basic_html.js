@@ -6,7 +6,8 @@ module.exports = [
     title: 'HTML',
     collapsable: false,
     children: [
-      ''
+      '',
+      '基础阅读/'
     ]
   }
 ]
