@@ -2,7 +2,7 @@
 sidebarDepth: 3
 ---
 
-# Learn | 面向对象
+# 面向对象
 
 ## 一个栗子
 

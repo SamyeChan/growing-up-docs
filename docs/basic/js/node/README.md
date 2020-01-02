@@ -2,7 +2,7 @@
 sidebarDepth: 3
 ---
 
-# Learn | Node.js
+# Node.js
 
 - 诞生于 2009；
 - 底层语言：C++；

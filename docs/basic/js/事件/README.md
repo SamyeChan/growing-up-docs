@@ -2,7 +2,7 @@
 sidebarDepth: 3
 ---
 
-# Learn | Event
+# Event
 
 ## 事件监听器
 

@@ -10,15 +10,14 @@ module.exports = [
       '',
       '异步编程/',
       '校验/',
-      'animation/',
-      'async/',
+      '动画/',
+      '异步/',
       'bom/',
       'dom/',
       'class/',
-      'es6/',
-      'event/',
+      '事件/',
       'node/',
-      'oop/'
+      '面向对象/'
     ])
   }, {
     title: 'ES',

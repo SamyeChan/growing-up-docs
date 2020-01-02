@@ -7,6 +7,7 @@ module.exports = [
     collapsable: false,
     children: [
       '',
+      '开发环境搭建/',
       '组件通信/'
     ]
   }

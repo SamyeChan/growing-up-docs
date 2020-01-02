@@ -20,19 +20,26 @@ module.exports = {
     nav: require('./config/nav/nav'),
     /* 侧边栏 --> 根据路径生成对应侧边栏sidebar */
     sidebar: {
-      // 主模块
+      // 初始
       '/start/': require('./config/sidebar/start'),
+      // 基础
       '/basic/html/': require('./config/sidebar/basic_html'),
       '/basic/css/': require('./config/sidebar/basic_css'),
       '/basic/js/': require('./config/sidebar/basic_js'),
+      // 框架
       '/frame/vue/': require('./config/sidebar/frame_vue'),
       '/frame/react/': require('./config/sidebar/frame_react'),
+      // 微信开发
       '/weapp/platform/': require('./config/sidebar/weapp_platform'),
       '/weapp/miniprogram/': require('./config/sidebar/weapp_miniprogram'),
+      // 工具库
       '/tools/': require('./config/sidebar/tools'),
-      '/life/': require('./config/sidebar/life'),
-      // 更多模块
-      '/standard/': require('./config/sidebar/standard'),
+      // 记录life
+      '/life/thinks/': require('./config/sidebar/life_thinks'),
+      '/life/sports/': require('./config/sidebar/life_sports'),
+      '/life/cook/': require('./config/sidebar/life_cook'),
+      // 开发标准
+      '/standard/': require('./config/sidebar/standard')
     }
   }
 }

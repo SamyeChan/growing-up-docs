@@ -1,9 +1,9 @@
 /**
- * 侧边栏【记录life】配置
+ * 侧边栏【记录life > 食在Cook】配置
  */
 module.exports = [
   {
-    title: '记录LIFE',
+    title: '食在Cook',
     collapsable: false,
     children: [
       ''

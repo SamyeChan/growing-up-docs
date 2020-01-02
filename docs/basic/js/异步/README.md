@@ -1,4 +1,4 @@
-# Learn | 异步处理
+# 异步处理
 
 - Promise
 - async

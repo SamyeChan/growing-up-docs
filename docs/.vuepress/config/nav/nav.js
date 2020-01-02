@@ -49,10 +49,6 @@ module.exports = [
     link: '/tools/'
   },
   {
-    text: '记录life',
-    link: '/life/'
-  },
-  {
     text: '更多',
     ariaLabel: '更多',
     items: [{
@@ -69,6 +65,18 @@ module.exports = [
       items: [{
         text: '每日一题',
         link: 'https://github.com/Advanced-Frontend/Daily-Interview-Question'
+      }]
+    }, {
+      text: '记录life',
+      items: [{
+        text: '阅读Melody',
+        link: '/life/thinks/'
+      }, {
+        text: '运动Love',
+        link: '/life/sports/'
+      }, {
+        text: '食在Cook',
+        link: '/life/cook/'
       }]
     }]
   }

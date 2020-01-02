@@ -6,7 +6,8 @@ module.exports = [
     title: '工具库',
     collapsable: false,
     children: [
-      ''
+      '',
+      '调试/'
     ]
   }
 ]

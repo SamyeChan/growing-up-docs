@@ -2,7 +2,7 @@
 sidebarDepth: 3
 ---
 
-# Learn | ECAMScript 6
+# ECAMScript 6
 
 ## 简介
 
