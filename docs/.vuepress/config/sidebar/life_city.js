@@ -1,14 +1,13 @@
 /**
- * 侧边栏【工具库】配置
+ * 侧边栏【记录life > 城市Walk】配置
  */
 module.exports = [
   {
-    title: '工具库',
+    title: '城市Walk',
     collapsable: false,
     children: [
       '',
-      '调试/',
-      'Mock/'
+      '厦门/'
     ]
   }
 ]

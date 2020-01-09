@@ -2,7 +2,7 @@
 sidebarDepth: 3
 ---
 
-# Learn | DOM
+# DOM
 
 <!-- = = = = = = = = = = = = = = = = = = = -->
 

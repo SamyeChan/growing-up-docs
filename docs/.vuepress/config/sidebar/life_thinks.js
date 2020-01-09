@@ -10,22 +10,24 @@ module.exports = [
       ''
     ]
   }, {
+    title: 'Book海洋',
+    collapsable: false,
+    children: initList('book/', [
+      ''
+    ])
+  }, {
     title: 'Movie人生',
     collapsable: false,
     children: initList('movie/', [
-      ''
+      '',
+      '《想见你》/'
     ])
   }, {
     title: 'Music旋律',
     collapsable: false,
     children: initList('music/', [
-      ''
-    ])
-  }, {
-    title: 'Book海洋',
-    collapsable: false,
-    children: initList('book/', [
-      ''
+      '',
+      '理想三旬2019/'
     ])
   }
 ]

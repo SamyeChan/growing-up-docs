@@ -9,21 +9,26 @@ module.exports = [
     children: initList('', [
       '',
       '异步编程/',
+      '防抖与节流/',
       '校验/',
       '动画/',
       '异步/',
-      'bom/',
-      'dom/',
-      'class/',
+      '闭包/',
+      '正则表达式/',
+      'BOM/',
+      'DOM/',
+      'Class/',
       '事件/',
-      'node/',
-      '面向对象/'
+      'Node/',
+      '面向对象/',
+      'This/'
     ])
   }, {
     title: 'ES',
     collapsable: false,
-    children: initList('es6/', [
+    children: initList('ES/', [
       '',
+      'ES6、7、8/'
     ])
   }, {
     title: 'TS',

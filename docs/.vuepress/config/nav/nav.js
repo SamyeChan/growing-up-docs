@@ -52,13 +52,16 @@ module.exports = [
     text: '更多',
     ariaLabel: '更多',
     items: [{
-      text: '开发规范',
+      text: '开发',
       items: [{
         text: '移动端开发',
         link: '/standard/mobile/'
       }, {
         text: 'PC端开发',
         link: '/standard/pc/'
+      }, {
+        text: '地图开发',
+        link: '/standard/map/'
       }]
     }, {
       text: '阅读',
@@ -77,6 +80,9 @@ module.exports = [
       }, {
         text: '食在Cook',
         link: '/life/cook/'
+      }, {
+        text: '城市Walk',
+        link: '/life/city/'
       }]
     }]
   }

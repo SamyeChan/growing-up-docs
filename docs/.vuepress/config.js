@@ -38,7 +38,8 @@ module.exports = {
       '/life/thinks/': require('./config/sidebar/life_thinks'),
       '/life/sports/': require('./config/sidebar/life_sports'),
       '/life/cook/': require('./config/sidebar/life_cook'),
-      // 开发标准
+      '/life/city/': require('./config/sidebar/life_city'),
+      // 开发
       '/standard/': require('./config/sidebar/standard')
     }
   }
