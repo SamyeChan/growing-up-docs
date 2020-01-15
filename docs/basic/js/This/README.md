@@ -1,4 +1,4 @@
-# Note | 判断this指向
+# 判断this指向
 
 阅读： [掘金 |《嗨，你真的懂this吗？》](https://juejin.im/post/5c96d0c751882511c832ff7b)
 

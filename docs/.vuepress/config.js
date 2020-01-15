@@ -26,6 +26,7 @@ module.exports = {
       '/basic/html/': require('./config/sidebar/basic_html'),
       '/basic/css/': require('./config/sidebar/basic_css'),
       '/basic/js/': require('./config/sidebar/basic_js'),
+      '/basic/cs/': require('./config/sidebar/basic_cs'),
       // 框架
       '/frame/vue/': require('./config/sidebar/frame_vue'),
       '/frame/react/': require('./config/sidebar/frame_react'),
@@ -41,6 +42,7 @@ module.exports = {
       '/life/city/': require('./config/sidebar/life_city'),
       // 开发
       '/standard/': require('./config/sidebar/standard')
-    }
+    },
+    sidebarDepth: 3
   }
 }

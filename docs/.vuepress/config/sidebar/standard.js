@@ -17,5 +17,14 @@ module.exports = [
     children: initList('pc/', [
       ''
     ])
+  },
+  {
+    title: '地图开发',
+    collapsable: false,
+    children: initList('map/', [
+      '',
+      'TX/自定义覆盖物/',
+      'TX/带箭头路线绘制/'
+    ])
   }
 ]

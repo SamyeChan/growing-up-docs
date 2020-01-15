@@ -21,7 +21,8 @@ module.exports = [
       '事件/',
       'Node/',
       '面向对象/',
-      'This/'
+      'This/',
+      'NaN/'
     ])
   }, {
     title: 'ES',
