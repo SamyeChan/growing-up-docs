@@ -8,8 +8,8 @@
 ├── docs
 │   ├── .vuepress
 │   │    ├── config           【文件夹 | 模块配置】
-│   │    │    ├── nav
-│   │    │    ├── sidebar
+│   │    │    ├── nav          [ 顶部导航栏 ]
+│   │    │    ├── sidebar      [ 侧边导航栏 ]
 │   │    │    └── methods.js
 │   │    ├── public           【文件夹 | 静态资源】
 │   │    └── config.js        【文件 | 文档主配置文件】
@@ -20,6 +20,7 @@
 │   │    └── js
 │   ├── frame                 【模块 | 框架】
 │   │    ├── vue
+│   │    ├── vue_cpn
 │   │    └── react
 │   └── weapp                 【模块 | 微信开发】  
 │   │    ├── platform

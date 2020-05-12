@@ -9,5 +9,14 @@ module.exports = [
       '',
       '基础阅读/'
     ]
+  },
+  {
+    title: 'Canvas',
+    collapsable: false,
+    children: [
+      'canvas/',
+      'canvas/canvas-asteroids.md',
+      'canvas/canvas-colorful-ball.md'
+    ]
   }
 ]

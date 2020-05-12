@@ -54,6 +54,9 @@ module.exports = [
       text: 'Vue',
       link: '/frame/vue/'
     }, {
+      text: 'Vue_组件',
+      link: '/frame/vue_cpn/'
+    }, {
       text: 'React',
       link: '/frame/react/'
     }]
@@ -80,6 +83,9 @@ module.exports = [
     }, {
       text: 'momentjs',
       link: '/tools/'
+    }, {
+      text: '公共方法',
+      link: '/common/'
     }]
   },
   {
@@ -105,6 +111,9 @@ module.exports = [
       items: [{
         text: '每日一题',
         link: 'https://github.com/Advanced-Frontend/Daily-Interview-Question'
+      }, {
+        text: '书·记',
+        link: '/'
       }]
     },
     // --------------------------------- 记录life ------
