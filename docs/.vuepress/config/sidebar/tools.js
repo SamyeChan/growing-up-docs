@@ -1,3 +1,4 @@
+const { initList } = require('../methods')
 /**
  * 侧边栏【工具库】配置
  */
@@ -7,8 +8,23 @@ module.exports = [
     collapsable: false,
     children: [
       '',
+      '校验/',
       '调试/',
-      'Mock/'
+      'mock/',
+      'nginx/',
+      'git/',
+      'http/',
+      'hosts/',
+      'security/',
+      '禅道/'
     ]
+  },
+  {
+    title: '地图',
+    collapsable: false,
+    children: initList('地图/', [
+      '',
+      '坐标转换/'
+    ])
   }
 ]

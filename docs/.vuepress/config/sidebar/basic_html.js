@@ -7,16 +7,9 @@ module.exports = [
     collapsable: false,
     children: [
       '',
-      '基础阅读/'
-    ]
-  },
-  {
-    title: 'Canvas',
-    collapsable: false,
-    children: [
-      'canvas/',
-      'canvas/canvas-asteroids.md',
-      'canvas/canvas-colorful-ball.md'
+      '基础阅读/',
+      '标签Meta/',
+      'H5语义化/'
     ]
   }
 ]

@@ -29,7 +29,9 @@ module.exports = {
       '/basic/cs/': require('./config/sidebar/basic_cs'),
       // 框架
       '/frame/vue/': require('./config/sidebar/frame_vue'),
+      '/frame/vue_cpn/': require('./config/sidebar/frame_vue_cpn'),
       '/frame/react/': require('./config/sidebar/frame_react'),
+      '/frame/nodejs/': require('./config/sidebar/frame_nodejs'),
       // 微信开发
       '/weapp/platform/': require('./config/sidebar/weapp_platform'),
       '/weapp/miniprogram/': require('./config/sidebar/weapp_miniprogram'),

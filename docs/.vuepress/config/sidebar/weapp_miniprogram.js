@@ -1,3 +1,4 @@
+const { initList } = require('../methods')
 /**
  * 侧边栏【微信开发 > 小程序开发】配置
  */
@@ -16,5 +17,12 @@ module.exports = [
     children: [
       '小程序优化/'
     ]
+  },
+  {
+    title: 'DEMO',
+    collapsable: false,
+    children: initList('例子/', [
+      '/电影imooc'
+    ])
   }
 ]

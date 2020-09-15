@@ -59,6 +59,9 @@ module.exports = [
     }, {
       text: 'React',
       link: '/frame/react/'
+    }, {
+      text: 'Node.js',
+      link: '/frame/nodejs/'
     }]
   },
   // --------------------------------- 微信开发 ------
