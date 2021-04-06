@@ -1,28 +1,30 @@
 {
-  "name": "samyechan.github.io",
+  "name": "ccOrange",
   "version": "1.0.0",
-  "description": "",
+  "description": "SamyeChan的笔记儿吖",
   "main": "index.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "serve": "vuepress dev docs",
+    "build": "vuepress build docs"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SamyeChan/samyechan.github.io.git"
+    "url": "git+https://gitee.com/SamyeChan/caicai-up.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/SamyeChan/samyechan.github.io/issues"
+    "url": "https://gitee.com/SamyeChan/samyechan.github.io/issues"
   },
-  "homepage": "https://github.com/SamyeChan/samyechan.github.io#readme",
+  "homepage": "https://gitee.com/SamyeChan/samyechan.github.io#readme",
   "dependencies": {
     "npm": "^6.11.2"
+  },
+  "devDependencies": {
+    "vuepress-theme-reco": "^1.6.6"
   }
 }

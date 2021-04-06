@@ -1,40 +1,26 @@
-# VuePress 笔记
+# caicai-up
 
-基于 VuePress 的 markdown 笔记整理
+### 【醒悟中的陈菜菜の前端升级记录】
 
-## 目录结构
+第一次社招面试就抽风地投了大厂，稀里糊涂地接受了面试，临时抱佛脚的 24 小时，其实蛮充实的，虽然还是怂了起来，面试过程没有想象中的那么那么差劲，但还是被虐得够够。没有那么差也主要因为面试官小哥哥人好而已，对，我太菜了，今天开始我叫陈菜菜了。
 
-```
-├── docs
-│   ├── .vuepress
-│   │    ├── config           【文件夹 | 模块配置】
-│   │    │    ├── nav          [ 顶部导航栏 ]
-│   │    │    ├── sidebar      [ 侧边导航栏 ]
-│   │    │    └── methods.js
-│   │    ├── public           【文件夹 | 静态资源】
-│   │    └── config.js        【文件 | 文档主配置文件】
-│   ├── start                 【模块 | 起始】
-│   ├── basic                 【模块 | 基础】
-│   │    ├── html
-│   │    ├── css
-│   │    └── js
-│   ├── frame                 【模块 | 框架】
-│   │    ├── vue
-│   │    ├── vue_cpn
-│   │    └── react
-│   └── weapp                 【模块 | 微信开发】  
-│   │    ├── platform
-│   │    └── miniprogram
-│   ├── tools                 【模块 | 工具库】
-│   └── life                  【模块 | 记录life】
-│        ├── city
-│        ├── cook
-│        ├── sports
-│        └── thinks
-│             ├── book
-│             ├── moive
-│             └── music
-├── package-lock.json
-├── package.json
-└── README.md
-```
+总是抱怨没有技术提升，总抱怨没有氛围，但自己又真的有做到由衷地热爱吗？没有做过踏踏实实的努力又怎么配去抱怨呢。工作以来的项目虽然小也都是一些后台管理系统，但其中很多的细节，又真的去研究过吗？其实很多都看过，却没有及时复习没有真正地印在脑子里吖。
+
+开始，什么时候都不晚，但需要坚持，是长时间的坚持。
+
+不要再在没付出 100%努力的时候抱怨了，因为不配。
+
+接下来，caicai-up 将不定时地每天记录每天的输出，可能是学习笔记、文章阅读，还可能是学习心情记录，加油噢，陈菜菜~
+
+START 👉 20210319
+
+[团队敏捷实践 —— 使用 semantic-release 自动管理发布版本](https://blog.dteam.top/posts/2020-05/semantic-release.html)
+
+## 冲浪板
+
+- [Gitee](https://gitee.com/SamyeChan)
+- [牛客](https://www.nowcoder.com/profile/5988115)
+- [Leetcode](https://leetcode-cn.com/u/season-49/)
+- [思否](https://segmentfault.com/)
+- [别看 | 掘金](https://juejin.cn/user/3562073406313208/posts)
+- [别看 | 简书](https://www.jianshu.com/u/d58b1d564dd3)

@@ -8,11 +8,11 @@ heroImage: /logo.png # 首页图片
 actionText: 开始 → # 首页跳转按钮
 actionLink: /start/ # 首页跳转路径
 features: # 首页特征
-- title: 学习
-  details: 关于前端的知识
-- title: 你好
-  details: My friends
-- title: 分享
-  details: 关于我自身的理解
-footer: Copyright © 2019-PRESENT | I'm Samye Chan +_+ # 底部内容
+  - title: 学习
+    details: 陈菜菜的前端成长
+  - title: 分享
+    details: 关于我自身的理解
+  - title: 记录
+    details: 工作中的坑坑洼洼
+footer: Copyright © 2021-PRESENT | I'm Samye Chan +_+ # 底部内容
 ---
